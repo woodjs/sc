@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <title>首页</title>
+</head>
+<body>
+    <span id="btn-login">登录</span>
+    <span id="btn-register">注册</span>
+
+    <div class="bg-login"></div>
+
+    <script type="text/ejs-tpl" id="tpl">
+        <%=  %>
+    </script>
+    <script type="text/javascript" src="../js/ejs.min.js"></script>
+    <script type="text/javascript">
+        var tpl = document.getElementById('tpl').innerHTML;
+        var html = ejs.render(tpl, {a: 1});
+    </script>
+</body>
+</html>
