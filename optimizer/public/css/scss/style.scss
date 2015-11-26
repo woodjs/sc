@@ -1,0 +1,212 @@
+@import "base";
+
+$fontSize: 14px;
+$color:#333;
+$bdColor: #ddd;
+$bgColor:#f6f6f6;
+$themeColor: #055a9b;
+$errorColor:#fc4343;
+
+html,body,header,section,footer,article,nav,aside,div,p,ul,dl,li,dt,dd,span,a,label,input,textarea{
+  margin:0;
+  padding:0;
+  border:0;
+  @include boxSizing(border-box);
+}
+dl,ul{
+  list-style: none;
+}
+input,textarea{
+  outline:medium;
+  -webkit-appearance: none;
+}
+input::-webkit-search-cancel-button{
+  display: none;
+}
+input {
+  line-height: normal;
+}
+a:link,a:visited,a:hover,a:active{
+  color: $color;
+  text-decoration: none;
+}
+
+body{
+  font-family: 'Microsoft Yahei', Arial, STHeiti, sans-serif;
+  font-size:$fontSize;
+  @include boxSizing(border-box);
+  background: $bgColor;
+}
+.btn{
+  cursor:pointer;
+}
+.box-login{
+  width:440px;
+  padding:10px 20px;
+  background: #fff;
+  @include boxShadow(0 0 10px #ddd);
+  position: absolute;
+  left:50%;
+  top:50%;
+  @include transform(translate(-50%, -50%));
+  .login-header{
+    height: 50px;
+    font-size:18px;
+    text-align: center;
+    color:$themeColor;
+    border-bottom: 4px solid #f0f0f0;
+    font-weight: bold;
+    line-height: 46px;
+  }
+  .line-input{
+    width: 100%;
+    height:42px;
+    margin-top:20px;
+    padding:0 20px;
+    position: relative;
+    .icon{
+      color:$bdColor;
+      font-size:22px;
+      display: inline-block;
+      width: 38px;
+      height:40px;
+      text-align: center;
+      line-height: 40px;
+      position: absolute;
+      left:21px;
+      top:1px;
+      z-index: 5;
+    }
+    input{
+      display: block;
+      width: 100%;
+      border:1px solid $bdColor;
+      height:42px;
+      line-height: 24px;
+      font-size:14px;
+      padding:8px 10px 8px 38px;
+      border-radius: 2px;
+    }
+  }
+  .line-error{
+    @include setHeightGroup(40px);
+    width:100%;
+    padding:0 20px 0 25px;
+    font-size:12px;
+    color: red;
+  }
+  .line-btn{
+    @include setHeightGroup(40px);
+    padding:0 20px;
+    margin:5px 0 20px;
+    .btn-login{
+      display: block;
+      width: 100%;
+      color:#fff;
+      @include setHeightGroup(40px);
+      border-radius: 2px;
+      background: #366D9B;
+      text-align: center;
+      font-size:16px;
+      @include transition(background 0.3s ease-out);
+      &:hover{
+        background: $themeColor;
+      }
+    }
+  }
+}
+.width-1100{
+  display: block;
+  width:1100px;
+  margin:0 auto;
+}
+.wrapper-top-line{
+  width:100%;
+  height:61px;
+  background: #fff;
+  border-bottom: 1px solid $bdColor;
+  @include boxShadow(0 0 10px #ddd);
+}
+.block-top-line{
+  height:60px;
+  .logo{
+    width:244px;
+    height: 60px;
+    background: url(../img/logo.png) 10px center no-repeat;
+    float:left;
+  }
+  h1{
+    color:$themeColor;
+    margin:0;
+    float:left;
+    font-size:20px;
+    font-weight: bold;
+    @include setHeightGroup(60px);
+    margin-left:20px;
+  }
+  .welcome{
+    display: inline-block;
+    @include setHeightGroup(60px);
+    font-size:14px;
+    float:right;
+    padding-left:15px;
+    max-width: 150px;
+    @extend %textOverflowEllipsis;
+    label{
+      color:#FF4200;
+    }
+  }
+  nav{
+    float:right;
+    @include setHeightGroup(60px);
+  }
+  ul{
+    float:left;
+    @include setHeightGroup(60px);
+    li{
+      float:left;
+      a{
+        display: inline-block;
+        padding:0 20px;
+        @include setHeightGroup(60px);
+        font-size:14px;
+        color:#555;
+        @include transition(all 0.3s ease-out);
+        &:hover{
+          background: $themeColor;
+          color:#fff;
+        }
+      }
+    }
+  }
+}
+.wrapper-main-content{
+  width: 100%;
+}
+.block-main-content{
+  margin-top:20px;
+  background: red;
+}
+.box-left-list{
+  width:432px;
+  float:left;
+  margin-bottom: 30px;
+}
+.block-right-stage{
+  width:648px;
+  float:right;
+  margin-bottom: 30px;
+  pre{
+    margin:0;
+    display: block;
+    width:100%;
+    padding:10px 20px;
+    background: #333;
+    font-size:16px;
+    line-height: 1.5;
+    color:#fff;
+    height:400px;
+    border-radius: 6px;
+    word-wrap: break-word;
+  }
+}
