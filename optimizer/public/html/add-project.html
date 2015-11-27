@@ -54,27 +54,34 @@
             </div>
             <div class="box-project-files">
                 <h3>请编辑项目相关文件:</h3>
-                <div class="tab-btn-list">
-                    <span class="btn active" data-href="#">gruntfile.js</span>
-                    <span class="btn" data-href="#">gruntfile.js</span>
-                    <span class="btn" data-href="#">gruntfile.js</span>
-                    <span class="btn" data-href="#">gruntfile.js</span>
+                <div class="tab-btn-list" id="tab-btn-list">
+                    <span class="btn active" data-href="tab-content-1">GruntFile.js</span>
+                    <span class="btn" data-href="tab-content-2">cssConfig.json</span>
+                    <span class="btn" data-href="tab-content-3">requireConfig.js</span>
+                    <span class="btn" data-href="tab-content-4">bat</span>
                 </div>
                 <div class="tab-content-list">
                     <div class="tab-content" id="tab-content-1">
                         <textarea id="code1"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-2">
+                        <textarea id="code2"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-3">
+                        <textarea id="code3"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-4">
+                        <textarea id="code4"></textarea>
                     </div>
                 </div>
             </div>
             <span class="btn btn-submit-all">提交</span>
         </div>
     </section>
+    <script type="text/javascript" src="../js/jquery/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../js/codemirror/codemirror.js"></script>
     <script type="text/javascript" src="../js/codemirror/mode/javascript/javascript.js"></script>
     <script type="text/javascript">
-        var textarea = document.getElementById('code1');
-        var myCodeMirror = createCodeMirror(textarea);
-        myCodeMirror.setSize('100%', '100%');
 
         function createCodeMirror(textarea) {
             return CodeMirror.fromTextArea(textarea, {
@@ -88,6 +95,33 @@
                 tabSize: 2
             });
         }
+
+        $(function () {
+            var myCodeMirror1;
+            var myCodeMirror2;
+            var myCodeMirror3;
+            var myCodeMirror4;
+            [1, 2, 3, 4].forEach(function (obj, index, arr) {
+                eval('myCodeMirror'+ obj +'  = createCodeMirror(document.getElementById("code'+ obj +'"));');
+            });
+
+            myCodeMirror1.setSize('100%', '100%');
+            myCodeMirror2.setSize('100%', '100%');
+            myCodeMirror3.setSize('100%', '100%');
+            myCodeMirror4.setSize('100%', '100%');
+
+            myCodeMirror1.setValue('GruntFile');
+            myCodeMirror2.setValue('cssConfig');
+            myCodeMirror3.setValue('requireConfig');
+            myCodeMirror4.setValue('bat');
+
+            $('#tab-btn-list .btn').on('click', function () {
+                var $temp = $(this);
+                var href = $temp.data('href');
+                $temp.addClass('active').siblings().removeClass('active');
+                $('#' + href).show().find('.CodeMirror').show().end().siblings().hide().find('.CodeMirror').hide();
+            });
+        });
 
     </script>
 </body>

@@ -5,10 +5,10 @@ $color:#333;
 $bdColor: #ddd;
 $bgColor:#f6f6f6;
 $themeColor: #055a9b;
-$lighterColor:#666;
-$lighterFontColor:#999;
+$lighterFontColor:#666;
+$lightestFontColor:#999;
 $errorColor:#fc4343;
-$prevHoverColor: #366d9b;
+$prevHoverColor: rgba(54,109,155,0.9);
 $tagColor:#ff4200;
 
 
@@ -30,6 +30,17 @@ input::-webkit-search-cancel-button{
 }
 input {
   line-height: normal;
+  &:focus{
+    border-color: $lightestFontColor !important;
+  }
+  &:focus + .icon{
+    i{
+      color:$lightestFontColor;
+    }
+  }
+}
+h1,h2,h3,h4,h5,h6{
+  margin:0;
 }
 a:link,a:visited,a:hover,a:active{
   color: $color;
@@ -201,6 +212,13 @@ body{
   padding:20px;
   min-height: 600px;
   @include boxShadow(0 0 10px #ddd);
+  h3{
+    font-size:16px;
+    font-weight: bold;
+    color:$themeColor;
+    margin:0 0 10px;
+    @include setHeightGroup(30px);
+  }
   .box-search{
     width:100%;
     height:32px;
@@ -299,6 +317,41 @@ body{
     text-decoration: underline;
   }
 }
+.table-show-list-2{
+  tr.warn{
+    background: #fcf8e3;
+    &:hover{
+      background:#faebcc;
+    }
+  }
+  td:nth-child(3){
+    width: 90px;
+  }
+  td:nth-child(4){
+    width: auto;
+  }
+  td:nth-child(5){
+    width: 90px;
+  }
+  td:last-child{
+    width: 120px;
+  }
+  .btn-optimize{
+    padding:0 10px;
+    border-right:1px solid $bdColor;
+  }
+  .btn-optimize:last-child{
+    border-right:none;
+  }
+}
+.table-show-list-3{
+  td:nth-child(3),td:nth-child(5){
+    width: auto;
+  }
+  td:last-child{
+    width: 260px;
+  }
+}
 .box-project-show{
   padding:20px 20px 15px;
   background: #fff;
@@ -392,6 +445,16 @@ body{
     color: $themeColor;
     margin: 0;
     @include setHeightGroup(30px);
+    span{
+      float:right;
+      font-size:14px;
+      font-weight: normal;
+      color:$lighterFontColor;
+      margin-right:5px;
+      label{
+        color:$tagColor;
+      }
+    }
   }
   .tab-btn-list{
     height:41px;
@@ -410,6 +473,14 @@ body{
         color:#fff;
         background: $themeColor;
       }
+      &:first-child{
+        &:hover,&.active{
+          border-left: 1px solid $themeColor;
+        }
+      }
+    }
+    span:first-child{
+      border-left: 1px solid $bdColor;
     }
     span:last-child{
       border-right: 1px solid $bdColor;
@@ -418,10 +489,13 @@ body{
   .tab-content-list{
     width:100%;
     height:800px;
+    overflow: hidden;
     .tab-content{
-      width: 100%;
-      height: 100%;
+      width: 1060px;
+      height: 800px;
       font-size:14px;
+      @include boxSizing(content-box);
+      float:left;
     }
   }
 }
@@ -437,5 +511,107 @@ body{
   @include transition(background 0.3s ease-out);
   &:hover{
     background: $themeColor;
+  }
+}
+
+.box-manage-list{
+  padding:20px;
+  background: #fff;
+  @include boxShadow(0 0 10px #ddd);
+  margin-top:20px;
+  width: 100%;
+  border-radius: 6px;
+  h3{
+    font-size:16px;
+    font-weight: bold;
+    color:$themeColor;
+    margin:0;
+    @include setHeightGroup(30px);
+  }
+  .set-project-name{
+    width: 100%;
+    height: 32px;
+    margin:10px 0 0;
+    input {
+      display: inline-block;
+      width: 222px;
+      border: 1px solid $bdColor;
+      padding: 5px 10px;
+      font-size: 14px;
+      line-height: 20px;
+      float: left;
+      border-radius: 2px;
+    }
+    span {
+      display: inline-block;
+      @include setHeightGroup(32px);
+      padding: 0 15px;
+      color: #fff;
+      background: $prevHoverColor;
+      @include transition(background 0.3s ease-out);
+      float: left;
+      margin-left: 10px;
+      font-size: 14px;
+      border-radius: 2px;
+      &:hover {
+        background: $themeColor;
+      }
+    }
+    .btn-add{
+      float:right;
+      background: rgba(0,153,0,0.7);
+      &:hover {
+        background: #009900;
+      }
+    }
+  }
+  .manage-list{
+    margin-top:15px;
+  }
+}
+.box-add-user{
+  padding:20px;
+  background: #fff;
+  @include boxShadow(0 0 10px #ddd);
+  margin-top:20px;
+  width: 100%;
+  border-radius: 6px;
+  h3{
+    font-size:16px;
+    font-weight: bold;
+    color:$themeColor;
+    margin:0;
+    @include setHeightGroup(30px);
+  }
+  .set-user{
+    width: 100%;
+    height: 32px;
+    margin:20px 0 0;
+    input {
+      display: inline-block;
+      width: 222px;
+      border: 1px solid $bdColor;
+      padding: 5px 10px;
+      font-size: 14px;
+      line-height: 20px;
+      float: left;
+      border-radius: 2px;
+    }
+    span {
+      display: inline-block;
+      @include setHeightGroup(32px);
+      width: 90px;
+      text-align: right;
+      float: left;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+  }
+  .error-info{
+    margin:15px 0 0;
+    @include setHeightGroup(30px);
+    padding-left: 102px;
+    color:red;
+    font-size:14px;
   }
 }

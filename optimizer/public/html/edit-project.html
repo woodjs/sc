@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <title>编辑项目</title>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link type="text/css" rel="stylesheet" href="../css/codemirror/codemirror.css" />
+    <link type="text/css" rel="stylesheet" href="../css/codemirror/theme/rubyblue.css" />
+</head>
+<body>
+    <section class="wrapper-top-line">
+        <header class="block-top-line width-1100">
+            <a class="logo" href="#"></a>
+            <h1>web前端项目优化管理系统</h1>
+            <span class="welcome">欢迎你，<label>yanlv.yin</label>！</span>
+            <nav>
+                <ul>
+                    <li><a href="#">项目优化</a></li>
+                    <li><a href="#">项目管理</a></li>
+                    <li><a href="#">用户管理</a></li>
+                    <li><a href="#">修改密码</a></li>
+                </ul>
+            </nav>
+        </header>
+    </section>
+    <section class="wrapper-main-content">
+        <div class="block-main-content width-1100">
+            <div class="box-project-files">
+                <h3>请编辑项目相关文件:<span>当前项目名称：<label>SGMW_EPC</label></span></h3>
+                <div class="tab-btn-list" id="tab-btn-list">
+                    <span class="btn active" data-href="tab-content-1">GruntFile.js</span>
+                    <span class="btn" data-href="tab-content-2">cssConfig.json</span>
+                    <span class="btn" data-href="tab-content-3">requireConfig.js</span>
+                    <span class="btn" data-href="tab-content-4">bat</span>
+                </div>
+                <div class="tab-content-list">
+                    <div class="tab-content" id="tab-content-1">
+                        <textarea id="code1"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-2">
+                        <textarea id="code2"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-3">
+                        <textarea id="code3"></textarea>
+                    </div>
+                    <div class="tab-content" id="tab-content-4">
+                        <textarea id="code4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <span class="btn btn-submit-all">提交</span>
+        </div>
+    </section>
+    <script type="text/javascript" src="../js/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../js/codemirror/codemirror.js"></script>
+    <script type="text/javascript" src="../js/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript">
+
+        function createCodeMirror(textarea) {
+            return CodeMirror.fromTextArea(textarea, {
+                value: textarea.value,
+                mode: 'javascript',
+                lineNumbers: true,
+                lineWrapping: true,
+                theme: 'rubyblue',
+                indentUnit : 2,
+                smartIndent: true,
+                tabSize: 2
+            });
+        }
+
+        $(function () {
+
+            var myCodeMirror1;
+            var myCodeMirror2;
+            var myCodeMirror3;
+            var myCodeMirror4;
+            [1, 2, 3, 4].forEach(function (obj, index, arr) {
+                eval('myCodeMirror'+ obj +'  = createCodeMirror(document.getElementById("code'+ obj +'"));');
+            });
+
+            myCodeMirror1.setSize('100%', '100%');
+            myCodeMirror2.setSize('100%', '100%');
+            myCodeMirror3.setSize('100%', '100%');
+            myCodeMirror4.setSize('100%', '100%');
+
+            myCodeMirror1.setValue('GruntFile');
+            myCodeMirror2.setValue('cssConfig');
+            myCodeMirror3.setValue('requireConfig');
+            myCodeMirror4.setValue('bat');
+
+            $('#tab-btn-list .btn').on('click', function () {
+                var $temp = $(this);
+                var href = $temp.data('href');
+                $temp.addClass('active').siblings().removeClass('active');
+                $('#' + href).show().find('.CodeMirror').show().end().siblings().hide().find('.CodeMirror').hide();
+            });
+        });
+
+    </script>
+</body>
+</html>
