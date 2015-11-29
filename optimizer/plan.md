@@ -1,13 +1,15 @@
 #optimizer项目规划
 
 ##数据库设计                             
+
 ###用户
 - role
 - username
 - nickname
 - password
 - createTime
-- createBy \
+- createBy 
+
 ###配置文件
 - projectName
 - createTime
