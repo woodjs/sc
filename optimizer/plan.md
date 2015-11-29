@@ -7,7 +7,7 @@
 - nickname
 - password
 - createTime
-- createBy
+- createBy \
 ###配置文件
 - projectName
 - createTime
