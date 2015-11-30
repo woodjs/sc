@@ -10,33 +10,23 @@ define(['jquery', '!domReady'], function ($) {
     buildElement: function () {
       var self = this;
 
-      self.$createdUserList = $('#box-user-show span');
       self.$btnSubmit = $('#btn-submit');
-      self.$username = $('#username');
       self.$nickname = $('#nickname');
+      self.$prePassword = $('#pre-password');
       self.$password = $('#password');
       self.$rePassword = $('#re-password');
       self.$errorInfo = $('#error-info');
     },
     bindEvent: function () {
       var self = this;
-      self.$username.on('keypress', listenKeyPress);
-
-      self.$password.on('keypress', listenKeyPress);
 
       self.$nickname.on('keypress', listenKeyPress);
 
+      self.$prePassword.on('keypress', listenKeyPress);
+
+      self.$password.on('keypress', listenKeyPress);
+
       self.$rePassword.on('keypress', listenKeyPress);
-
-      self.$username.on('blur', function () {
-        var $temp = $(this);
-
-        if (self.isUserCreated()) {
-          self.showError('该用户名已被占用!');
-        } else {
-          self.hideError();
-        }
-      });
 
       self.$rePassword.on('blur', function () {
         if (self.checkRePassword()) {
@@ -72,21 +62,6 @@ define(['jquery', '!domReady'], function ($) {
       }
 
     },
-    isUserCreated: function () {
-      var self = this;
-      var username = $.trim(self.$username.val());
-      var stamp = false;
-
-      self.$createdUserList.each(function (index, object, arr) {
-        var $temp = $(object);
-
-        if ($temp.data('username') === username) {
-          stamp = true;
-        }
-      });
-
-      return stamp;
-    },
     checkRePassword: function () {
       var self = this;
       var stamp = false;
@@ -99,7 +74,7 @@ define(['jquery', '!domReady'], function ($) {
     },
     checkAllInput: function () {
       var self = this;
-      var inputList = [self.$username, self.$nickname, self.$password, self.$rePassword];
+      var inputList = [self.$nickname, self.$prePassword, self.$password, self.$rePassword];
       var stamp = true;
       inputList.forEach(function (object, index, arr) {
         var value = $(object).val();
@@ -113,11 +88,6 @@ define(['jquery', '!domReady'], function ($) {
         return false;
       }
 
-      if (self.isUserCreated()) {
-        self.showError('该用户名已被占用!');
-        return false;
-      }
-
       if (!self.checkRePassword()) {
         self.showError('两次密码输入不一致!');
         return false;
@@ -128,8 +98,8 @@ define(['jquery', '!domReady'], function ($) {
     getAllInput: function () {
       var self = this;
       var temp = {};
-      temp.username = $.trim(self.$username.val());
       temp.nickname = $.trim(self.$nickname.val());
+      temp.prePassword = $.trim(self.$prePassword.val());
       temp.password = $.trim(self.$password.val());
       temp.rePassword = $.trim(self.$rePassword.val());
 

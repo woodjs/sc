@@ -1,617 +1,639 @@
 @import "base";
 
 $fontSize: 14px;
-$color:#333;
+$color: #333;
 $bdColor: #ddd;
-$bgColor:#f6f6f6;
+$bgColor: #f6f6f6;
 $themeColor: #055a9b;
-$lighterFontColor:#666;
-$lightestFontColor:#999;
-$errorColor:#fc4343;
-$prevHoverColor: rgba(54,109,155,0.9);
-$tagColor:#ff4200;
+$lighterFontColor: #666;
+$lightestFontColor: #999;
+$errorColor: #fc4343;
+$prevHoverColor: rgba(54, 109, 155, 0.9);
+$tagColor: #ff4200;
 
+html, body, header, section, footer, article, nav, aside, div, p, ul, dl, li, dt, dd, span, a, label, input, textarea, pre {
+ margin: 0;
+ padding: 0;
+ border: 0;
+ @include boxSizing(border-box);
+}
 
-html,body,header,section,footer,article,nav,aside,div,p,ul,dl,li,dt,dd,span,a,label,input,textarea,pre{
-  margin:0;
-  padding:0;
-  border:0;
-  @include boxSizing(border-box);
+dl, ul {
+ list-style: none;
 }
-dl,ul{
-  list-style: none;
+
+input, textarea {
+ outline: medium;
+ -webkit-appearance: none;
 }
-input,textarea{
-  outline:medium;
-  -webkit-appearance: none;
+
+input::-webkit-search-cancel-button {
+ display: none;
 }
-input::-webkit-search-cancel-button{
-  display: none;
-}
+
 input {
-  line-height: normal;
-  &:focus{
-    border-color: $lightestFontColor !important;
+ line-height: normal;
+ &:focus {
+  border-color: $lightestFontColor !important;
+ }
+ &:focus + .icon {
+  i {
+   color: $lightestFontColor;
   }
-  &:focus + .icon{
-    i{
-      color:$lightestFontColor;
-    }
-  }
-}
-h1,h2,h3,h4,h5,h6{
-  margin:0;
-}
-a:link,a:visited,a:hover,a:active{
-  color: $color;
-  text-decoration: none;
+ }
 }
 
-body{
-  font-family: 'Microsoft Yahei', Arial, STHeiti, sans-serif;
-  font-size:$fontSize;
-  @include boxSizing(border-box);
-  background: $bgColor;
+h1, h2, h3, h4, h5, h6 {
+ margin: 0;
 }
-.btn{
-  cursor:pointer;
+
+a:link, a:visited, a:hover, a:active {
+ color: $color;
+ text-decoration: none;
 }
-.box-login{
-  width:440px;
-  padding:10px 20px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
-  position: absolute;
-  left:50%;
-  top:50%;
-  @include transform(translate(-50%, -50%));
-  border-radius: 2px;
-  .login-header{
-    height: 50px;
-    font-size:18px;
-    text-align: center;
-    color:$themeColor;
-    border-bottom: 4px solid #f0f0f0;
-    font-weight: bold;
-    line-height: 46px;
-  }
-  .line-input{
-    width: 100%;
-    height:42px;
-    margin-top:20px;
-    padding:0 20px;
-    position: relative;
-    .icon{
-      color:$bdColor;
-      font-size:22px;
-      display: inline-block;
-      width: 38px;
-      height:40px;
-      text-align: center;
-      line-height: 40px;
-      position: absolute;
-      left:21px;
-      top:1px;
-      z-index: 5;
-    }
-    input{
-      display: block;
-      width: 100%;
-      border:1px solid $bdColor;
-      height:42px;
-      line-height: 24px;
-      font-size:14px;
-      padding:8px 10px 8px 38px;
-      border-radius: 2px;
-    }
-  }
-  .line-error{
-    @include setHeightGroup(40px);
-    width:100%;
-    padding:0 20px 0 25px;
-    font-size:12px;
-    color: red;
-  }
-  .line-btn{
-    @include setHeightGroup(40px);
-    padding:0 20px;
-    margin:5px 0 20px;
-    .btn-login{
-      display: block;
-      width: 100%;
-      color:#fff;
-      @include setHeightGroup(40px);
-      border-radius: 2px;
-      background: $prevHoverColor;
-      text-align: center;
-      font-size:16px;
-      @include transition(background 0.3s ease-out);
-      &:hover{
-        background: $themeColor;
-      }
-    }
-  }
+
+body {
+ font-family: 'Microsoft Yahei', Arial, STHeiti, sans-serif;
+ font-size: $fontSize;
+ @include boxSizing(border-box);
+ background: $bgColor;
 }
-.width-1100{
-  display: block;
-  width:1100px;
-  margin:0 auto;
+
+.btn {
+ cursor: pointer;
 }
-.wrapper-top-line{
-  width:100%;
-  height:61px;
-  background: #fff;
-  border-bottom: 1px solid $bdColor;
-  @include boxShadow(0 0 10px #ddd);
-}
-.block-top-line{
-  height:60px;
-  .logo{
-    width:244px;
-    height: 60px;
-    background: url(../img/logo.png) 10px center no-repeat;
-    float:left;
-  }
-  h1{
-    color:$themeColor;
-    margin:0;
-    float:left;
-    font-size:20px;
-    font-weight: bold;
-    @include setHeightGroup(60px);
-    margin-left:20px;
-  }
-  .welcome{
-    display: inline-block;
-    @include setHeightGroup(60px);
-    font-size:14px;
-    float:right;
-    padding-left:15px;
-    max-width: 150px;
-    @extend %textOverflowEllipsis;
-    label{
-      color:$tagColor;
-    }
-  }
-  nav{
-    float:right;
-    @include setHeightGroup(60px);
-  }
-  ul{
-    float:left;
-    @include setHeightGroup(60px);
-    li{
-      float:left;
-      a{
-        display: inline-block;
-        padding:0 20px;
-        @include setHeightGroup(60px);
-        font-size:14px;
-        color:#555;
-        @include transition(all 0.3s ease-out);
-        &:hover{
-          background: $themeColor;
-          color:#fff;
-        }
-      }
-    }
-  }
-}
-.wrapper-main-content{
+
+.box-login {
+ width: 440px;
+ padding: 10px 20px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ @include transform(translate(-50%, -50%));
+ border-radius: 2px;
+ .login-header {
+  height: 50px;
+  font-size: 18px;
+  text-align: center;
+  color: $themeColor;
+  border-bottom: 4px solid #f0f0f0;
+  font-weight: bold;
+  line-height: 46px;
+ }
+ .line-input {
   width: 100%;
-}
-.block-main-content{
-  margin-top:20px;
-}
-.box-left-list{
-  width:432px;
-  float:left;
-  margin-bottom: 30px;
-  background:#fff;
-  border-radius: 6px;
-  padding:20px;
-  min-height: 600px;
-  @include boxShadow(0 0 10px #ddd);
-  h3{
-    font-size:16px;
-    font-weight: bold;
-    color:$themeColor;
-    margin:0 0 10px;
-    @include setHeightGroup(30px);
-  }
-  .box-search{
-    width:100%;
-    height:32px;
-    input{
-      display: inline-block;
-      width:222px;
-      border:1px solid $bdColor;
-      padding:5px 10px;
-      font-size:14px;
-      line-height:20px;
-      float:left;
-      border-radius: 2px;
-    }
-    span{
-      display:inline-block;
-      @include setHeightGroup(32px);
-      padding: 0 15px;
-      color:#fff;
-      background: $prevHoverColor;
-      @include transition(background 0.3s ease-out);
-      float:left;
-      margin-left:10px;
-      font-size:14px;
-      border-radius: 2px;
-      &:hover{
-        background: $themeColor;
-      }
-    }
-  }
-  .box-list{
-    margin-top:15px;
-    border-top:4px solid #f0f0f0;
-    padding-top:15px;
-  }
-}
-.block-right-stage{
-  width:648px;
-  float:right;
-  margin-bottom: 30px;
-  pre{
-    margin:0;
-    display: block;
-    width:100%;
-    padding:20px;
-    background: #333;
-    font-size:16px;
-    line-height: 1.5;
-    color:#fff;
-    min-height:600px;
-    border-radius: 6px;
-    word-wrap: break-word;
-    @include boxShadow(0 0 10px #ddd);
-  }
-}
-.table-show-list{
-  width:100%;
-  border:1px solid $bdColor;
-  border-bottom: 0;
-  border-collapse: collapse;
-  thead{
-    td{
-      font-weight: bold;
-      color:$themeColor;
-    }
-  }
-  tbody{
-    tr{
-      background: #fff;
-      @include transition(background 0.3s ease-out);
-    }
-    tr:hover{
-      background: $bgColor;
-    }
-  }
-  td{
-    text-align:center;
-    vertical-align: middle;
-    padding:5px 0;
-    line-height: 20px;
-    height: 31px;
-    font-size:14px;
-    border-right:1px solid $bdColor;
-    border-bottom: 1px solid $bdColor;
-  }
-  td:nth-child(3){
-    width: 90px;
-  }
-  td:nth-child(4){
-    width: 60px;
-  }
-  td:last-child{
-    border-right:0;
-  }
-  .btn-optimize{
-    color:$tagColor;
-    text-decoration: underline;
-  }
-}
-.table-show-list-2{
-  tr.warn{
-    background: #fcf8e3;
-    &:hover{
-      background:#faebcc;
-    }
-  }
-  td:nth-child(3){
-    width: 90px;
-  }
-  td:nth-child(4){
-    width: auto;
-  }
-  td:nth-child(5){
-    width: 90px;
-  }
-  td:last-child{
-    width: 120px;
-  }
-  .btn-optimize{
-    padding:0 10px;
-    border-right:1px solid $bdColor;
-  }
-  .btn-optimize:last-child{
-    border-right:none;
-  }
-}
-.table-show-list-3{
-  td:nth-child(3),td:nth-child(5){
-    width: auto;
-  }
-  td:last-child{
-    width: 260px;
-  }
-}
-.box-project-show{
-  padding:20px 20px 15px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
-  margin-top:20px;
-  width: 100%;
-  border-radius: 6px;
-  label{
-    display: inline-block;
-    @include setHeightGroup(30px);
-    padding:0 5px;
-    color:$themeColor;
-    font-size:14px;
-    font-weight: bold;
-    margin:0 5px 5px;
-  }
-  span{
-    display: inline-block;
-    @include setHeightGroup(30px);
-    padding:0 5px;
-    color:$lighterFontColor;
-    font-size:14px;
-    margin:0 5px 5px;
-  }
-}
-.box-project-name{
-  padding:20px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
-  margin-top:20px;
-  width: 100%;
-  border-radius: 6px;
-  h3{
-    font-size:16px;
-    font-weight: bold;
-    color:$themeColor;
-    margin:0;
-    @include setHeightGroup(30px);
-  }
-  .set-project-name{
-    width: 100%;
-    height: 32px;
-    margin:10px 0 0;
-    input {
-      display: inline-block;
-      width: 222px;
-      border: 1px solid $bdColor;
-      padding: 5px 10px;
-      font-size: 14px;
-      line-height: 20px;
-      float: left;
-      border-radius: 2px;
-    }
-    span {
-      display: inline-block;
-      @include setHeightGroup(32px);
-      padding: 0 15px;
-      color: #fff;
-      background: $prevHoverColor;
-      @include transition(background 0.3s ease-out);
-      float: left;
-      margin-left: 10px;
-      font-size: 14px;
-      border-radius: 2px;
-      &:hover {
-        background: $themeColor;
-      }
-    }
-  }
-  .cur-name{
-    margin:10px 0 0;
-    @include setHeightGroup(30px);
-    color:$color;
-    font-size:14px;
-    label{
-      margin-left:5px;
-      color:$tagColor;
-    }
-  }
-}
-.box-project-files {
-  padding: 20px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
+  height: 42px;
   margin-top: 20px;
+  padding: 0 20px;
+  position: relative;
+  .icon {
+   color: $bdColor;
+   font-size: 22px;
+   display: inline-block;
+   width: 38px;
+   height: 40px;
+   text-align: center;
+   line-height: 40px;
+   position: absolute;
+   left: 21px;
+   top: 1px;
+   z-index: 5;
+  }
+  input {
+   display: block;
+   width: 100%;
+   border: 1px solid $bdColor;
+   height: 42px;
+   line-height: 24px;
+   font-size: 14px;
+   padding: 8px 10px 8px 38px;
+   border-radius: 2px;
+  }
+ }
+ .line-error {
+  @include setHeightGroup(32px);
   width: 100%;
-  border-radius: 6px;
-  h3 {
-    font-size: 16px;
-    font-weight: bold;
-    color: $themeColor;
-    margin: 0;
-    @include setHeightGroup(30px);
-    span{
-      float:right;
-      font-size:14px;
-      font-weight: normal;
-      color:$lighterFontColor;
-      margin-right:5px;
-      label{
-        color:$tagColor;
-      }
-    }
-  }
-  .tab-btn-list{
-    height:41px;
-    margin-top:10px;
-    span{
-      height: 41px;
-      line-height: 40px;
-      display: inline-block;
-      padding:0 20px;
-      background: $bgColor;
-      border-top:1px solid $bdColor;
-      border-right:1px solid #fff;
-      float:left;
-      @include transition(all 0.3s ease-out);
-      &:hover,&.active{
-        color:#fff;
-        background: $themeColor;
-      }
-      &:first-child{
-        &:hover,&.active{
-          border-left: 1px solid $themeColor;
-        }
-      }
-    }
-    span:first-child{
-      border-left: 1px solid $bdColor;
-    }
-    span:last-child{
-      border-right: 1px solid $bdColor;
-    }
-  }
-  .tab-content-list{
-    width:100%;
-    height:800px;
-    overflow: hidden;
-    .tab-content{
-      width: 1060px;
-      height: 800px;
-      font-size:14px;
-      @include boxSizing(content-box);
-      float:left;
-    }
-  }
-}
-.btn-submit-all{
-  @include setHeightGroup(36px);
-  background: $prevHoverColor;
-  padding:0 50px;
-  color:#fff;
-  font-size:16px;
-  margin:20px 10px 30px;
-  float:right;
-  border-radius: 2px;
-  @include transition(background 0.3s ease-out);
-  &:hover{
+  padding: 0 20px 0 25px;
+  font-size: 12px;
+  color: red;
+ }
+ .line-btn {
+  @include setHeightGroup(40px);
+  padding: 0 20px;
+  margin: 0 0 20px;
+  .btn-login {
+   display: block;
+   width: 100%;
+   color: #fff;
+   @include setHeightGroup(40px);
+   border-radius: 2px;
+   background: $prevHoverColor;
+   text-align: center;
+   font-size: 16px;
+   @include transition(background 0.3s ease-out);
+   &:hover {
     background: $themeColor;
+   }
   }
+ }
 }
 
-.box-manage-list{
-  padding:20px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
-  margin-top:20px;
-  width: 100%;
-  border-radius: 6px;
-  h3{
-    font-size:16px;
-    font-weight: bold;
-    color:$themeColor;
-    margin:0;
-    @include setHeightGroup(30px);
-  }
-  .set-project-name{
-    width: 100%;
-    height: 32px;
-    margin:10px 0 0;
-    input {
-      display: inline-block;
-      width: 222px;
-      border: 1px solid $bdColor;
-      padding: 5px 10px;
-      font-size: 14px;
-      line-height: 20px;
-      float: left;
-      border-radius: 2px;
-    }
-    span {
-      display: inline-block;
-      @include setHeightGroup(32px);
-      padding: 0 15px;
-      color: #fff;
-      background: $prevHoverColor;
-      @include transition(background 0.3s ease-out);
-      float: left;
-      margin-left: 10px;
-      font-size: 14px;
-      border-radius: 2px;
-      &:hover {
-        background: $themeColor;
-      }
-    }
-    .btn-add{
-      float:right;
-      background: rgba(0,153,0,0.7);
-      &:hover {
-        background: #009900;
-      }
-    }
-  }
-  .manage-list{
-    margin-top:15px;
-  }
+.width-1100 {
+ display: block;
+ width: 1100px;
+ margin: 0 auto;
 }
-.box-add-user{
-  padding:20px;
-  background: #fff;
-  @include boxShadow(0 0 10px #ddd);
-  margin-top:20px;
+
+.wrapper-top-line {
+ width: 100%;
+ height: 61px;
+ background: #fff;
+ border-bottom: 1px solid $bdColor;
+ @include boxShadow(0 0 10px #ddd);
+}
+
+.block-top-line {
+ height: 60px;
+ .logo {
+  width: 244px;
+  height: 60px;
+  background: url(images/logo.png) 10px center no-repeat;
+  float: left;
+ }
+ h1 {
+  color: $themeColor;
+  margin: 0;
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+  @include setHeightGroup(60px);
+  margin-left: 20px;
+ }
+ .welcome {
+  display: inline-block;
+  @include setHeightGroup(60px);
+  font-size: 14px;
+  float: right;
+  padding-left: 15px;
+  max-width: 150px;
+  @extend %textOverflowEllipsis;
+  label {
+   color: $tagColor;
+  }
+ }
+ nav {
+  float: right;
+  @include setHeightGroup(60px);
+ }
+ ul {
+  float: left;
+  @include setHeightGroup(60px);
+  li {
+   float: left;
+   a {
+    display: inline-block;
+    padding: 0 20px;
+    @include setHeightGroup(60px);
+    font-size: 14px;
+    color: #555;
+    @include transition(all 0.3s ease-out);
+    &:hover {
+     background: $themeColor;
+     color: #fff;
+    }
+   }
+  }
+ }
+}
+
+.wrapper-main-content {
+ width: 100%;
+}
+
+.block-main-content {
+ margin-top: 20px;
+}
+
+.box-left-list {
+ width: 432px;
+ float: left;
+ margin-bottom: 30px;
+ background: #fff;
+ border-radius: 6px;
+ padding: 20px;
+ min-height: 600px;
+ @include boxShadow(0 0 10px #ddd);
+ h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: $themeColor;
+  margin: 0 0 10px;
+  @include setHeightGroup(30px);
+ }
+ .box-search {
   width: 100%;
+  height: 32px;
+  input {
+   display: inline-block;
+   width: 222px;
+   border: 1px solid $bdColor;
+   padding: 5px 10px;
+   font-size: 14px;
+   line-height: 20px;
+   float: left;
+   border-radius: 2px;
+  }
+  span {
+   display: inline-block;
+   @include setHeightGroup(32px);
+   padding: 0 15px;
+   color: #fff;
+   background: $prevHoverColor;
+   @include transition(background 0.3s ease-out);
+   float: left;
+   margin-left: 10px;
+   font-size: 14px;
+   border-radius: 2px;
+   &:hover {
+    background: $themeColor;
+   }
+  }
+ }
+ .box-list {
+  margin-top: 15px;
+  border-top: 4px solid #f0f0f0;
+  padding-top: 15px;
+ }
+}
+
+.block-right-stage {
+ width: 648px;
+ float: right;
+ margin-bottom: 30px;
+ pre {
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  background: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  min-height: 600px;
   border-radius: 6px;
-  h3{
-    font-size:16px;
-    font-weight: bold;
-    color:$themeColor;
-    margin:0;
-    @include setHeightGroup(30px);
+  word-wrap: break-word;
+  @include boxShadow(0 0 10px #ddd);
+ }
+}
+
+.table-show-list {
+ width: 100%;
+ border: 1px solid $bdColor;
+ border-bottom: 0;
+ border-collapse: collapse;
+ thead {
+  td {
+   font-weight: bold;
+   color: $themeColor;
   }
-  .set-user{
-    width: 100%;
-    height: 32px;
-    margin:20px 0 0;
-    input {
-      display: inline-block;
-      width: 222px;
-      border: 1px solid $bdColor;
-      padding: 5px 10px;
-      font-size: 14px;
-      line-height: 20px;
-      float: left;
-      border-radius: 2px;
+ }
+ tbody {
+  tr {
+   background: #fff;
+   @include transition(background 0.3s ease-out);
+  }
+  tr:hover {
+   background: $bgColor;
+  }
+ }
+ td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px 0;
+  line-height: 20px;
+  height: 31px;
+  font-size: 14px;
+  border-right: 1px solid $bdColor;
+  border-bottom: 1px solid $bdColor;
+ }
+ td:nth-child(3) {
+  width: 90px;
+ }
+ td:nth-child(4) {
+  width: 60px;
+ }
+ td:last-child {
+  border-right: 0;
+ }
+ .btn-optimize {
+  color: $tagColor;
+  text-decoration: underline;
+ }
+}
+
+.table-show-list-2 {
+ tr.warn {
+  background: #fcf8e3;
+  &:hover {
+   background: #faebcc;
+  }
+ }
+ td:nth-child(3) {
+  width: 90px;
+ }
+ td:nth-child(4) {
+  width: auto;
+ }
+ td:nth-child(5) {
+  width: 90px;
+ }
+ td:last-child {
+  width: 120px;
+ }
+ .btn-optimize {
+  padding: 0 10px;
+  border-right: 1px solid $bdColor;
+ }
+ .btn-optimize:last-child {
+  border-right: none;
+ }
+}
+
+.table-show-list-3 {
+ td:nth-child(3), td:nth-child(5) {
+  width: auto;
+ }
+ td:last-child {
+  width: 260px;
+ }
+}
+
+.box-project-show {
+ padding: 20px 20px 15px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ margin-top: 20px;
+ width: 100%;
+ border-radius: 6px;
+ label {
+  display: inline-block;
+  @include setHeightGroup(30px);
+  padding: 0 5px;
+  color: $themeColor;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 5px 5px;
+ }
+ span {
+  display: inline-block;
+  @include setHeightGroup(30px);
+  padding: 0 5px;
+  color: $lighterFontColor;
+  font-size: 14px;
+  margin: 0 5px 5px;
+ }
+}
+
+.box-project-name {
+ padding: 20px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ margin-top: 20px;
+ width: 100%;
+ border-radius: 6px;
+ h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: $themeColor;
+  margin: 0;
+  @include setHeightGroup(30px);
+ }
+ .set-project-name {
+  width: 100%;
+  height: 32px;
+  margin: 10px 0 0;
+  input {
+   display: inline-block;
+   width: 222px;
+   border: 1px solid $bdColor;
+   padding: 5px 10px;
+   font-size: 14px;
+   line-height: 20px;
+   float: left;
+   border-radius: 2px;
+  }
+  span {
+   display: inline-block;
+   @include setHeightGroup(32px);
+   padding: 0 15px;
+   color: #fff;
+   background: $prevHoverColor;
+   @include transition(background 0.3s ease-out);
+   float: left;
+   margin-left: 10px;
+   font-size: 14px;
+   border-radius: 2px;
+   &:hover {
+    background: $themeColor;
+   }
+  }
+ }
+ .cur-name {
+  margin: 10px 0 0;
+  @include setHeightGroup(30px);
+  color: $color;
+  font-size: 14px;
+  label {
+   margin-left: 5px;
+   color: $tagColor;
+  }
+ }
+}
+
+.box-project-files {
+ padding: 20px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ margin-top: 20px;
+ width: 100%;
+ border-radius: 6px;
+ h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: $themeColor;
+  margin: 0;
+  @include setHeightGroup(30px);
+  span {
+   float: right;
+   font-size: 14px;
+   font-weight: normal;
+   color: $lighterFontColor;
+   margin-right: 5px;
+   label {
+    color: $tagColor;
+   }
+  }
+ }
+ .tab-btn-list {
+  height: 41px;
+  margin-top: 10px;
+  span {
+   height: 41px;
+   line-height: 40px;
+   display: inline-block;
+   padding: 0 20px;
+   background: $bgColor;
+   border-top: 1px solid $bdColor;
+   border-right: 1px solid #fff;
+   float: left;
+   @include transition(all 0.3s ease-out);
+   &:hover, &.active {
+    color: #fff;
+    background: $themeColor;
+   }
+   &:first-child {
+    &:hover, &.active {
+     border-left: 1px solid $themeColor;
     }
-    span {
-      display: inline-block;
-      @include setHeightGroup(32px);
-      width: 90px;
-      text-align: right;
-      float: left;
-      margin-right: 10px;
-      font-size: 14px;
-    }
+   }
   }
-  .error-info{
-    margin:15px 0 0;
-    @include setHeightGroup(30px);
-    padding-left: 102px;
-    color:red;
-    font-size:14px;
+  span:first-child {
+   border-left: 1px solid $bdColor;
   }
+  span:last-child {
+   border-right: 1px solid $bdColor;
+  }
+ }
+ .tab-content-list {
+  width: 100%;
+  height: 800px;
+  overflow: hidden;
+  .tab-content {
+   width: 1060px;
+   height: 800px;
+   font-size: 14px;
+   @include boxSizing(content-box);
+   float: left;
+  }
+ }
+}
+
+.btn-submit-all {
+ @include setHeightGroup(36px);
+ background: $prevHoverColor;
+ padding: 0 50px;
+ color: #fff;
+ font-size: 16px;
+ margin: 20px 10px 30px;
+ float: right;
+ border-radius: 2px;
+ @include transition(background 0.3s ease-out);
+ &:hover {
+  background: $themeColor;
+ }
+}
+
+.box-manage-list {
+ padding: 20px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ margin-top: 20px;
+ width: 100%;
+ border-radius: 6px;
+ h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: $themeColor;
+  margin: 0;
+  @include setHeightGroup(30px);
+ }
+ .set-project-name {
+  width: 100%;
+  height: 32px;
+  margin: 10px 0 0;
+  input {
+   display: inline-block;
+   width: 222px;
+   border: 1px solid $bdColor;
+   padding: 5px 10px;
+   font-size: 14px;
+   line-height: 20px;
+   float: left;
+   border-radius: 2px;
+  }
+  span {
+   display: inline-block;
+   @include setHeightGroup(32px);
+   padding: 0 15px;
+   color: #fff;
+   background: $prevHoverColor;
+   @include transition(background 0.3s ease-out);
+   float: left;
+   margin-left: 10px;
+   font-size: 14px;
+   border-radius: 2px;
+   &:hover {
+    background: $themeColor;
+   }
+  }
+  .btn-add {
+   float: right;
+   background: rgba(0, 153, 0, 0.7);
+   &:hover {
+    background: #009900;
+   }
+  }
+ }
+ .manage-list {
+  margin-top: 15px;
+ }
+}
+
+.box-add-user {
+ padding: 20px 20px 25px;
+ background: #fff;
+ @include boxShadow(0 0 10px #ddd);
+ margin-top: 20px;
+ width: 100%;
+ border-radius: 6px;
+ h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: $themeColor;
+  margin: 0;
+  @include setHeightGroup(30px);
+ }
+ .set-user {
+  width: 100%;
+  height: 32px;
+  margin: 20px 0 0;
+  input {
+   display: inline-block;
+   width: 222px;
+   border: 1px solid $bdColor;
+   padding: 5px 10px;
+   font-size: 14px;
+   line-height: 20px;
+   float: left;
+   border-radius: 2px;
+  }
+  span {
+   display: inline-block;
+   @include setHeightGroup(32px);
+   width: 90px;
+   text-align: right;
+   float: left;
+   margin-right: 10px;
+   font-size: 14px;
+  }
+ }
+ .error-info {
+  margin: 15px 0 0;
+  @include setHeightGroup(30px);
+  padding-left: 102px;
+  color: red;
+  font-size: 14px;
+ }
 }

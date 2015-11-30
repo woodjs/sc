@@ -1,14 +1,26 @@
-<script type="text/javascript" src="${path}/js/libs/public/require.js"></script>
-
-requirejs.config({
-  baseUrl: '/js/',
-  paths: {
-    //public
-    jquery: 'jquery/jquery-2.1.4.min',
-    domReady: 'requirejs/domReady',
-    //private
-    addUser: 'private/add_user'
-  }
-});
-
-require(requiredModuleList || 'jquery');
+    <script type="text/javascript" src="/scripts/libs/public/require.js"></script>
+    <script type="text/javascript">
+      requirejs.config({
+        baseUrl: '/scripts/',
+        paths: {
+          //libs
+          jquery: 'libs/public/jquery-2.1.4.min',
+          domReady: 'libs/public/domReady',
+          ejs: 'libs/public/ejs.min',
+          ajax: 'libs/private/ajax',
+          //component
+          codeMirror: 'component/public/codemirror/codemirror',
+          codeMirrorMode: 'component/public/codemirror/mode/javascript/javascript',
+          easyDialog: 'component/public/easydialog.min',
+          //app
+          login: 'app/login',
+          addUser: 'app/add_user',
+          manageUser: 'app/manage_user',
+          editUser: 'app/edit_user'
+        },
+        shim: {
+          ajax: ['jquery']
+        }
+      });
+      require(requiredModuleList || 'jquery');
+    </script>

@@ -1,0 +1,36 @@
+<%- include common/header.ejs %>
+<%- include common/nav.ejs %>
+
+    <section class="wrapper-main-content">
+      <div class="block-main-content width-1100">
+        <div class="box-add-user">
+          <h3>请输入用户信息:</h3>
+
+          <div class="set-user">
+            <span>昵称：</span>
+            <input type="text" id="nickname" placeholder="请输入用户昵称"/>
+          </div>
+          <div class="set-user">
+            <span>原始密码:</span>
+            <input type="password" id="pre-password" placeholder="请输入原始密码"/>
+          </div>
+          <div class="set-user">
+            <span>新密码:</span>
+            <input type="password" id="password" placeholder="请输入新密码"/>
+          </div>
+          <div class="set-user">
+            <span>确认新密码：</span>
+            <input type="password" id="re-password" placeholder="请再次输入新密码"/>
+          </div>
+          <div class="error-info" id="error-info" style="display: none;">两次密码输入不一致！</div>
+        </div>
+        <span class="btn btn-submit-all" id="btn-submit">提交</span>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      var requiredModuleList = ['editUser'];
+    </script>
+
+<%- include config/requirejsConfig.ejs %>
+<%- include common/footer.ejs %>

@@ -1,70 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
-  <title>增加用户</title>
-  <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-  <script type="text/javascript">
-    var requiredModuleList = ['addUser'];
-  </script>
-</head>
-<body>
-<section class="wrapper-top-line">
-  <header class="block-top-line width-1100">
-    <a class="logo" href="#"></a>
+<%- include common/header.ejs %>
+<%- include common/nav.ejs %>
+    <section class="wrapper-main-content">
+      <div class="block-main-content width-1100">
+        <div class="box-project-show" id="box-user-show">
+          <label>已创建的用户:</label>
+          <% userNameList.forEach(function (obj, index, arr) { %>
+            <span data-username="<%= obj.username %>"><%= obj.username %></span>
+          <% }) %>
+        </div>
+        <div class="box-add-user">
+          <h3>请输入用户信息:</h3>
+          <div class="set-user">
+            <span>用户名:</span>
+            <input type="text" id="username" placeholder="请输入用户名"/>
+          </div>
+          <div class="set-user">
+            <span>昵称：</span>
+            <input type="text" id="nickname" placeholder="请输入用户昵称"/>
+          </div>
+          <div class="set-user">
+            <span>密码:</span>
+            <input type="password" id="password" placeholder="请输入密码"/>
+          </div>
+          <div class="set-user">
+            <span>确认密码：</span>
+            <input type="password" id="re-password" placeholder="请再次输入密码"/>
+          </div>
+          <div class="error-info" id="error-info" style="display:none;">两次密码输入不一致！</div>
+        </div>
+        <span class="btn btn-submit-all" id="btn-submit">提交</span>
+      </div>
+    </section>
 
-    <h1>web前端项目优化管理系统</h1>
-    <span class="welcome">欢迎你，<label>yanlv.yin</label>！</span>
-    <nav>
-      <ul>
-        <li><a href="#">项目优化</a></li>
-        <li><a href="#">项目管理</a></li>
-        <li><a href="#">用户管理</a></li>
-        <li><a href="#">修改密码</a></li>
-      </ul>
-    </nav>
-  </header>
-</section>
-<section class="wrapper-main-content">
-  <div class="block-main-content width-1100">
-    <div class="box-project-show" id="box-user-show">
-      <label>已创建的用户:</label>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-      <span data-username="SGMW_EPC">SGMW_EPC</span>
-    </div>
-    <div class="box-add-user">
-      <h3>请输入用户信息:</h3>
+    <script type="text/javascript">
+      var requiredModuleList = ['addUser'];
+    </script>
 
-      <div class="set-user">
-        <span>用户名:</span>
-        <input type="text" id="username" placeholder="请输入用户名"/>
-      </div>
-      <div class="set-user">
-        <span>昵称：</span>
-        <input type="text" id="nickname" placeholder="请输入用户昵称"/>
-      </div>
-      <div class="set-user">
-        <span>密码:</span>
-        <input type="password" id="password" placeholder="请输入密码"/>
-      </div>
-      <div class="set-user">
-        <span>确认密码：</span>
-        <input type="password" id="re-password" placeholder="请再次输入密码"/>
-      </div>
-      <div class="error-info" id="error-info" style="display:none;">两次密码输入不一致！</div>
-    </div>
-    <span class="btn btn-submit-all" id="btn-submit">提交</span>
-  </div>
-</section>
-<script type="text/javascript" data-main="/js/private/r_config.js" src="/js/requirejs/require.js"></script>
-</body>
-</html>
+<%- include config/requirejsConfig.ejs %>
+<%- include common/footer.ejs %>

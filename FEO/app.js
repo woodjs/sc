@@ -8,6 +8,7 @@ var expressSession = require('express-session');
 var MongoStore = require('connect-mongo')(expressSession);
 
 var db = require('./config/db');
+var login = require('./routes/login');
 var user = require('./routes/user');
 
 var app = express();
@@ -38,6 +39,7 @@ app.use(expressSession({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/login', login);
 app.use('/user', user);
 
 // catch 404 and forward to error handler

@@ -104,8 +104,8 @@ body {
       padding: 8px 10px 8px 38px;
       border-radius: 2px; }
   .box-login .line-error {
-    height: 40px;
-    line-height: 40px;
+    height: 32px;
+    line-height: 32px;
     width: 100%;
     padding: 0 20px 0 25px;
     font-size: 12px;
@@ -114,7 +114,7 @@ body {
     height: 40px;
     line-height: 40px;
     padding: 0 20px;
-    margin: 5px 0 20px; }
+    margin: 0 0 20px; }
     .box-login .line-btn .btn-login {
       display: block;
       width: 100%;
@@ -154,7 +154,7 @@ body {
   .block-top-line .logo {
     width: 244px;
     height: 60px;
-    background: url(../img/logo.png) 10px center no-repeat;
+    background: url(images/logo.png) 10px center no-repeat;
     float: left; }
   .block-top-line h1 {
     color: #055a9b;
@@ -574,7 +574,7 @@ body {
     margin-top: 15px; }
 
 .box-add-user {
-  padding: 20px;
+  padding: 20px 20px 25px;
   background: #fff;
   -webkit-box-shadow: 0 0 10px #ddd;
   -ms-box-shadow: 0 0 10px #ddd;
