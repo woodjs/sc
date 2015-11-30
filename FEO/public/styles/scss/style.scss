@@ -162,6 +162,17 @@ body {
   background: url(images/logo.png) 10px center no-repeat;
   float: left;
  }
+ .logout {
+  float:right;
+  padding:0 5px;
+  font-size:14px;
+  color:$themeColor;
+  display: inline-block;
+  @include setHeightGroup(60px);
+  &:hover{
+   text-decoration: underline;
+  }
+ }
  h1 {
   color: $themeColor;
   margin: 0;

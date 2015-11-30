@@ -156,6 +156,16 @@ body {
     height: 60px;
     background: url(images/logo.png) 10px center no-repeat;
     float: left; }
+  .block-top-line .logout {
+    float: right;
+    padding: 0 5px;
+    font-size: 14px;
+    color: #055a9b;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px; }
+    .block-top-line .logout:hover {
+      text-decoration: underline; }
   .block-top-line h1 {
     color: #055a9b;
     margin: 0;

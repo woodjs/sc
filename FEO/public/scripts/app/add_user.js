@@ -51,13 +51,15 @@ define(['jquery', '!domReady'], function ($) {
           self.hideError();
           var temp = self.getAllInput();
           $.ajax({
-            url: '/user/addUser',
+            url: '/user/add',
             type: 'post',
             contentType: 'application/JSON',
             data: JSON.stringify(temp),
             dataType: 'json',
             success: function (res) {
-              alert('创建成功！');
+              if (res.message === 'ok') {
+                window.location.reload();
+              }
             }
           })
         }

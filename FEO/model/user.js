@@ -1,4 +1,5 @@
 var crypto = require('crypto');
+var moment = require('moment');
 var db = require('../config/db');
 var userSchema = require('../schema/user');
 var userModel = db.model('users', userSchema, 'users');
@@ -69,14 +70,16 @@ userModel.createUser = function (req, res) {
     password: pwd,
     nickname: obj.nickname.toString(),
     role: 0,
-    createTime: Date.now(),
-    createBy: req.session.username
+    createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    createBy: 'yyl'
   };
   userModel.create(doc, function (err, doc) {
     if (err) {
       console.log(err);
     }
-    console.log(doc);
+    res.send(200, {
+      message: 'ok'
+    });
   });
 };
 
@@ -144,12 +147,13 @@ userModel.editUser = function (req, res) {
     return;
   }
   var prePassword = crypto.createHash('md5').update(obj.prePassword).digest('hex');
-  var newPwd = crypto.createHash('md5').update(obj.password).digest('hex');
+  var password = crypto.createHash('md5').update(obj.password).digest('hex');
   var doc = {
+    username: req.session.username,
     nickname: obj.nickname.toString(),
-    password: newPwd
+    password: password
   };
-  userModel.find({username: obj.username}, function (err, docs) {
+  userModel.find({username: doc.username}, function (err, docs) {
     if (err) {
       console.log(err);
     }

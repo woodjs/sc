@@ -34,7 +34,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
             dataType: 'json',
             success: function (res) {
               if (res.message === 'ok') {
-                window.location.href = 'user/addUser';
+                window.location.href = 'user/add';
               } else {
                 self.showError(res.message);
               }
