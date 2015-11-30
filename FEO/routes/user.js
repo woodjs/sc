@@ -2,6 +2,20 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('../model/user');
 
+var user = {
+    index: function(){
+      
+
+    },
+
+    // @Url
+    getUser:function(){
+
+
+    }
+};
+
+
 /* GET users listing. */
 router.use(function (err, req, res, next) {
   if (err) {

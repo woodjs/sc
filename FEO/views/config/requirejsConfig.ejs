@@ -1,0 +1,14 @@
+<script type="text/javascript" src="${path}/js/libs/public/require.js"></script>
+
+requirejs.config({
+  baseUrl: '/js/',
+  paths: {
+    //public
+    jquery: 'jquery/jquery-2.1.4.min',
+    domReady: 'requirejs/domReady',
+    //private
+    addUser: 'private/add_user'
+  }
+});
+
+require(requiredModuleList || 'jquery');
