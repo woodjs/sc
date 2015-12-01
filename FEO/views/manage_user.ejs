@@ -6,10 +6,10 @@
         <div class="box-manage-list">
           <h3>用户管理:</h3>
           <div class="set-project-name">
-            <input type="text" placeholder="请输入用户昵称" />
-            <span class="btn">查询</span>
-            <span class="btn">显示全部</span>
-            <span class="btn btn-add">新增用户</span>
+            <input type="text" id="input-search" placeholder="请输入用户昵称" />
+            <span class="btn" id="btn-search">查询</span>
+            <span class="btn" id="btn-show-all">显示全部</span>
+            <a class="btn btn-add" href="/user/add">新增用户</a>
           </div>
           <div class="manage-list">
             <table class="table-show-list table-show-list-2 table-show-list-3">
@@ -23,80 +23,23 @@
                 <td>操作</td>
               </tr>
               </thead>
-              <tbody>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>管理员</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>普通用户</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>普通用户</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>普通用户</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>管理员</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>王大锤</td>
-                <td>管理员</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>创建人</td>
-                <td>
-                  <span class="btn btn-optimize">配置权限</span>
-                  <span class="btn btn-optimize">删除用户</span>
-                  <span class="btn btn-optimize">重置密码</span>
-                </td>
-              </tr>
-
+              <tbody id="tbody-user-list">
+              <% userList.forEach(function (obj, index, arr) { %>
+                <% var curClass = (obj.username === curUser.username ? 'disable' : 'normal')  %>
+                <tr class="<%= curClass %>">
+                  <td><%= obj.username %></td>
+                  <td><%= obj.nickname %></td>
+                  <% var role = obj.role ? '管理员' : '普通用户' %>
+                  <td><%= role %></td>
+                  <td><%= obj.createTime %></td>
+                  <td><%= obj.createBy %></td>
+                  <td>
+                    <span class="btn btn-optimize btn-auth" data-username="<%= obj.username %>">配置权限</span>
+                    <span class="btn btn-optimize btn-delete" data-username="<%= obj.username %>">删除用户</span>
+                    <span class="btn btn-optimize btn-reset" data-username="<%= obj.username %>">重置密码</span>
+                  </td>
+                </tr>
+              <% }) %>
               </tbody>
             </table>
           </div>
@@ -104,8 +47,37 @@
       </div>
     </section>
 
+    <script type="text/ejs-template" id="tpl-user-list">
+      {{ userList.forEach(function (obj, index, arr) { }}
+      {{ var curClass = (obj.username === curUser.username ? 'disable' : 'normal')  }}
+      <tr class="{{= curClass }}">
+        <td>{{= obj.username }}</td>
+        <td>{{= obj.nickname }}</td>
+        {{ var role = obj.role ? '管理员' : '普通用户' }}
+        <td>{{= role }}</td>
+        <td>{{= obj.createTime }}</td>
+        <td>{{= obj.createBy }}</td>
+        <td>
+          <span class="btn btn-optimize btn-auth" data-username="{{= obj.username }}">配置权限</span>
+          <span class="btn btn-optimize btn-delete" data-username="{{= obj.username }}">删除用户</span>
+          <span class="btn btn-optimize btn-reset" data-username="{{= obj.username }}">重置密码</span>
+        </td>
+      </tr>
+      {{ }) }}
+    </script>
+
+    <script type="text/ejs-template" id="tpl-auth">
+      <div class="auth-content" id="auth-content"><span><input type="radio" name="auth" value="0"  />普通用户</span><span><input type="radio" name="auth" value="1" />管理员</span></div>
+    </script>
+
     <script type="text/javascript">
       var requiredModuleList = ['manageUser'];
+      <% var curUserTemp = curUser.username ? curUser.username : '' %>
+      <% if (curUserTemp) { %>
+        var curUser = {username: '<%= curUserTemp %>'};
+      <% } else { %>
+        var curUser = {username: ''};
+      <% } %>
     </script>
 
 <%- include config/requirejsConfig.ejs %>

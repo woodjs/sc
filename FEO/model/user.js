@@ -90,15 +90,16 @@ userModel.createUser = function (req, res) {
  * @param res
  */
 userModel.renderManageUser = function (req, res) {
-  userModel.getUserNameList(renderHtml);
+  userModel.getUserList(renderHtml);
 
   function renderHtml(docs) {
     res.render('manage_user', {
       title: '用户管理',
       curUser: {
-        username: req.session.username
-      }
-      //userNameList: docs
+        username: req.session.username,
+        nickname: req.session.nickname
+      },
+      userList: docs
     });
   }
 };
@@ -111,6 +112,58 @@ userModel.renderManageUser = function (req, res) {
  */
 userModel.manageUser = function (req, res) {
   var obj = req.body;
+  var type = obj.type;
+  var reg = new RegExp(obj.search, 'g');
+  var password = '';
+
+  switch (type) {
+    case 'some':
+        userModel.find({'nickname': reg}, {_id: 0, password: 0}, {}, function (err, docs) {
+          if (err) {
+            console.log(err);
+          }
+          res.send({
+            state: 200,
+            userList: docs
+          });
+        });
+      break;
+    case 'all':
+        userModel.find({}, {_id: 0, password: 0}, {}, function (err, docs) {
+          if (err) {
+            console.log(err);
+          }
+          res.send({
+            state: 200,
+            userList: docs
+          });
+        });
+      break;
+    case 'auth':
+
+      break;
+    case 'delete':
+        userModel.remove({username: obj.username}, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          res.send();
+        });
+      break;
+    case 'reset':
+        password = crypto.createHash('md5').update(obj.password).digest('hex');
+        userModel.update({username: obj.username}, {$set: {password: password}}, {}, function (err, docs) {
+          if (err) {
+            console.log(err);
+          }
+          res.send({
+            state: 200
+          });
+        });
+      break;
+    default:
+      console.log('when step into this line! means some error happened!');
+  }
 
 };
 

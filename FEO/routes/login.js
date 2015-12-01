@@ -3,7 +3,7 @@ var router = express.Router();
 var loginModel = require('../model/login');
 
 /**
- * @url user/
+ * @url /login
  */
 router.route('/')
   .get(loginModel.renderLogin)

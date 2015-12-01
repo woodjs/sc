@@ -158,9 +158,9 @@ body {
     float: left; }
   .block-top-line .logout {
     float: right;
-    padding: 0 5px;
+    padding: 0 5px 0 10px;
     font-size: 14px;
-    color: #055a9b;
+    color: #333;
     display: inline-block;
     height: 60px;
     line-height: 60px; }
@@ -311,6 +311,10 @@ body {
     transition: background 0.3s ease-out; }
   .table-show-list tbody tr:hover {
     background: #f6f6f6; }
+  .table-show-list tbody .disable {
+    background: #eee; }
+    .table-show-list tbody .disable:hover {
+      background: #eee; }
   .table-show-list td {
     text-align: center;
     vertical-align: middle;
@@ -576,6 +580,20 @@ body {
       .box-manage-list .set-project-name span:hover {
         background: #055a9b; }
     .box-manage-list .set-project-name .btn-add {
+      display: inline-block;
+      height: 32px;
+      line-height: 32px;
+      padding: 0 15px;
+      color: #fff;
+      background: rgba(54, 109, 155, 0.9);
+      -webkit-transition: background 0.3s ease-out;
+      -ms-transition: background 0.3s ease-out;
+      -moz-transition: background 0.3s ease-out;
+      -o-transition: background 0.3s ease-out;
+      transition: background 0.3s ease-out;
+      margin-left: 10px;
+      font-size: 14px;
+      border-radius: 2px;
       float: right;
       background: rgba(0, 153, 0, 0.7); }
       .box-manage-list .set-project-name .btn-add:hover {
@@ -630,5 +648,23 @@ body {
     padding-left: 102px;
     color: red;
     font-size: 14px; }
+
+.auth-content {
+  height: 26px;
+  line-height: 26px;
+  text-align: center; }
+  .auth-content span {
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 40px; }
+  .auth-content input[type=radio] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    -webkit-appearance: radio;
+    position: relative;
+    top: 3px; }
 
 /*# sourceMappingURL=style.css.map */

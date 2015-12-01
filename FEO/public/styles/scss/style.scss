@@ -164,9 +164,9 @@ body {
  }
  .logout {
   float:right;
-  padding:0 5px;
+  padding:0 5px 0 10px;
   font-size:14px;
-  color:$themeColor;
+  color: $color;
   display: inline-block;
   @include setHeightGroup(60px);
   &:hover{
@@ -317,6 +317,12 @@ body {
   }
   tr:hover {
    background: $bgColor;
+  }
+  .disable{
+   background: #eee;
+   &:hover{
+    background: #eee;
+   }
   }
  }
  td {
@@ -590,6 +596,15 @@ body {
    }
   }
   .btn-add {
+   display: inline-block;
+   @include setHeightGroup(32px);
+   padding: 0 15px;
+   color: #fff;
+   background: $prevHoverColor;
+   @include transition(background 0.3s ease-out);
+   margin-left: 10px;
+   font-size: 14px;
+   border-radius: 2px;
    float: right;
    background: rgba(0, 153, 0, 0.7);
    &:hover {
@@ -646,5 +661,23 @@ body {
   padding-left: 102px;
   color: red;
   font-size: 14px;
+ }
+}
+.auth-content{
+ @include setHeightGroup(26px);
+ text-align: center;
+ span{
+  display: inline-block;
+  @include setHeightGroup(26px);
+  margin-right:40px;
+ }
+ input[type=radio]{
+  display: inline-block;
+  width:14px;
+  height:14px;
+  margin-right:5px;
+  -webkit-appearance:radio;
+  position: relative;
+  top:3px;
  }
 }

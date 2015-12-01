@@ -2,9 +2,7 @@ var mongoose = require('mongoose');
 var userSchema = new mongoose.Schema({
   username: {
     type: 'String',
-    index: 1,
-    required: true,
-    unique: true
+    required: true
   },
   password: {
     type: 'String',
@@ -19,7 +17,7 @@ var userSchema = new mongoose.Schema({
     required: true
   },
   createTime: {
-    type: 'Date',
+    type: 'String',
     required: true
   },
   createBy: {

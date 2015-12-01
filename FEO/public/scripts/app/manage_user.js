@@ -1,152 +1,209 @@
-define(['jquery', '!domReady'], function ($) {
+define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
 
-  var addUser = {
+  var manageUser = {
     init: function () {
       var self = this;
 
       self.buildElement();
+      self.buildTpl();
       self.bindEvent();
     },
     buildElement: function () {
       var self = this;
 
-      self.$createdUserList = $('#box-user-show span');
-      self.$btnSubmit = $('#btn-submit');
-      self.$username = $('#username');
-      self.$nickname = $('#nickname');
-      self.$password = $('#password');
-      self.$rePassword = $('#re-password');
-      self.$errorInfo = $('#error-info');
+      self.$inputSearch = $('#input-search');
+      self.$btnSearch = $('#btn-search');
+      self.$btnShowAll = $('#btn-show-all');
+      self.$btnAuthList = $('.normal .btn-auth');
+      self.$btnDeleteList = $('.normal .btn-delete');
+      self.$btnResetList = $('.normal .btn-reset');
+      self.$tbodyUserList = $('#tbody-user-list');
+    },
+    buildTpl: function () {
+      var self = this;
+
+      self.tplList = $('#tpl-user-list').html();
+      self.$tplAuth = $('#tpl-auth').html();
     },
     bindEvent: function () {
       var self = this;
-      self.$username.on('keypress', listenKeyPress);
 
-      self.$password.on('keypress', listenKeyPress);
+      self.$inputSearch.on('keypress', listenKeyPress);
 
-      self.$nickname.on('keypress', listenKeyPress);
+      self.$btnSearch.on('click', function () {
+        if (self.checkInput()) {
+          var data = {
+            type: 'some',
+            search: self.getInput()
+          };
+          self.searchAjax(data, function (res) {
+            self.$tbodyUserList.html(self.renderList(res));
+            self.reBindEvent();
+          });
+        } else {
+          self.showError('请输入用户昵称!');
+        }
+      });
 
-      self.$rePassword.on('keypress', listenKeyPress);
+      self.$btnShowAll.on('click', function () {
+        var data = {
+          type: 'all',
+          search: self.getInput()
+        };
+        self.searchAjax(data, function (res) {
+          self.$tbodyUserList.html(self.renderList(res));
+          self.reBindEvent();
+        });
+      });
 
-      self.$username.on('blur', function () {
+      self.$btnAuthList.on('click', function () {
         var $temp = $(this);
+        var username = $temp.data('username');
+        var text = self.$tplAuth;
 
-        if (self.isUserCreated()) {
-          self.showError('该用户名已被占用!');
-        } else {
-          self.hideError();
+        var data = {
+          type: 'auth',
+          username: username,
+          role: $('#auth-content input').val()
+        };
+
+        self.showConfirm(text, data, handleAuth);
+
+        function handleAuth() {
+
         }
       });
 
-      self.$rePassword.on('blur', function () {
-        if (self.checkRePassword()) {
-          self.hideError();
-        } else {
-          self.showError('两次密码输入不一致!');
+      self.$btnDeleteList.on('click', function () {
+        var $temp = $(this);
+        var username = $temp.data('username');
+        var text = '该操作不可恢复，确定删除该用户？';
+        var data = {
+          type: 'delete',
+          username: username
+        };
+
+        self.showConfirm(text, data, handleDelete);
+
+        function handleDelete(res) {
+          alert('删除成功');
         }
       });
 
-      self.$btnSubmit.on('click', function () {
-        if (self.checkAllInput()) {
-          self.hideError();
-          var temp = self.getAllInput();
-          $.ajax({
-            url: '/user/addUser',
-            type: 'post',
-            contentType: 'application/JSON',
-            data: JSON.stringify(temp),
-            dataType: 'json',
-            success: function (res) {
-              alert('创建成功！');
-            }
-          })
+      self.$btnResetList.on('click', function () {
+        var $temp = $(this);
+        var username = $temp.data('username');
+        var text = '该用户的密码将被重置为00000000，确定重置？';
+        var data = {
+          type: 'reset',
+          username: username,
+          password: '00000000'
+        };
+
+        self.showConfirm(text, data, handleReset);
+
+        function handleReset(res) {
+          alert('重置成功');
         }
       });
 
       function listenKeyPress(e) {
         if (e.keyCode === 13) {
-          self.$btnSubmit.click();
+          self.$btnSearch.click();
           $(this).blur();
           e.preventDefault();
         }
       }
 
     },
-    isUserCreated: function () {
+    unBindEvent: function () {
       var self = this;
-      var username = $.trim(self.$username.val());
-      var stamp = false;
-
-      self.$createdUserList.each(function (index, object, arr) {
-        var $temp = $(object);
-
-        if ($temp.data('username') === username) {
-          stamp = true;
-        }
-      });
-
-      return stamp;
     },
-    checkRePassword: function () {
+    reBindEvent: function () {
       var self = this;
-      var stamp = false;
 
-      if ($.trim(self.$password.val()) === $.trim(self.$rePassword.val())) {
-        stamp = true;
-      }
+      self.buildElement();
+      self.unBindEvent();
+      self.bindEvent();
 
-      return stamp;
     },
-    checkAllInput: function () {
+    checkInput: function () {
       var self = this;
-      var inputList = [self.$username, self.$nickname, self.$password, self.$rePassword];
+      var value = self.$inputSearch.val();
       var stamp = true;
-      inputList.forEach(function (object, index, arr) {
-        var value = $(object).val();
-        if ($.trim(value) === '') {
-          stamp = false;
-          self.showError('尚有条目未填写,请检查各项!');
-        }
-      });
 
-      if (!stamp) {
-        return false;
+      if ($.trim(value) === '') {
+        stamp = false;
       }
 
-      if (self.isUserCreated()) {
-        self.showError('该用户名已被占用!');
-        return false;
-      }
-
-      if (!self.checkRePassword()) {
-        self.showError('两次密码输入不一致!');
-        return false;
-      }
-
-      return true;
+      return stamp;
     },
-    getAllInput: function () {
+    getInput: function () {
       var self = this;
-      var temp = {};
-      temp.username = $.trim(self.$username.val());
-      temp.nickname = $.trim(self.$nickname.val());
-      temp.password = $.trim(self.$password.val());
-      temp.rePassword = $.trim(self.$rePassword.val());
 
-      return temp;
+      return $.trim(self.$inputSearch.val());
     },
     showError: function (text) {
       var self = this;
 
-      self.$errorInfo.html(text).show();
+      easyDialog.open({
+        container: {
+          header: '提示',
+          content: text,
+          yesFn: function () {
+          },
+          noFn: false
+        },
+        drag: true,
+        fixed: true
+      });
     },
-    hideError: function () {
+    showConfirm: function (str, obj, callback) {
+
+      easyDialog.open({
+        container: {
+          header: '提示',
+          content: str,
+          yesFn: function () {
+            $.ajax({
+              url: '/user/manage',
+              type: 'post',
+              contentType: 'application/JSON',
+              data: JSON.stringify(obj),
+              dataType: 'json',
+              success: function (res) {
+                callback && callback(res);
+              }
+            });
+          },
+          noFn: true
+        },
+        drag: true,
+        fixed: true
+      });
+    },
+    searchAjax: function (obj, callback) {
+      $.ajax({
+        url: '/user/manage',
+        type: 'post',
+        contentType: 'application/JSON',
+        data: JSON.stringify(obj),
+        dataType: 'json',
+        success: function (res) {
+          callback && callback(res);
+        }
+      });
+    },
+    renderList: function (obj) {
       var self = this;
 
-      self.$errorInfo.hide();
+      ejs.open = '{{';
+      ejs.close = '}}';
+
+      return ejs.render(self.tplList, obj);
     }
   };
 
-  addUser.init();
+  manageUser.init();
 
 });
