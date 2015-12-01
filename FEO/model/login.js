@@ -22,7 +22,11 @@ loginModel.checkUser = function (req, res) {
       console.log(err);
     }
     if (docs[0] && docs[0].password === pwd) {
-      req.session.username = docs[0].username;
+      req.session.user = {
+        username: docs[0].username,
+        nickname: docs[0].nickname,
+        role: docs[0].role
+      };
       res.send(200, {
         message: 'ok'
       });

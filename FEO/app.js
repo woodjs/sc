@@ -28,7 +28,7 @@ app.use(expressSession({
     secret: 'sc_optimizer',
     name: 'sc_userId',
     cookie: {
-        maxAge: 1000 * 300
+        maxAge: 1000 * 3000
     },
     resave: false,
     saveUninitialized: true,

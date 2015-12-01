@@ -34,7 +34,7 @@
                   <td><%= obj.createTime %></td>
                   <td><%= obj.createBy %></td>
                   <td>
-                    <span class="btn btn-optimize btn-auth" data-username="<%= obj.username %>">配置权限</span>
+                    <span class="btn btn-optimize btn-auth" data-role="<%= obj.role %>" data-username="<%= obj.username %>">配置权限</span>
                     <span class="btn btn-optimize btn-delete" data-username="<%= obj.username %>">删除用户</span>
                     <span class="btn btn-optimize btn-reset" data-username="<%= obj.username %>">重置密码</span>
                   </td>
@@ -58,7 +58,7 @@
         <td>{{= obj.createTime }}</td>
         <td>{{= obj.createBy }}</td>
         <td>
-          <span class="btn btn-optimize btn-auth" data-username="{{= obj.username }}">配置权限</span>
+          <span class="btn btn-optimize btn-auth" data-role="{{= obj.role }}" data-username="{{= obj.username }}">配置权限</span>
           <span class="btn btn-optimize btn-delete" data-username="{{= obj.username }}">删除用户</span>
           <span class="btn btn-optimize btn-reset" data-username="{{= obj.username }}">重置密码</span>
         </td>
@@ -66,8 +66,11 @@
       {{ }) }}
     </script>
 
-    <script type="text/ejs-template" id="tpl-auth">
-      <div class="auth-content" id="auth-content"><span><input type="radio" name="auth" value="0"  />普通用户</span><span><input type="radio" name="auth" value="1" />管理员</span></div>
+    <script type="text/ejs-template" id="tpl-auth-1">
+      <div class="auth-content" id="auth-content"><span><input type="radio" name="auth" value="0" checked />普通用户</span><span><input type="radio" name="auth" value="1" />管理员</span></div>
+    </script>
+    <script type="text/ejs-template" id="tpl-auth-2">
+      <div class="auth-content" id="auth-content"><span><input type="radio" name="auth" value="0"  />普通用户</span><span><input type="radio" name="auth" value="1" checked />管理员</span></div>
     </script>
 
     <script type="text/javascript">

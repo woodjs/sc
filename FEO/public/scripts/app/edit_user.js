@@ -49,6 +49,8 @@ define(['jquery', '!domReady'], function ($) {
             success: function (res) {
               if (res.message === 'ok') {
                 window.location.href = '/login';
+              } else {
+                self.showError(res.message);
               }
             }
           })

@@ -23,7 +23,8 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
       var self = this;
 
       self.tplList = $('#tpl-user-list').html();
-      self.$tplAuth = $('#tpl-auth').html();
+      self.$tplAuth1 = $('#tpl-auth-1').html();
+      self.$tplAuth2 = $('#tpl-auth-2').html();
     },
     bindEvent: function () {
       var self = this;
@@ -59,18 +60,18 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
       self.$btnAuthList.on('click', function () {
         var $temp = $(this);
         var username = $temp.data('username');
-        var text = self.$tplAuth;
+        var role = $temp.data('role');
+        var text = role ? self.$tplAuth2 : self.$tplAuth1;
 
         var data = {
           type: 'auth',
-          username: username,
-          role: $('#auth-content input').val()
+          username: username
         };
 
-        self.showConfirm(text, data, handleAuth);
+        self.showConfirm(text, {}, handleAuth, data);
 
-        function handleAuth() {
-
+        function handleAuth(res) {
+          window.location.reload();
         }
       });
 
@@ -86,7 +87,7 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
         self.showConfirm(text, data, handleDelete);
 
         function handleDelete(res) {
-          alert('删除成功');
+          window.location.reload();
         }
       });
 
@@ -103,7 +104,7 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
         self.showConfirm(text, data, handleReset);
 
         function handleReset(res) {
-          alert('重置成功');
+          self.showError('重置成功');
         }
       });
 
@@ -158,13 +159,17 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
         fixed: true
       });
     },
-    showConfirm: function (str, obj, callback) {
+    showConfirm: function (str, obj, callback, auth) {
 
       easyDialog.open({
         container: {
           header: '提示',
           content: str,
           yesFn: function () {
+            if (auth) {
+              auth.role = parseInt($('#auth-content input:checked').val());
+              obj = auth;
+            }
             $.ajax({
               url: '/user/manage',
               type: 'post',

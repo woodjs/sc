@@ -39,13 +39,19 @@ userModel.getUserNameList = function (callback) {
  * @param res
  */
 userModel.renderAddUser = function (req, res) {
+
+  if (!req.session.user.role) {
+    return res.redirect('back');
+  }
   userModel.getUserNameList(renderHtml);
 
   function renderHtml(docs) {
     res.render('add_user', {
       title: '增加用户',
       curUser: {
-        username: req.session.username
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
       },
       userNameList: docs
     });
@@ -71,7 +77,7 @@ userModel.createUser = function (req, res) {
     nickname: obj.nickname.toString(),
     role: 0,
     createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-    createBy: 'yyl'
+    createBy: req.session.user.username
   };
   userModel.create(doc, function (err, doc) {
     if (err) {
@@ -90,14 +96,19 @@ userModel.createUser = function (req, res) {
  * @param res
  */
 userModel.renderManageUser = function (req, res) {
+
+  if (!req.session.user.role) {
+    return res.redirect('back');
+  }
   userModel.getUserList(renderHtml);
 
   function renderHtml(docs) {
     res.render('manage_user', {
       title: '用户管理',
       curUser: {
-        username: req.session.username,
-        nickname: req.session.nickname
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
       },
       userList: docs
     });
@@ -140,7 +151,14 @@ userModel.manageUser = function (req, res) {
         });
       break;
     case 'auth':
-
+      userModel.update({username: obj.username}, {$set: {role: obj.role}}, {}, function (err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        res.send({
+          state: 200
+        });
+      });
       break;
     case 'delete':
         userModel.remove({username: obj.username}, function (err) {
@@ -180,9 +198,10 @@ userModel.renderEditUser = function (req, res) {
     res.render('edit_user', {
       title: '修改密码',
       curUser: {
-        username: req.session.username
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
       }
-      //userNameList: docs
     });
   }
 };
@@ -202,7 +221,7 @@ userModel.editUser = function (req, res) {
   var prePassword = crypto.createHash('md5').update(obj.prePassword).digest('hex');
   var password = crypto.createHash('md5').update(obj.password).digest('hex');
   var doc = {
-    username: req.session.username,
+    username: req.session.user.username,
     nickname: obj.nickname.toString(),
     password: password
   };

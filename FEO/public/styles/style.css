@@ -158,12 +158,12 @@ body {
     float: left; }
   .block-top-line .logout {
     float: right;
-    padding: 0 5px 0 10px;
+    padding: 0 5px 0 15px;
     font-size: 14px;
-    color: #333;
     display: inline-block;
     height: 60px;
-    line-height: 60px; }
+    line-height: 60px;
+    color: #055a9b; }
     .block-top-line .logout:hover {
       text-decoration: underline; }
   .block-top-line h1 {
@@ -665,6 +665,6 @@ body {
     margin-right: 5px;
     -webkit-appearance: radio;
     position: relative;
-    top: 3px; }
+    top: 1px; }
 
 /*# sourceMappingURL=style.css.map */

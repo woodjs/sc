@@ -164,11 +164,11 @@ body {
  }
  .logout {
   float:right;
-  padding:0 5px 0 10px;
+  padding:0 5px 0 15px;
   font-size:14px;
-  color: $color;
   display: inline-block;
   @include setHeightGroup(60px);
+  color:$themeColor;
   &:hover{
    text-decoration: underline;
   }
@@ -678,6 +678,6 @@ body {
   margin-right:5px;
   -webkit-appearance:radio;
   position: relative;
-  top:3px;
+  top:1px;
  }
 }

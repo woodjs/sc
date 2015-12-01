@@ -2,6 +2,13 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('../model/user');
 
+router.use(function (req, res, next) {
+  if (!req.session.username) {
+    return res.redirect('/login');
+  }
+  next();
+});
+
 /**
  * @url user/addUser
  */
