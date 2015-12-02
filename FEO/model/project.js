@@ -20,7 +20,7 @@ projectModel.renderAddProject = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       }
-      //userNameList: docs
+      //projectNameList: docs
     });
   }
 };
@@ -68,6 +68,20 @@ projectModel.renderEditProject = function (req, res) {
       }
     });
   }
+};
+
+/**
+ * 返回用户列表（只包含projectName字段）
+ *
+ * @param {Function} callback
+ */
+projectModel.getProjectNameList = function (callback) {
+  projectModel.find({}, {username: 1, _id: 0}, {}, function (err, docs) {
+    if (err) {
+      console.log(err);
+    }
+    callback && callback(docs);
+  });
 };
 
 module.exports = projectModel;

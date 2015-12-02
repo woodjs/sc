@@ -89,13 +89,13 @@ define(function () {
 
       switch (error.status) {
         case 401:
-          alert(trans["101"]);
+          console.log(trans["101"]);
           location.href = location.href;
           break;
         case 409:
           break;
         case 500:
-          alert(trans["102"]);
+          console.log(trans["102"]);
           break;
         default:
           break;

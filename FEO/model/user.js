@@ -5,6 +5,84 @@ var userSchema = require('../schema/user');
 var userModel = db.model('users', userSchema, 'users');
 
 /**
+ * 渲染并返回增加用户（add_user）页面
+ *
+ * @param req
+ * @param res
+ */
+userModel.renderAddUser = function (req, res) {
+
+  if (!req.session.user.role) {//非管理员，跳转到上一个页面
+    return res.redirect('back');
+  }
+
+  userModel.getUserNameList(renderHtml);
+  /*  req.session.user = {//开发后门
+   username: 'yyl',
+   nickname: 'yyl',
+   role: 1
+   };*/
+  function renderHtml(docs) {
+    res.render('add_user', {
+      title: '增加用户',
+      curUser: {
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
+      },
+      userNameList: docs
+    });
+  }
+};
+
+/**
+ * 渲染并返回用户管理（manage_user）页面
+ *
+ * @param req
+ * @param res
+ */
+userModel.renderManageUser = function (req, res) {
+
+  if (!req.session.user.role) {//非管理员，跳转到上一个页面
+    return res.redirect('back');
+  }
+  userModel.getUserList(renderHtml);
+
+  function renderHtml(docs) {
+    res.render('manage_user', {
+      title: '用户管理',
+      curUser: {
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
+      },
+      userList: docs
+    });
+  }
+};
+
+/**
+ * 渲染并返回修改密码（edit_user）页面
+ *
+ * @param req
+ * @param res
+ */
+userModel.renderEditUser = function (req, res) {
+  userModel.getUserNameList(renderHtml);
+
+  function renderHtml(docs) {
+    res.render('edit_user', {
+      title: '修改密码',
+      curUser: {
+        username: req.session.user.username,
+        nickname: req.session.user.nickname,
+        role: req.session.user.role
+      }
+    });
+  }
+};
+
+/**
  * 返回用户列表（包含所有字段）
  *
  * @param {Function } callback
@@ -30,37 +108,6 @@ userModel.getUserNameList = function (callback) {
       }
       callback && callback(docs);
     });
-};
-
-/**
- * 渲染并返回增加用户（add_user）页面
- *
- * @param req
- * @param res
- */
-userModel.renderAddUser = function (req, res) {
-
-  if (!req.session.user.role) {//非管理员，跳转到上一个页面
-    return res.redirect('back');
-  }
-
-  userModel.getUserNameList(renderHtml);
-/*  req.session.user = {//开发后门
-    username: 'yyl',
-    nickname: 'yyl',
-    role: 1
-  };*/
-  function renderHtml(docs) {
-    res.render('add_user', {
-      title: '增加用户',
-      curUser: {
-        username: req.session.user.username,
-        nickname: req.session.user.nickname,
-        role: req.session.user.role
-      },
-      userNameList: docs
-    });
-  }
 };
 
 /**
@@ -92,32 +139,6 @@ userModel.createUser = function (req, res) {
       message: 'ok'
     });
   });
-};
-
-/**
- * 渲染并返回用户管理（manage_user）页面
- *
- * @param req
- * @param res
- */
-userModel.renderManageUser = function (req, res) {
-
-  if (!req.session.user.role) {//非管理员，跳转到上一个页面
-    return res.redirect('back');
-  }
-  userModel.getUserList(renderHtml);
-
-  function renderHtml(docs) {
-    res.render('manage_user', {
-      title: '用户管理',
-      curUser: {
-        username: req.session.user.username,
-        nickname: req.session.user.nickname,
-        role: req.session.user.role
-      },
-      userList: docs
-    });
-  }
 };
 
 /**
@@ -188,27 +209,6 @@ userModel.manageUser = function (req, res) {
       console.log('when step into this line! means some error happened!');
   }
 
-};
-
-/**
- * 渲染并返回修改密码（edit_user）页面
- *
- * @param req
- * @param res
- */
-userModel.renderEditUser = function (req, res) {
-  userModel.getUserNameList(renderHtml);
-
-  function renderHtml(docs) {
-    res.render('edit_user', {
-      title: '修改密码',
-      curUser: {
-        username: req.session.user.username,
-        nickname: req.session.user.nickname,
-        role: req.session.user.role
-      }
-    });
-  }
 };
 
 /**
