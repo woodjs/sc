@@ -10,7 +10,7 @@ var projectModel = db.model('projects', projectSchema, 'projects');
  */
 projectModel.renderAddProject = function (req, res) {
 
-  renderHtml();
+  projectModel.getProjectNameList(renderHtml);
 
   function renderHtml(docs) {
     res.render('add_project', {
@@ -19,8 +19,8 @@ projectModel.renderAddProject = function (req, res) {
         username: req.session.user.username,
         nickname: req.session.user.nickname,
         role: req.session.user.role
-      }
-      //projectNameList: docs
+      },
+      projectNameList: docs
     });
   }
 };
@@ -76,7 +76,7 @@ projectModel.renderEditProject = function (req, res) {
  * @param {Function} callback
  */
 projectModel.getProjectNameList = function (callback) {
-  projectModel.find({}, {username: 1, _id: 0}, {}, function (err, docs) {
+  projectModel.find({}, {projectName: 1, _id: 0}, {}, function (err, docs) {
     if (err) {
       console.log(err);
     }

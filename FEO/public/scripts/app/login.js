@@ -33,7 +33,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
             data: JSON.stringify(temp),
             dataType: 'json',
             success: function (res) {
-              if (res.message === 'ok') {
+              if (res.status === 200) {
                 window.location.href = '/optimize';
               } else {
                 self.showError(res.message);

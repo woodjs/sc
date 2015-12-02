@@ -82,6 +82,7 @@ userModel.renderEditUser = function (req, res) {
   }
 };
 
+
 /**
  * 返回用户列表（包含所有字段）
  *
@@ -135,7 +136,8 @@ userModel.createUser = function (req, res) {
     if (err) {
       console.log(err);
     }
-    res.send(200, {
+    res.send({
+      status: 200,
       message: 'ok'
     });
   });
@@ -160,7 +162,7 @@ userModel.manageUser = function (req, res) {
             console.log(err);
           }
           res.send({
-            state: 200,
+            status: 200,
             userList: docs
           });
         });
@@ -171,27 +173,29 @@ userModel.manageUser = function (req, res) {
             console.log(err);
           }
           res.send({
-            state: 200,
+            status: 200,
             userList: docs
           });
         });
       break;
     case 'auth':
-      userModel.update({username: obj.username}, {$set: {role: obj.role}}, {}, function (err, docs) {
-        if (err) {
-          console.log(err);
-        }
-        res.send({
-          state: 200
+        userModel.update({username: obj.username}, {$set: {role: obj.role}}, {}, function (err, docs) {
+          if (err) {
+            console.log(err);
+          }
+          res.send({
+            status: 200
+          });
         });
-      });
       break;
     case 'delete':
         userModel.remove({username: obj.username}, function (err) {
           if (err) {
             console.log(err);
           }
-          res.send();
+          res.send({
+            status: 200
+          });
         });
       break;
     case 'reset':
@@ -201,7 +205,7 @@ userModel.manageUser = function (req, res) {
             console.log(err);
           }
           res.send({
-            state: 200
+            status: 200
           });
         });
       break;

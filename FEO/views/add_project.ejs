@@ -2,34 +2,41 @@
 <%- include common/nav.ejs %>
     <section class="wrapper-main-content">
       <div class="block-main-content width-1100">
-        <div class="box-project-show">
+        <div class="box-project-show" id="box-project-show">
           <label>已创建的项目:</label>
-          <span data-projectName="SGMW_EPC">SGMW_EPC</span>
-
+          <% projectNameList.forEach(function (obj, index, arr) { %>
+          <span data-project-name="<%= obj.projectName %>"><%= obj.projectName %></span>
+          <% }) %>
         </div>
         <div class="box-project-name">
           <h3>请输入项目名称:</h3>
 
           <div class="set-project-name">
-            <input type="text" placeholder="请输入项目名称"/>
-            <span class="btn btn-add">确认</span>
+            <input type="text" id="input-project-name" placeholder="请输入项目名称"/>
+            <span class="btn btn-add" id="btn-add">确认</span>
           </div>
           <div class="cur-name">
-            当前项目名称: <label>SGMW_EPC</label>
+            当前项目名称: <label id="cur-project-name"></label>
           </div>
         </div>
         <div class="box-project-files">
           <h3>请编辑项目相关文件:</h3>
 
           <div class="tab-btn-list" id="tab-btn-list">
-            <span class="btn active" data-href="tab-content-1">GruntFile.js</span>
+            <span class="btn active" data-href="tab-content-1">gulpfile.js</span>
             <span class="btn" data-href="tab-content-2">cssConfig.json</span>
             <span class="btn" data-href="tab-content-3">requireConfig.js</span>
-            <span class="btn" data-href="tab-content-4">bat</span>
+            <span class="btn" data-href="tab-content-4">run.bat</span>
+            <span class="btn" data-href="tab-content-5">srcConfig.json</span>
           </div>
           <div class="tab-content-list">
             <div class="tab-content" id="tab-content-1">
-              <textarea id="code1"></textarea>
+              <textarea id="code1">
+var a = 1;
+var b = 1;
+alert(a + b);
+
+              </textarea>
             </div>
             <div class="tab-content" id="tab-content-2">
               <textarea id="code2"></textarea>
@@ -39,6 +46,9 @@
             </div>
             <div class="tab-content" id="tab-content-4">
               <textarea id="code4"></textarea>
+            </div>
+            <div class="tab-content" id="tab-content-5">
+              <textarea id="code5"></textarea>
             </div>
           </div>
         </div>

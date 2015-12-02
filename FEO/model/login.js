@@ -28,11 +28,13 @@ loginModel.checkUser = function (req, res) {
         nickname: docs[0].nickname,
         role: docs[0].role
       };
-      res.send(200, {
+      res.send({
+        status: 200,
         message: 'ok'
       });
     } else {
-      res.send(200, {
+      res.send({
+        status: 401,
         message: '用户名或密码错误！'
       });
     }
