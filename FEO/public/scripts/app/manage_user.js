@@ -1,4 +1,4 @@
-define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
+define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) {
 
   var manageUser = {
     init: function () {
@@ -170,7 +170,7 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
               auth.role = parseInt($('#auth-content input:checked').val());
               obj = auth;
             }
-            $.ajax({
+            ajax.invoke({
               url: '/user/manage',
               type: 'post',
               contentType: 'application/JSON',
@@ -188,7 +188,7 @@ define(['jquery', 'easyDialog', 'ejs', '!domReady'], function ($) {
       });
     },
     searchAjax: function (obj, callback) {
-      $.ajax({
+      ajax.invoke({
         url: '/user/manage',
         type: 'post',
         contentType: 'application/JSON',

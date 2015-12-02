@@ -48,9 +48,10 @@ define(function () {
           beforeSend: opts.beforeSend,
           complete: opts.complete,
           traditional: opts.traditional,
-          success: function (result) {
-            self.success(opts, result);
-          },
+          //success: function (result) {
+          //  self.success(opts, result);
+          //},
+          success: opts.success,
           error: function (error) {
             self.error(opts, error);
           }

@@ -1,6 +1,6 @@
-define(['jquery', '!domReady'], function ($) {
+define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
 
-  var addUser = {
+  var eidtUser = {
     init: function () {
       var self = this;
 
@@ -40,7 +40,7 @@ define(['jquery', '!domReady'], function ($) {
         if (self.checkAllInput()) {
           self.hideError();
           var temp = self.getAllInput();
-          $.ajax({
+          ajax.invoke({
             url: '/user/edit',
             type: 'post',
             contentType: 'application/JSON',
@@ -121,6 +121,6 @@ define(['jquery', '!domReady'], function ($) {
     }
   };
 
-  addUser.init();
+  eidtUser.init();
 
 });

@@ -6,7 +6,8 @@ var userSchema = new mongoose.Schema({
   },
   password: {
     type: 'String',
-    required: true
+    required: true,
+    index: 0
   },
   nickname: {
     type: 'String',

@@ -12,6 +12,7 @@ var loginModel = {};
  */
 loginModel.checkUser = function (req, res) {
   var obj = req.body;
+  console.log(obj);
   if (!(obj.username && obj.password)) {
     console.log('some fields is empty!');
     return;

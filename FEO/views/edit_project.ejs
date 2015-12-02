@@ -1,0 +1,38 @@
+<%- include common/header.ejs %>
+<%- include common/nav.ejs %>
+
+    <section class="wrapper-main-content">
+      <div class="block-main-content width-1100">
+        <div class="box-project-files">
+          <h3>请编辑项目相关文件:<span>当前项目名称：<label>SGMW_EPC</label></span></h3>
+          <div class="tab-btn-list" id="tab-btn-list">
+            <span class="btn active" data-href="tab-content-1">GruntFile.js</span>
+            <span class="btn" data-href="tab-content-2">cssConfig.json</span>
+            <span class="btn" data-href="tab-content-3">requireConfig.js</span>
+            <span class="btn" data-href="tab-content-4">bat</span>
+          </div>
+          <div class="tab-content-list">
+            <div class="tab-content" id="tab-content-1">
+              <textarea id="code1"></textarea>
+            </div>
+            <div class="tab-content" id="tab-content-2">
+              <textarea id="code2"></textarea>
+            </div>
+            <div class="tab-content" id="tab-content-3">
+              <textarea id="code3"></textarea>
+            </div>
+            <div class="tab-content" id="tab-content-4">
+              <textarea id="code4"></textarea>
+            </div>
+          </div>
+        </div>
+        <span class="btn btn-submit-all">提交</span>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      var requiredModuleList = ['editProject'];
+    </script>
+
+<%- include config/requirejsConfig.ejs %>
+<%- include common/footer.ejs %>

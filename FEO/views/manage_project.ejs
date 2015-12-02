@@ -1,0 +1,112 @@
+<%- include common/header.ejs %>
+<%- include common/nav.ejs %>
+
+    <section class="wrapper-main-content">
+      <div class="block-main-content width-1100">
+        <div class="box-manage-list">
+          <h3>项目管理:</h3>
+          <div class="set-project-name">
+            <input type="text" placeholder="请输入项目名称" />
+            <span class="btn">查询</span>
+            <span class="btn">显示全部</span>
+            <a class="btn btn-add" href="/project/add">新增项目</a>
+          </div>
+          <div class="manage-list">
+            <table class="table-show-list table-show-list-2">
+              <thead>
+              <tr>
+                <td>项目名</td>
+                <td>上次优化时间</td>
+                <td>优化人</td>
+                <td>项目创建时间</td>
+                <td>创建人</td>
+                <td>操作</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="warn">
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><span class="btn btn-optimize">恢复</span></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+              <tr>
+                <td>SGMW_EPC</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td>2015-11-23T11:10:20</td>
+                <td>操作人</td>
+                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      var requiredModuleList = ['manageProject'];
+    </script>
+
+<%- include config/requirejsConfig.ejs %>
+<%- include common/footer.ejs %>

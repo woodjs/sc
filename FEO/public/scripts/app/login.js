@@ -26,7 +26,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
         if (self.checkAllInput()) {
           self.hideError();
           var temp = self.getAllInput();
-          $.ajax({
+          ajax.invoke({
             url: '/login',
             type: 'post',
             contentType: 'application/JSON',
@@ -34,7 +34,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
             dataType: 'json',
             success: function (res) {
               if (res.message === 'ok') {
-                window.location.href = 'user/edit';
+                window.location.href = '/optimize';
               } else {
                 self.showError(res.message);
               }

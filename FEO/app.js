@@ -10,7 +10,9 @@ var MongoStore = require('connect-mongo')(expressSession);
 var db = require('./config/db');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
+var optimize = require('./routes/optimize');
 var user = require('./routes/user');
+var project = require('./routes/project');
 
 var app = express();
 
@@ -40,9 +42,14 @@ app.use(expressSession({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/optimize', optimize);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/user', user);
+app.use('/project', project);
+app.route('/').get(function (req, res) {
+  res.redirect('/optimize');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

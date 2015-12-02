@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userModel = require('../model/user');
+var projectModel = require('../model/project');
 
 router.use(function (req, res, next) {
   if (!req.session.user) {
@@ -10,24 +10,21 @@ router.use(function (req, res, next) {
 });
 
 /**
- * @url user/add
+ * @url project/add
  */
 router.route('/add')
-  .get(userModel.renderAddUser)
-  .post(userModel.createUser);
+  .get(projectModel.renderAddProject);
 
 /**
- * @url user/manage
+ * @url project/manage
  */
 router.route('/manage')
-  .get(userModel.renderManageUser)
-  .post(userModel.manageUser);
+  .get(projectModel.renderManageProject);
 
 /**
- * @url user/edit
+ * @url project/edit
  */
 router.route('/edit')
-  .get(userModel.renderEditUser)
-  .post(userModel.editUser);
+  .get(projectModel.renderEditProject);
 
 module.exports = router;

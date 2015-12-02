@@ -1,4 +1,4 @@
-define(['jquery', '!domReady'], function ($) {
+define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
 
   var addUser = {
     init: function () {
@@ -50,7 +50,7 @@ define(['jquery', '!domReady'], function ($) {
         if (self.checkAllInput()) {
           self.hideError();
           var temp = self.getAllInput();
-          $.ajax({
+          ajax.invoke({
             url: '/user/add',
             type: 'post',
             contentType: 'application/JSON',
