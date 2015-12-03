@@ -1,3 +1,4 @@
+var moment = require('moment');
 var projectModel = require('./project');
 var optimizeModel = {};
 
@@ -36,18 +37,40 @@ optimizeModel.manageOptimize = function (req, res) {
 
   switch (type) {
     case 'action':
-      //TODO
-      console.log('action:'+ obj.projectName +'，执行优化操作！');
-      res.send({
-        status: 200
+      var optimizeTime = moment().format('YYYY-MM-DD HH:mm:ss');
+      projectModel.update({projectName: obj.projectName}, {
+        $set: {
+          lastOptimizeTime: optimizeTime,
+          lastOptimizeBy: req.session.user.username
+        }
+      }, {}, function (err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        //TODO
+        console.log('action:'+ obj.projectName +'，执行优化操作！');
+        res.send({
+          status: 200,
+          optimizeTime: optimizeTime,
+          optimizeBy: req.session.user.username
+        });
       });
+      /*setTimeout(function () {
+        res.send({
+          status: 200,
+          optimizeTime: optimizeTime,
+          optimizeBy: req.session.user.username
+        });
+      }, 5000);*/
       break;
     case 'cancel':
       //TODO
       console.log('cancel:'+ obj.projectName +'，取消执行优化操作！');
-      res.send({
-        status: 200
-      });
+      setTimeout(function () {
+        res.send({
+          status: 200
+        });
+      }, 1000);
       break;
     default:
       console.log('when step into this line! means some error happened!');

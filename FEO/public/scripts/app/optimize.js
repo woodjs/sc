@@ -1,4 +1,4 @@
-define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) {
+define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], function ($, ajax, io) {
 
   var optimize = {
     init: function () {
@@ -7,6 +7,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.buildElement();
       self.buildlTpl();
       self.bindEvent();
+      self.bindSocket();
     },
     buildElement: function () {
       var self = this;
@@ -19,11 +20,19 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$bgLoading = $('#bg-loading');
       self.$holdLoading = $('#hold-loading');
       self.$btnCancel = $('#btn-cancel');
+      self.$infoStage = $('#info-stage');
     },
     buildlTpl: function () {
       var self = this;
 
       self.tplList = $('#tpl-project-list').html();
+    },
+    bindSocket: function () {
+      var self = this;
+      self.socket = io.connect('http://localhost:3000');
+      self.socket.on('optimize message', function (data) {
+        self.$infoStage.append(data);
+      });
     },
     bindEvent: function () {
       var self = this;
@@ -65,15 +74,19 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
           projectName: projectName
         };
 
-        $temp.hide().siblings('.btn').show();
-        $temp.closest('tr').addClass('warn').siblings('tr').addClass('disable');
-
-        self.showConfirm(text, data, handleAction);
+        self.showConfirm(text, data, $temp, handleAction);
 
         function handleAction(res) {
-          //window.location.reload();
+          if (res.status === 200) {
+            $temp.closest('td').prev().html(res.optimizeBy).prev().html(res.optimizeTime);
+            self.unlockBtns($temp.siblings('.btn'));
+          }
         }
 
+      });
+
+      self.$bgLoading.on('click', function (e) {
+        e.stopPropagation();
       });
 
       function listenKeyPress(e) {
@@ -86,6 +99,12 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
     },
     unBindEvent: function () {
       var self = this;
+
+      self.$inputSearch.off('keypress');
+      self.$btnSearch.off('click');
+      self.$btnShowAll.off('click');
+      self.$btnActionList.off('click');
+      self.$bgLoading.off('click');
     },
     reBindEvent: function () {
       var self = this;
@@ -126,13 +145,15 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
         fixed: true
       });
     },
-    showConfirm: function (str, obj, callback) {
+    showConfirm: function (str, obj, $btn, callback) {
+      var self = this;
 
       easyDialog.open({
         container: {
           header: '提示',
           content: str,
           yesFn: function () {
+            self.controlOptimize($btn);
             ajax.invoke({
               url: '/optimize',
               type: 'post',
@@ -169,6 +190,45 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       ejs.close = '}}';
 
       return ejs.render(self.tplList, obj);
+    },
+    controlOptimize: function ($obj) {
+      var self = this;
+
+      if ($obj.is('.btn-action')) {
+        self.lockBtns($obj);
+      } else {
+        self.unlockBtns($obj);
+      }
+    },
+    lockBtns: function ($obj) {
+      var self = this;
+
+      $obj.hide().siblings('.btn').show();
+      $obj.closest('tr').addClass('warn').siblings('tr').addClass('disable');
+      self.unBindEvent();
+      $obj.siblings('.btn').on('click', function () {
+        var $temp = $(this);
+        var projectName = $temp.data('project-name');
+        var text = '确定取消优化该项目？';
+        var data = {
+          type: 'cancel',
+          projectName: projectName
+        };
+        self.showConfirm(text, data, $temp, handleCancel);
+
+        function handleCancel(res) {
+          if (res.status === 200) {
+            self.unlockBtns($temp.siblings('.btn'));
+          }
+        }
+      });
+    },
+    unlockBtns: function ($obj) {
+      var self = this;
+
+      $obj.hide().siblings('.btn').show();
+      $obj.closest('tr').removeClass('warn').siblings('tr').removeClass('disable');
+      self.bindEvent();
     }
   };
 

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db = mongoose.createConnection('mongodb://admin:111111@10.0.0.106:27017/optimizer');
+var db = mongoose.createConnection('mongodb://127.0.0.1:27017/optimizer');
 
 db.on('open', function (err) {
   if (err) {

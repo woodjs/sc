@@ -2,9 +2,9 @@ var os = require('os');
 var platform = os.platform();
 var baseUrl = '';
 
-if (platform.indexOf('win') > -1) {
+if (platform.indexOf('dar') === -1) {
   baseUrl = 'D:\\nodejs_workspace\\optimizers\\';
 } else {
-  baseUrl = '~/documents/optimizers/';
+  baseUrl = '/users/bugong/documents/optimizers/';
 }
 module.exports = baseUrl;

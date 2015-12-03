@@ -139,6 +139,7 @@ projectModel.createProjectFiles = function (obj, callback) {
 projectModel.getProjectFiles = function (projectName, callback) {
   var obj = {};
   var dirPath = baseUrl + projectName;
+  console.log(dirPath);
   //TODO
   obj.gulpfile = fs.readFileSync(path.join(dirPath, 'gulpfile.js'));
   obj.cssConfig = fs.readFileSync(path.join(dirPath, 'cssConfig.json'));
