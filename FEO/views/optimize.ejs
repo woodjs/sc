@@ -6,9 +6,9 @@
         <div class="box-left-list">
           <h3>项目优化:</h3>
           <div class="box-search">
-            <input type="text" placeholder="请输入项目名称" />
-            <span class="btn btn-search">查询</span>
-            <span class="btn btn-show-all">显示全部</span>
+            <input type="text" id="input-search" placeholder="请输入项目名称" />
+            <span class="btn btn-search" id="btn-search">查询</span>
+            <span class="btn btn-show-all" id="btn-show-all">显示全部</span>
           </div>
           <div class="box-list">
             <table class="table-show-list">
@@ -20,43 +20,15 @@
                 <td>操作</td>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="tbody-project-list">
+              <% projectList.forEach(function (obj, index, arr) { %>
               <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
+                <td><%= obj.projectName %></td>
+                <td><%= obj.lastOptimizeTime %></td>
+                <td><%= obj.lastOptimizeBy %></td>
+                <td><span class="btn btn-optimize btn-action" data-project-name="<%= obj.projectName %>">优化</span><span class="btn btn-optimize btn-cancel" style="display: none;" data-project-name="<%= obj.projectName %>">取消</span></td>
               </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">优化</span></td>
-              </tr>
+              <% }) %>
               </tbody>
             </table>
           </div>
@@ -66,6 +38,24 @@
         </div>
       </div>
     </section>
+
+    <div class="bg-loading" id="bg-loading" style="display: none;"></div>
+    <ul class="hold-loading" id="hold-loading" style="display: none;">
+      <li><i class="icon-spinner icon-spin"></i></li>
+      <li>正在执行优化操作，请稍等...</li>
+      <li><span class="btn btn-cancel" id="btn-cancel">取消</span></li>
+    </ul>
+
+    <script type="text/ejs-template" id="tpl-project-list">
+      {{ projectList.forEach(function (obj, index, arr) { }}
+      <tr>
+        <td>{{= obj.projectName }}</td>
+        <td>{{= obj.lastOptimizeTime }}</td>
+        <td>{{= obj.lastOptimizeBy }}</td>
+        <td><span class="btn btn-optimize btn-action" data-project-name="{{= obj.projectName }}">优化</span><span class="btn btn-optimize btn-cancel" style="display: none;" data-project-name="{{= obj.projectName }}">取消</span></td>
+      </tr>
+      {{ }) }}
+    </script>
 
     <script type="text/javascript">
       var requiredModuleList = ['optimize'];

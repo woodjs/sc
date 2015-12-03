@@ -318,6 +318,12 @@ body {
   tr:hover {
    background: $bgColor;
   }
+  tr.warn {
+   background: #fcf8e3;
+   &:hover {
+    background: #faebcc;
+   }
+  }
   .disable{
    background: #eee;
    &:hover{
@@ -679,5 +685,52 @@ body {
   -webkit-appearance:radio;
   position: relative;
   top:1px;
+ }
+}
+.bg-loading{
+ position: fixed;
+ z-index:1000;
+ top:0;
+ left:0;
+ right:0;
+ bottom:0;
+ background: rgb(51,51,51);
+ opacity: 0.6;
+}
+.hold-loading{
+ position: fixed;
+ z-index:1000;
+ top:50%;
+ left:50%;
+ @include transform(translate(-50%, -50%));
+ color:#fff;
+ li{
+  text-align: center;
+ }
+ li:nth-child(1){
+  @include setHeightGroup(60px);
+  i{
+   font-size:44px;
+  }
+ }
+ li:nth-child(2){
+  margin-top:10px;
+  font-size:18px;
+ }
+ li:nth-child(3){
+  margin-top:30px;
+  .btn-cancel{
+   display: inline-block;
+   @include setHeightGroup(32px);
+   border-radius: 2px;
+   border:1px solid #fff;
+   padding:0 30px;
+   font-size:14px;
+   @include transition(all 0.3s ease-out);
+   &:hover{
+    background: #fff;
+    color:$color;
+   }
+  }
  }
 }

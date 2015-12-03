@@ -14,6 +14,7 @@ router.use(function (req, res, next) {
  * @url /optimize
  */
 router.route('/')
-  .get(optimizeModel.renderOptimize);
+  .get(optimizeModel.renderOptimize)
+  .post(optimizeModel.manageOptimize);
 
 module.exports = router;

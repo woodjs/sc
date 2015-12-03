@@ -1,4 +1,4 @@
-define(['jquery', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], function ($, CodeMirror, codeMirrorMode) {
+define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], function ($, ajax, CodeMirror, codeMirrorMode) {
 
   var addProject = {
     init: function () {
@@ -21,6 +21,7 @@ define(['jquery', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], fu
       self.$createdProjectList = $('#box-project-show span');
       self.$inputProjectName = $('#input-project-name');
       self.$btnAdd = $('#btn-add');
+      self.$btnSubmit = $('#btn-submit');
       self.$curProjectName = $('#cur-project-name');
 
     },
@@ -51,6 +52,24 @@ define(['jquery', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], fu
         self.$inputProjectName.val('');
       });
 
+      self.$btnSubmit.on('click', function () {
+        if (self.checkAllInput()) {
+          var data = self.getAllInput();
+          ajax.invoke({
+            url: '/project/add',
+            type: 'post',
+            contentType: 'application/JSON',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (res) {
+              if (res.status === 200) {
+                window.location.reload();
+              }
+            }
+          });
+        }
+      });
+      
       function listenKeyPress(e) {
         if (e.keyCode === 13) {
           self.$btnAdd.click();
@@ -66,12 +85,6 @@ define(['jquery', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], fu
       self.$codeMirrorList.forEach(function (obj, index, arr) {
         obj.setSize('100%', '100%');
       });
-
-      /*self.$codeMirror1.setValue('gulpfile');
-      self.$codeMirror2.setValue('cssConfig');
-      self.$codeMirror3.setValue('requireConfig');
-      self.$codeMirror4.setValue('bat');
-      self.$codeMirror5.setValue('srcConfig');*/
     },
     createCodeMirror: function (textarea) {
       return CodeMirror.fromTextArea(textarea, {
@@ -99,6 +112,48 @@ define(['jquery', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domReady'], fu
       });
 
       return stamp;
+    },
+    checkAllInput: function () {
+      var self = this;
+      var stamp = true;
+
+      if ($.trim(self.$curProjectName.html()) === '') {
+        self.showError('请添加项目名称!');
+        return false;
+      }
+
+      self.$codeMirrorList.forEach(function (obj, index, arr) {
+        var value = obj.getValue();
+        if ($.trim(value) === '') {
+          stamp = false;
+        }
+      });
+
+      if (!stamp) {
+        self.showError('尚有配置文件未填写,请检查各项!');
+        return false;
+      }
+
+      if (self.isProjectCreated()) {
+        self.showError('该项目名已被占用,请重新输入!');
+        return false;
+      }
+
+      return true;
+
+    },
+    getAllInput: function () {
+      var self = this;
+      var temp = {};
+
+      temp.projectName = $.trim(self.$curProjectName.html());
+      temp.gulpfile = self.$codeMirror1.getValue();
+      temp.cssConfig = self.$codeMirror2.getValue();
+      temp.requireConfig = self.$codeMirror3.getValue();
+      temp.run = self.$codeMirror4.getValue();
+      temp.srcConfig = self.$codeMirror5.getValue();
+
+      return temp;
     },
     showError: function (text) {
       var self = this;

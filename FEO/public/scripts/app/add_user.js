@@ -61,7 +61,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
                 window.location.reload();
               }
             }
-          })
+          });
         }
       });
 
@@ -123,7 +123,7 @@ define(['jquery', 'ajax', '!domReady'], function ($, ajax) {
       if (!self.checkRePassword()) {
         self.showError('两次密码输入不一致!');
         return false;
-      }
+    }
 
       return true;
     },

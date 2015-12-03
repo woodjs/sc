@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var projectSchema = new mongoose.Schema({
   projectName: {
     type: 'String',
-    required: true
+    required: true,
+    unique: true
   },
   createTime: {
     type: 'String',
@@ -12,13 +13,11 @@ var projectSchema = new mongoose.Schema({
     type: 'String',
     required: true
   },
-  lastEditTime: {
-    type: 'String',
-    required: true
+  lastOptimizeTime: {
+    type: 'String'
   },
-  lastEditBy: {
-    type: 'String',
-    required: true
+  lastOptimizeBy: {
+    type: 'String'
   },
   isShow: {
     type: 'Boolean',

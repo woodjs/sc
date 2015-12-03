@@ -35,9 +35,10 @@ app.use(expressSession({
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({
-        host: '127.0.0.1',
-        port: 27017,
-        db: 'optimizer_sessions'
+        url: 'mongodb://admin:111111@10.0.0.106:27017/optimizer_sessions'
+        //host: '127.0.0.1',
+        //port: 27017,
+        //db: 'optimizer_sessions'
     })
 }));
 app.use(express.static(path.join(__dirname, 'public')));

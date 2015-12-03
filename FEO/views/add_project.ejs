@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="box-project-files">
-          <h3>请编辑项目相关文件:</h3>
+          <h3>请编辑项目相关配置文件:</h3>
 
           <div class="tab-btn-list" id="tab-btn-list">
             <span class="btn active" data-href="tab-content-1">gulpfile.js</span>
@@ -31,28 +31,48 @@
           </div>
           <div class="tab-content-list">
             <div class="tab-content" id="tab-content-1">
-              <textarea id="code1">
+              <textarea id="code1" style="display: none;">
 var a = 1;
 var b = 1;
 alert(a + b);
-
               </textarea>
             </div>
             <div class="tab-content" id="tab-content-2">
-              <textarea id="code2"></textarea>
+              <textarea id="code2" style="display: none;">
+{
+ "a": 1,
+ "b": 2
+}
+              </textarea>
             </div>
             <div class="tab-content" id="tab-content-3">
-              <textarea id="code3"></textarea>
+              <textarea id="code3" style="display: none;">
+var a = 2;
+var b = 3;
+alert(a + b);
+              </textarea>
             </div>
             <div class="tab-content" id="tab-content-4">
-              <textarea id="code4"></textarea>
+              <textarea id="code4" style="display: none;">
+d:
+cd "D:\\nodejs_workspace\\optimizers\\项目名"
+call run.bat
+              </textarea>
             </div>
             <div class="tab-content" id="tab-content-5">
-              <textarea id="code5"></textarea>
+              <textarea id="code5" style="display: none;">
+module.exports = {
+ "projectBaseURI": "D:\\git\\byd-epc\\src\\main\\webapp\\",
+ "scriptsSrc": "scripts",
+ "stylesSrc": "styles",
+ "scriptsDest": "release\\scripts",
+ "stylesDest": "release\\styles"
+}
+              </textarea>
             </div>
           </div>
         </div>
-        <span class="btn btn-submit-all">提交</span>
+        <span class="btn btn-submit-all" id="btn-submit">提交</span>
       </div>
     </section>
 

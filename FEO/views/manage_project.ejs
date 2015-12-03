@@ -6,9 +6,9 @@
         <div class="box-manage-list">
           <h3>项目管理:</h3>
           <div class="set-project-name">
-            <input type="text" placeholder="请输入项目名称" />
-            <span class="btn">查询</span>
-            <span class="btn">显示全部</span>
+            <input type="text" id="input-search" placeholder="请输入项目名称" />
+            <span class="btn" id="btn-search">查询</span>
+            <span class="btn" id="btn-show-all">显示全部</span>
             <a class="btn btn-add" href="/project/add">新增项目</a>
           </div>
           <div class="manage-list">
@@ -23,86 +23,46 @@
                 <td>操作</td>
               </tr>
               </thead>
-              <tbody>
-              <tr class="warn">
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><span class="btn btn-optimize">恢复</span></td>
+              <tbody id="tbody-project-list">
+              <% projectList.forEach(function (obj, index, arr) { %>
+              <% var curClass = (obj.isShow ? '' : 'warn')  %>
+              <tr class="<%= curClass %>">
+                <td><%= obj.projectName %></td>
+                <td><%= obj.lastOptimizeTime %></td>
+                <td><%= obj.lastOptimizeBy %></td>
+                <td><%= obj.createTime %></td>
+                <td><%= obj.createBy %></td>
+                <% if (obj.isShow) { %>
+                <td><span class="btn btn-optimize btn-delete" data-project-name="<%= obj.projectName %>">删除</span><a  href="/project/edit/<%= obj.projectName %>" class="btn btn-optimize btn-edit">配置</a></td>
+                <% } else { %>
+                <td><span class="btn btn-optimize btn-dep-delete" data-project-name="<%= obj.projectName %>">删除</span><span class="btn btn-optimize btn-recovery" data-project-name="<%= obj.projectName %>">恢复</span></td>
+                <% } %>
               </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-              <tr>
-                <td>SGMW_EPC</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td>2015-11-23T11:10:20</td>
-                <td>操作人</td>
-                <td><span class="btn btn-optimize">删除</span><a href="/project/edit" class="btn btn-optimize">配置</a></td>
-              </tr>
-
+              <% }) %>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </section>
+
+    <script type="text/ejs-template" id="tpl-project-list">
+      {{ projectList.forEach(function (obj, index, arr) { }}
+      {{ var curClass = (obj.isShow ? '' : 'warn')  }}
+      <tr class="{{= curClass }}">
+        <td>{{= obj.projectName }}</td>
+        <td>{{= obj.lastOptimizeTime }}</td>
+        <td>{{= obj.lastOptimizeBy }}</td>
+        <td>{{= obj.createTime }}</td>
+        <td>{{= obj.createBy }}</td>
+        {{ if (obj.isShow) { }}
+        <td><span class="btn btn-optimize btn-delete" data-project-name="{{= obj.projectName }}">删除</span><a  href="/project/edit/{{= obj.projectName }}" class="btn btn-optimize btn-edit">配置</a></td>
+        {{ } else { }}
+        <td><span class="btn btn-optimize btn-dep-delete" data-project-name="{{= obj.projectName }}">删除</span><span class="btn btn-optimize btn-recovery" data-project-name="{{= obj.projectName }}">恢复</span></td>
+        {{ } }}
+      </tr>
+      {{ }) }}
+    </script>
 
     <script type="text/javascript">
       var requiredModuleList = ['manageProject'];

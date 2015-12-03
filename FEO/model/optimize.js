@@ -1,6 +1,5 @@
-var db = require('../config/db');
-var projectSchema = require('../schema/project');
-var projectModel = db.model('projects', projectSchema, 'projects');
+var projectModel = require('./project');
+var optimizeModel = {};
 
 /**
  * 渲染并返回项目优化（optimize）页面
@@ -8,9 +7,10 @@ var projectModel = db.model('projects', projectSchema, 'projects');
  * @param req
  * @param res
  */
-projectModel.renderOptimize = function (req, res) {
+optimizeModel.renderOptimize = function (req, res) {
 
-  renderHtml();
+  projectModel.getProjectList(renderHtml);
+
   function renderHtml(docs) {
     res.render('optimize', {
       title: '项目优化',
@@ -18,13 +18,45 @@ projectModel.renderOptimize = function (req, res) {
         username: req.session.user.username,
         nickname: req.session.user.nickname,
         role: req.session.user.role
-      }
+      },
+      projectList: docs
     });
+  }
+};
+
+/**
+ * 执行优化相关的操作
+ *
+ * @param req
+ * @param res
+ */
+optimizeModel.manageOptimize = function (req, res) {
+  var obj = req.body;
+  var type = obj.type;
+
+  switch (type) {
+    case 'action':
+      //TODO
+      console.log('action:'+ obj.projectName +'，执行优化操作！');
+      res.send({
+        status: 200
+      });
+      break;
+    case 'cancel':
+      //TODO
+      console.log('cancel:'+ obj.projectName +'，取消执行优化操作！');
+      res.send({
+        status: 200
+      });
+      break;
+    default:
+      console.log('when step into this line! means some error happened!');
   }
 };
 
 
 
-module.exports = projectModel;
+
+module.exports = optimizeModel;
 
 

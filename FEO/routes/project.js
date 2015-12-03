@@ -13,18 +13,21 @@ router.use(function (req, res, next) {
  * @url project/add
  */
 router.route('/add')
-  .get(projectModel.renderAddProject);
+  .get(projectModel.renderAddProject)
+  .post(projectModel.createProject);
 
 /**
  * @url project/manage
  */
 router.route('/manage')
-  .get(projectModel.renderManageProject);
+  .get(projectModel.renderManageProject)
+  .post(projectModel.manageProject);
 
 /**
- * @url project/edit
+ * @url project/edit/:name
  */
-router.route('/edit')
-  .get(projectModel.renderEditProject);
+router.route('/edit/:name')
+  .get(projectModel.renderEditProject)
+  .post(projectModel.editProject);
 
 module.exports = router;

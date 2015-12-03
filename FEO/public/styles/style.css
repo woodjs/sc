@@ -311,6 +311,10 @@ body {
     transition: background 0.3s ease-out; }
   .table-show-list tbody tr:hover {
     background: #f6f6f6; }
+  .table-show-list tbody tr.warn {
+    background: #fcf8e3; }
+    .table-show-list tbody tr.warn:hover {
+      background: #faebcc; }
   .table-show-list tbody .disable {
     background: #eee; }
     .table-show-list tbody .disable:hover {
@@ -666,5 +670,55 @@ body {
     -webkit-appearance: radio;
     position: relative;
     top: 1px; }
+
+.bg-loading {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #333333;
+  opacity: 0.6; }
+
+.hold-loading {
+  position: fixed;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #fff; }
+  .hold-loading li {
+    text-align: center; }
+  .hold-loading li:nth-child(1) {
+    height: 60px;
+    line-height: 60px; }
+    .hold-loading li:nth-child(1) i {
+      font-size: 44px; }
+  .hold-loading li:nth-child(2) {
+    margin-top: 10px;
+    font-size: 18px; }
+  .hold-loading li:nth-child(3) {
+    margin-top: 30px; }
+    .hold-loading li:nth-child(3) .btn-cancel {
+      display: inline-block;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 2px;
+      border: 1px solid #fff;
+      padding: 0 30px;
+      font-size: 14px;
+      -webkit-transition: all 0.3s ease-out;
+      -ms-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out; }
+      .hold-loading li:nth-child(3) .btn-cancel:hover {
+        background: #fff;
+        color: #333; }
 
 /*# sourceMappingURL=style.css.map */
