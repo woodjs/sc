@@ -15,13 +15,8 @@ userModel.renderAddUser = function (req, res) {
   if (!req.session.user.role) {//非管理员，跳转到上一个页面
     return res.redirect('back');
   }
-
   userModel.getUserNameList(renderHtml);
-  /*  req.session.user = {//开发后门
-   username: 'yyl',
-   nickname: 'yyl',
-   role: 1
-   };*/
+
   function renderHtml(docs) {
     res.render('add_user', {
       title: '增加用户',

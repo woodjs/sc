@@ -16,6 +16,7 @@
 - createBy
 - lastOptimizeTime
 - lastOptimizeBy
+- isOptimizing
 - isShow
 
 ##功能设计

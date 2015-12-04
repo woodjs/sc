@@ -188,6 +188,7 @@ projectModel.createProject = function (req, res) {
     createBy: req.session.user.username,
     lastOptimizeTime: '暂无数据',
     lastOptimizeBy: '暂无数据',
+    isOptimizing: false,
     isShow: true
   };
   projectModel.create(doc, function (err, doc) {

@@ -38,22 +38,31 @@ optimizeModel.manageOptimize = function (req, res) {
   switch (type) {
     case 'action':
       var optimizeTime = moment().format('YYYY-MM-DD HH:mm:ss');
-      projectModel.update({projectName: obj.projectName}, {
+      projectModel.update({projectName: obj.projectName, isOptimizing: false}, {
         $set: {
           lastOptimizeTime: optimizeTime,
-          lastOptimizeBy: req.session.user.username
+          lastOptimizeBy: req.session.user.username,
+          isOptimizing: true
         }
       }, {}, function (err, docs) {
         if (err) {
           console.log(err);
         }
         //TODO
-        console.log('action:'+ obj.projectName +'，执行优化操作！');
-        res.send({
-          status: 200,
-          optimizeTime: optimizeTime,
-          optimizeBy: req.session.user.username
-        });
+        if (docs[0]) {
+          console.log('action:'+ obj.projectName +'，执行优化操作！');
+          res.send({
+            status: 200,
+            optimizeTime: optimizeTime,
+            optimizeBy: req.session.user.username
+          });
+        } else {
+          res.send({
+            status: 200,
+            optimizeTime: optimizeTime,
+            optimizeBy: req.session.user.username
+          });
+        }
       });
       /*setTimeout(function () {
         res.send({

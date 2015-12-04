@@ -19,6 +19,10 @@ var projectSchema = new mongoose.Schema({
   lastOptimizeBy: {
     type: 'String'
   },
+  isOptimizing: {
+    type: 'Boolean',
+    default: false
+  },
   isShow: {
     type: 'Boolean',
     default: true
