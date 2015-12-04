@@ -63,7 +63,7 @@ define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domRea
             dataType: 'json',
             success: function (res) {
               if (res.status === 200) {
-                window.location.reload();
+                window.location.href = '/project/manage';
               }
             }
           });
