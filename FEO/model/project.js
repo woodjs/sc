@@ -1,3 +1,4 @@
+"use strict";
 var fs = require('fs');
 var path = require('path');
 var db = require('../config/db');
@@ -5,7 +6,8 @@ var moment = require('moment');
 var projectSchema = require('../schema/project');
 var projectModel = db.model('projects', projectSchema, 'projects');
 var userModel = require('./user');
-var baseUrl = require('../config/baseUrl');
+var baseUrl = require('../config/base_url');
+var fileList = require('../config/file_list');
 
 /**
  * 渲染并返回增加项目（add_project）页面
@@ -115,16 +117,14 @@ projectModel.getProjectList = function (callback) {
 projectModel.createProjectFiles = function (obj, callback) {
   if (obj) {
     var dirPath = baseUrl + obj.projectName;
-    //TODO
+
     fs.mkdir(dirPath, function (err) {
       if (err) {
         console.log(err);
       }
-      fs.writeFileSync(path.join(dirPath, 'gulpfile.js'), obj.gulpfile);
-      fs.writeFileSync(path.join(dirPath, 'cssConfig.json'), obj.cssConfig);
-      fs.writeFileSync(path.join(dirPath, 'requireConfig.js'), obj.requireConfig);
-      fs.writeFileSync(path.join(dirPath, 'run.bat'), obj.run);
-      fs.writeFileSync(path.join(dirPath, 'srcConfig.json'), obj.srcConfig);
+      fileList.forEach(function (temp, index, arr) {
+        fs.writeFileSync(path.join(dirPath, temp.name + temp.extension), obj[temp.name]);
+      });
       callback && callback();
     });
   }
@@ -139,14 +139,10 @@ projectModel.createProjectFiles = function (obj, callback) {
 projectModel.getProjectFiles = function (projectName, callback) {
   var obj = {};
   var dirPath = baseUrl + projectName;
-  console.log(dirPath);
-  //TODO
-  obj.gulpfile = fs.readFileSync(path.join(dirPath, 'gulpfile.js'));
-  obj.cssConfig = fs.readFileSync(path.join(dirPath, 'cssConfig.json'));
-  obj.requireConfig = fs.readFileSync(path.join(dirPath, 'requireConfig.js'));
-  obj.run = fs.readFileSync(path.join(dirPath, 'run.bat'));
-  obj.srcConfig = fs.readFileSync(path.join(dirPath, 'srcConfig.json'));
 
+  fileList.forEach(function (temp, index, arr) {
+    obj[temp.name] = fs.readFileSync(path.join(dirPath, temp.name + temp.extension));
+  });
   callback && callback(obj);
 };
 
@@ -159,12 +155,10 @@ projectModel.getProjectFiles = function (projectName, callback) {
 projectModel.removeProjectFiles = function (projectName, callback) {
   if (projectName) {
     var dirPath = baseUrl + projectName;
-    //TODO
-    fs.unlinkSync(path.join(dirPath, 'gulpfile.js'));
-    fs.unlinkSync(path.join(dirPath, 'cssConfig.json'));
-    fs.unlinkSync(path.join(dirPath, 'requireConfig.js'));
-    fs.unlinkSync(path.join(dirPath, 'run.bat'));
-    fs.unlinkSync(path.join(dirPath, 'srcConfig.json'));
+
+    fileList.forEach(function (temp, index, arr) {
+      fs.unlinkSync(path.join(dirPath, temp.name + temp.extension));
+    });
     fs.rmdir(dirPath, function (err) {
       if (err) {
         console.log(err);

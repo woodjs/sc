@@ -29,8 +29,11 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
     },
     bindSocket: function () {
       var self = this;
-      self.socket = io.connect('http://localhost:3001');
-      self.socket.on('message', function (data) {
+      self.socket = io.connect('http://localhost:3000');
+      self.socket.on('connection', function () {
+        "use strict";
+      });
+      self.socket.on('optimize message', function (data) {
         self.$infoStage.append(data);
       });
     },
