@@ -48,9 +48,7 @@ optimizeModel.manageOptimize = function (req, res) {
         if (err) {
           console.log(err);
         }
-        //TODO
         if (docs[0]) {
-          console.log('action:'+ obj.projectName +'，执行优化操作！');
           res.send({
             status: 200,
             optimizeTime: optimizeTime,
@@ -58,28 +56,30 @@ optimizeModel.manageOptimize = function (req, res) {
           });
         } else {
           res.send({
-            status: 200,
-            optimizeTime: optimizeTime,
-            optimizeBy: req.session.user.username
+            status: 201
           });
         }
       });
-      /*setTimeout(function () {
-        res.send({
-          status: 200,
-          optimizeTime: optimizeTime,
-          optimizeBy: req.session.user.username
-        });
-      }, 5000);*/
       break;
     case 'cancel':
-      //TODO
-      console.log('cancel:'+ obj.projectName +'，取消执行优化操作！');
-      setTimeout(function () {
-        res.send({
-          status: 200
-        });
-      }, 1000);
+      projectModel.update({projectName: obj.projectName, isOptimizing: true}, {
+        $set: {
+          isOptimizing: false
+        }
+      }, {}, function (err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        if (docs[0]) {
+          res.send({
+            status: 200
+          });
+        } else {
+          res.send({
+            status: 201
+          });
+        }
+      });
       break;
     default:
       console.log('when step into this line! means some error happened!');

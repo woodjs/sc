@@ -9,11 +9,7 @@ var fileList = [
   },
   {
     name: 'requireConfig',
-    extension: '.js'
-  },
-  {
-    name: 'run',
-    extension: '.bat'
+    extension: '.json'
   },
   {
     name: 'srcConfig',

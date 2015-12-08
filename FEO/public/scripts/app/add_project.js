@@ -15,8 +15,7 @@ define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domRea
       self.$codeMirror2 = self.createCodeMirror($('#code2')[0]);
       self.$codeMirror3 = self.createCodeMirror($('#code3')[0]);
       self.$codeMirror4 = self.createCodeMirror($('#code4')[0]);
-      self.$codeMirror5 = self.createCodeMirror($('#code5')[0]);
-      self.$codeMirrorList = [self.$codeMirror1, self.$codeMirror2, self.$codeMirror3, self.$codeMirror4, self.$codeMirror5];
+      self.$codeMirrorList = [self.$codeMirror1, self.$codeMirror2, self.$codeMirror3, self.$codeMirror4];
       self.$tabBtnList = $('#tab-btn-list .btn');
       self.$createdProjectList = $('#box-project-show span');
       self.$inputProjectName = $('#input-project-name');
@@ -150,8 +149,7 @@ define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domRea
       temp.gulpfile = self.$codeMirror1.getValue();
       temp.cssConfig = self.$codeMirror2.getValue();
       temp.requireConfig = self.$codeMirror3.getValue();
-      temp.run = self.$codeMirror4.getValue();
-      temp.srcConfig = self.$codeMirror5.getValue();
+      temp.srcConfig = self.$codeMirror4.getValue();
 
       return temp;
     },

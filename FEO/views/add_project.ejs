@@ -25,51 +25,282 @@
           <div class="tab-btn-list" id="tab-btn-list">
             <span class="btn active" data-href="tab-content-1">gulpfile.js</span>
             <span class="btn" data-href="tab-content-2">cssConfig.json</span>
-            <span class="btn" data-href="tab-content-3">requireConfig.js</span>
-            <span class="btn" data-href="tab-content-4">run.bat</span>
-            <span class="btn" data-href="tab-content-5">srcConfig.json</span>
+            <span class="btn" data-href="tab-content-3">requireConfig.json</span>
+            <span class="btn" data-href="tab-content-4">srcConfig.json</span>
           </div>
           <div class="tab-content-list">
             <div class="tab-content" id="tab-content-1">
               <textarea id="code1" style="display: none;">
-var a = 1;
-var b = 1;
-alert(a + b);
+'use strict';
+
+var fs = require('fs'),
+	now = new Date(),
+	gulp = require('gulp'),
+	async = require('async'),
+	copy = require('copy-to'),
+	requirejs = require('requirejs'),
+	dateFormat = require('dateformat'),
+	concat = require('gulp-concat'),
+	autoprefixer = require('gulp-autoprefixer'),
+	minifycss = require('gulp-minify-css'),
+	ginsert = require('gulp-insert');
+
+var now = new Date(),
+	comments = "/* build date: " + dateFormat(now, "isoDateTime") + " */ ";
+
+var srcConfig = require('./srcConfig.json'),
+	cssConfig = require('./cssConfig.json'),
+	requireConfig = require('./requireConfig.json');
+
+var utils = {
+	outFile: function(path, filename, text) {
+		var self = this;
+
+		fs.writeFile(path + filename, comments + text, function(err) {
+			if (err) {
+				self.sendLog(filename + ':' + err);
+			}
+		});
+	},
+	sendLog: function(log) {
+		if (process && process.send) {
+			process.send(log);
+		} else {
+			console.log(log);
+		}
+	}
+};
+
+// build js file
+gulp.task('scripts', function(cb) {
+	var series = [];
+
+	var buildConfig = {
+		outPath: srcConfig.projectBaseURI + srcConfig.scriptsDest,
+		baseConfig: {
+			baseUrl: srcConfig.projectBaseURI + srcConfig.scriptsSrc,
+			paths: requireConfig.paths,
+			shim: requireConfig.shim,
+			optimize: 'uglify',
+			preserveLicenseComments: false,
+			exclude: ["jqueryDatepickeri18n", "globalConfig", "jquery"],
+			onBuildWrite: function(moduleName, path, contents) {
+				var log = '>> Tracing dependencies for:' + moduleName;
+
+				utils.sendLog(log);
+			},
+			onModuleBundleComplete: function(data) {
+				var buildJsFile = data.included[data.included.length - 1],
+					log = ' Uglifying script file >> ' + buildJsFile;
+
+				utils.sendLog(log);
+			}
+		},
+		pages: {
+			header: {
+				include: ["app/header/main.js"],
+				out: function(text) {
+					utils.outFile(buildConfig.outPath, 'header.min.js', text);
+				}
+			},
+			usage: {
+				include: ["app/usage/main.js"],
+				out: function(text) {
+					utils.outFile(buildConfig.outPath, 'usage.min.js', text);
+				}
+			},
+			cart: {
+				include: ["app/cart/shoppingCart.js"],
+				out: function(text) {
+					utils.outFile(buildConfig.outPath, 'cart.min.js', text);
+				}
+			}
+		}
+	};
+
+	for (let key in buildConfig.pages) {
+		copy(buildConfig.baseConfig).to(buildConfig.pages[key]);
+
+		series.push(function(cb) {
+			requirejs.optimize(buildConfig.pages[key], function() {
+				cb(null);
+			}, function(err) {
+				cb(err);
+			});
+		});
+	}
+
+	async.series(series, function(err, values) {
+		if (err) {
+			utils.sendLog('script optimizer err:' + err)
+		} else {
+			utils.sendLog('>>> script uglify optimizer done');
+		}
+	});
+});
+
+// build css file
+gulp.task('cssmin', function() {
+	var series = [],
+		outPath = srcConfig.projectBaseURI + srcConfig.stylesDest,
+		srcPath = srcConfig.projectBaseURI + srcConfig.stylesSrc;
+
+	for (let key in cssConfig.paths) {
+		var cssFiles = cssConfig.paths[key].map(function(item) {
+			return srcPath + '\\' + item
+		});
+
+		series.push(function(cb) {
+			gulp.src(cssFiles)
+				.pipe(minifycss({
+					keepSpecialComments: 0,
+					compatibility: 'ie8'
+				}))
+				.pipe(autoprefixer())
+				.pipe(concat(key))
+				.pipe(ginsert.transform(function(contents, file) {
+					var log = ' Minifying css file >> ' + file.path;
+
+					utils.sendLog(log);
+					return comments + contents;
+				}))
+				.pipe(gulp.dest(outPath))
+				.on('error', function(err) {
+					cb(err);
+				}).on('end', function() {
+					cb(null);
+				});
+		});
+	}
+
+	async.series(series, function(err) {
+		if (err) {
+			utils.sendLog('css optimizer err:' + err)
+		} else {
+			utils.sendLog(' >>> css minifycss optimizer done');
+		}
+	});
+});
+
+// setting default task
+gulp.task('default', ['scripts', 'cssmin']);
+
+// start default task
+gulp.start('default');
               </textarea>
             </div>
             <div class="tab-content" id="tab-content-2">
               <textarea id="code2" style="display: none;">
 {
- "a": 1,
- "b": 2
+    "paths": {
+        "header.min.css": ["all.css", "common.css", "header.css", "jquery-ui.css"],
+        "usage.min.css": ["usage.css", "dialog.css", "easyui.css"],
+        "cart.min.css": ["account.css", "dialog.css"],
+        "detail.min.css": ["detail.css", "dialog.css", "easyui.css"],
+        "orderConfirm.min.css": ["order.css", "dialog.css"],
+        "orderHistory.min.css": ["usage.css", "dialog.css"],
+        "historyDetail.min.css": ["historyDetail.css", "order.css"],
+        "accountManager.min.css": ["account.css", "dialog.css"]
+    }
 }
               </textarea>
             </div>
             <div class="tab-content" id="tab-content-3">
               <textarea id="code3" style="display: none;">
-var a = 2;
-var b = 3;
-alert(a + b);
+{
+	 "paths" : {
+			"jquery" : "libs/public/jquery-1.8.1.min",
+			"jqueryUI" : "libs/public/jquery-ui-1.9.0.custom.min",
+			"jqueryDatepickeri18n" : "libs/public/jquery.ui.datepicker-en",
+			"amplify" : "libs/public/amplify.min",
+			"mustache" : "libs/public/mustache",
+			"linq" : "libs/public/linq",
+			"json2" : "libs/public/json2",
+			"domReady" : "libs/public/domReady",
+			"css" : "libs/public/css",
+			"text" : "libs/public/text",
+			"jqueryScrollIntoView" :"libs/public/jquery.scrollIntoView.min",
+			"jqueryMd5" :"libs/public/jquery.md5",
+			"jqueryEasyUI": "component/public/jqueryEasyUI/jquery.easyui.min",
+
+			"ajax" : "libs/private/ajax",
+			"jqExtend" : "libs/private/jquery.extend",
+			"track": "libs/private/track",
+
+			"blockUI" : "component/public/blockUI/jquery.blockUI",
+			"layResizable": "component/public/layResizable/layResizable",
+			"jqueryForm": "component/public/jqueryForm/jquery.form",
+			"multipleSelect": "component/public/multipleSelect/jquery.multiple.select",
+			"jqueryDatepickeri18n" : "libs/public/jquery.ui.datepicker-zh_CN",
+
+			"grid":"component/private/grid",
+			"export":"component/private/export",
+			"unqueUserLogin" : "component/private/uniqueUserLogin",
+			"swfobject" : "component/private/swfobject",
+			"history" : "component/private/history",
+
+			"base": "app/base/base",
+			"model":"app/model/model",
+			"crumbs":"app/header/crumbs",
+			"layout":"app/usage/layout",
+			"group":"app/usage/group",
+			"parts":"app/usage/parts",
+			"legend":"app/usage/legend",
+			"catalog":"app/usage/catalog",
+
+			"supersession": "app/detail/supersession",
+			"note": "app/detail/note",
+			"noteDialog": "app/detail/noteDialog",
+
+			"orderQty": "app/header/orderQty",
+			"hmNumberCtrlBox":"app/header/hm.numberCtrlBox",
+
+			"advancedSearch": "app/header/advancedSearch",
+			"replaceInfo": "app/header/replaceInfo",
+			"shoppingCart": "app/header/shoppingCart",
+			"kzSearch": "app/header/kzSearch",
+			"searchBar": "app/header/searchBar",
+			"configSearch": "app/header/configSearch",
+			"vinSearch": "app/header/vinSearch",
+			"vpConfig": "app/header/vpConfig",
+			"vinListSearch": "app/header/vinListSearch",
+			"remarkSearch": "app/header/remarkSearch",
+			"partsSearch": "app/header/partsSearch",
+
+			"globalConfig": "empty:"
+		},
+		"shim" : {
+			"jquery" : {
+				"exports" : "$"
+			},
+			"jqueryUI" : ["jquery"],
+			"jqueryScrollIntoView":["jquery"],
+			"jqueryMd5": ["jquery"],
+			"layResizable": ["jquery"],
+			"jqueryEasyUI": ["jquery", "jqueryUI"],
+			"grid":["jquery", "jqueryUI"],
+			"amplify" : ["jquery"],
+			"blockUI" : ["jquery"],
+			"jqueryForm" : ["jquery"],
+			"jqExtend" : ["jquery", "blockUI", "amplify"],
+			"multipleSelect": ["jquery"],
+			"jqueryCombo": ["jquery"]
+		}
+}
               </textarea>
             </div>
             <div class="tab-content" id="tab-content-4">
               <textarea id="code4" style="display: none;">
-d:
-cd "D:\\nodejs_workspace\\optimizers\\项目名"
-call run.bat
-              </textarea>
-            </div>
-            <div class="tab-content" id="tab-content-5">
-              <textarea id="code5" style="display: none;">
-module.exports = {
- "projectBaseURI": "D:\\git\\byd-epc\\src\\main\\webapp\\",
- "scriptsSrc": "scripts",
- "stylesSrc": "styles",
- "scriptsDest": "release\\scripts",
- "stylesDest": "release\\styles"
+{
+	"projectBaseURI": "D:\\sih_epc_project\\",
+	"scriptsSrc": "scripts",
+	"stylesSrc": "styles",
+	"scriptsDest": "release\\scripts",
+	"stylesDest": "release\\styles"
 }
               </textarea>
             </div>
+
           </div>
         </div>
         <span class="btn btn-submit-all" id="btn-submit">提交</span>

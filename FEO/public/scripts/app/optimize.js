@@ -21,6 +21,8 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$holdLoading = $('#hold-loading');
       self.$btnCancel = $('#btn-cancel');
       self.$infoStage = $('#info-stage');
+      self.$container = $('html, body');
+      self.$document = $(document);
     },
     buildlTpl: function () {
       var self = this;
@@ -29,13 +31,19 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
     },
     bindSocket: function () {
       var self = this;
-      self.socket = io.connect('http://localhost:3000');
-      self.socket.on('connection', function () {
-        "use strict";
+
+      self.socket = io.connect(socketServerUrl);
+      self.socket.on('connect_error', function(err) {
+        if (err) {
+          self.socket.close();
+          self.showError('压缩服务未连接成功，请检查配置或网络！');
+        }
       });
       self.socket.on('optimize message', function (data) {
         self.$infoStage.append(data);
+        self.$container.animate({scrollTop: self.$document.height()}, 0);
       });
+
     },
     bindEvent: function () {
       var self = this;
@@ -81,11 +89,14 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
 
         function handleAction(res) {
           if (res.status === 200) {
+            self.clearInfoStage();
+            self.controlOptimize($temp);
+            self.socket.emit('start optimizer', data.projectName);
             $temp.closest('td').prev().html(res.optimizeBy).prev().html(res.optimizeTime);
-            self.unlockBtns($temp.siblings('.btn'));
+          } else if (res.status === 201) {
+            self.show('有其它用户正在操作该项目，请稍后！');
           }
         }
-
       });
 
       self.$bgLoading.on('click', function (e) {
@@ -156,7 +167,6 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
           header: '提示',
           content: str,
           yesFn: function () {
-            self.controlOptimize($btn);
             ajax.invoke({
               url: '/optimize',
               type: 'post',
@@ -221,7 +231,11 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
 
         function handleCancel(res) {
           if (res.status === 200) {
-            self.unlockBtns($temp.siblings('.btn'));
+            self.socket.emit('stop optimizer', data.projectName);
+            self.unlockBtns($temp);
+          } else if (res.status === 201) {
+            self.show('该项目尚无人操作！');
+            self.unlockBtns($temp);
           }
         }
       });
@@ -232,6 +246,11 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       $obj.hide().siblings('.btn').show();
       $obj.closest('tr').removeClass('warn').siblings('tr').removeClass('disable');
       self.bindEvent();
+    },
+    clearInfoStage: function () {
+      var self = this;
+
+      self.$infoStage.html('');
     }
   };
 

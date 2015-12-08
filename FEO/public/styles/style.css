@@ -508,7 +508,8 @@ body {
     .box-project-files .tab-content-list .tab-content {
       width: 1060px;
       height: 800px;
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 24px;
       -webkit-box-sizing: content-box;
       -ms-box-sizing: content-box;
       -moz-box-sizing: content-box;
