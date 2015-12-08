@@ -8,6 +8,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.buildlTpl();
       self.bindEvent();
       self.bindSocket();
+      self.isSocketConnected = null;
     },
     buildElement: function () {
       var self = this;
@@ -20,9 +21,11 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$bgLoading = $('#bg-loading');
       self.$holdLoading = $('#hold-loading');
       self.$btnCancel = $('#btn-cancel');
+      self.$btnClear = $('#btn-clear');
       self.$infoStage = $('#info-stage');
       self.$container = $('html, body');
       self.$document = $(document);
+      self.$curCancelBtn = null;
     },
     buildlTpl: function () {
       var self = this;
@@ -33,10 +36,14 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       var self = this;
 
       self.socket = io.connect(socketServerUrl);
+      self.socket.on('connect', function () {
+        self.isSocketConnected = true;
+      });
       self.socket.on('connect_error', function(err) {
         if (err) {
           self.socket.close();
-          self.showError('压缩服务未连接成功，请检查配置或网络！');
+          self.isSocketConnected = false;
+          self.showError('socket服务未连接成功，请检查配置或网络！');
         }
       });
       self.socket.on('optimize message', function (data) {
@@ -85,22 +92,30 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
           projectName: projectName
         };
 
-        self.showConfirm(text, data, $temp, handleAction);
+        if (self.isSocketConnected) {
+          self.showConfirm(text, data, $temp, handleAction);
+        } else {
+          self.showError('socket服务未连接成功，请检查配置或网络！');
+        }
 
         function handleAction(res) {
           if (res.status === 200) {
             self.clearInfoStage();
-            self.controlOptimize($temp);
+            self.lockBtns($temp);
             self.socket.emit('start optimizer', data.projectName);
             $temp.closest('td').prev().html(res.optimizeBy).prev().html(res.optimizeTime);
           } else if (res.status === 201) {
-            self.show('有其它用户正在操作该项目，请稍后！');
+            self.showError('有其它用户正在操作该项目，请稍后！');
           }
         }
       });
 
       self.$bgLoading.on('click', function (e) {
         e.stopPropagation();
+      });
+
+      self.$btnClear.on('click', function () {
+        self.clearInfoStage();
       });
 
       function listenKeyPress(e) {
@@ -126,7 +141,6 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.buildElement();
       self.unBindEvent();
       self.bindEvent();
-
     },
     checkInput: function () {
       var self = this;
@@ -204,22 +218,14 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
 
       return ejs.render(self.tplList, obj);
     },
-    controlOptimize: function ($obj) {
-      var self = this;
-
-      if ($obj.is('.btn-action')) {
-        self.lockBtns($obj);
-      } else {
-        self.unlockBtns($obj);
-      }
-    },
     lockBtns: function ($obj) {
       var self = this;
 
       $obj.hide().siblings('.btn').show();
       $obj.closest('tr').addClass('warn').siblings('tr').addClass('disable');
       self.unBindEvent();
-      $obj.siblings('.btn').on('click', function () {
+      self.$curCancelBtn = $obj.siblings('.btn');
+      self.$curCancelBtn.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
         var text = '确定取消优化该项目？';
@@ -227,7 +233,12 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
           type: 'cancel',
           projectName: projectName
         };
-        self.showConfirm(text, data, $temp, handleCancel);
+
+        if (self.isSocketConnected) {
+          self.showConfirm(text, data, $temp, handleCancel);
+        } else {
+          self.showError('socket服务未连接成功，请检查配置或网络！');
+        }
 
         function handleCancel(res) {
           if (res.status === 200) {

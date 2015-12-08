@@ -44,11 +44,11 @@ optimizeModel.manageOptimize = function (req, res) {
           lastOptimizeBy: req.session.user.username,
           isOptimizing: true
         }
-      }, {}, function (err, docs) {
+      }, {}, function (err, info) {
         if (err) {
           console.log(err);
         }
-        if (docs[0]) {
+        if (info.nModified === 1) {
           res.send({
             status: 200,
             optimizeTime: optimizeTime,
@@ -66,11 +66,11 @@ optimizeModel.manageOptimize = function (req, res) {
         $set: {
           isOptimizing: false
         }
-      }, {}, function (err, docs) {
+      }, {}, function (err, info) {
         if (err) {
           console.log(err);
         }
-        if (docs[0]) {
+        if (info.nModified === 1) {
           res.send({
             status: 200
           });
@@ -85,9 +85,6 @@ optimizeModel.manageOptimize = function (req, res) {
       console.log('when step into this line! means some error happened!');
   }
 };
-
-
-
 
 module.exports = optimizeModel;
 

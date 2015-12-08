@@ -283,6 +283,30 @@ body {
  width: 648px;
  float: right;
  margin-bottom: 30px;
+ position: relative;
+ .btn-clear{
+  display: inline-block;
+  width:44px;
+  @include setHeightGroup(44px);
+  position: fixed;
+  right: 0;
+  top:50%;
+  margin-top:-22px;
+  text-align: center;
+  z-index:10;
+  color:$color;
+  background: #fff;
+  @include transition(all 0.3s ease-out);
+  @include opacity(0.4);
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  &:hover{
+   color:#fff;
+   background: $themeColor;
+   @include opacity(1);
+   @include boxShadow(0 0 3px #eee);
+  }
+ }
  pre {
   margin: 0;
   display: block;

@@ -275,7 +275,40 @@ body {
 .block-right-stage {
   width: 648px;
   float: right;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  position: relative; }
+  .block-right-stage .btn-clear {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    margin-top: -22px;
+    text-align: center;
+    z-index: 10;
+    color: #333;
+    background: #fff;
+    -webkit-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px; }
+    .block-right-stage .btn-clear:hover {
+      color: #fff;
+      background: #055a9b;
+      opacity: 1;
+      filter: alpha(opacity=100);
+      -webkit-box-shadow: 0 0 3px #eee;
+      -ms-box-shadow: 0 0 3px #eee;
+      -moz-box-shadow: 0 0 3px #eee;
+      -o-box-shadow: 0 0 3px #eee;
+      box-shadow: 0 0 3px #eee; }
   .block-right-stage pre {
     margin: 0;
     display: block;
