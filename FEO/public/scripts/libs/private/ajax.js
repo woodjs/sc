@@ -25,6 +25,7 @@ define(function () {
     timeout: 60000,
     dataType: "json",
     traditional: false,
+    async: true,
     contentType: 'application/JSON'
   };
 
@@ -44,6 +45,7 @@ define(function () {
           cache: opts.cache,
           data: opts.data,
           timeout: opts.timeout,
+          async: opts.async,
           dataType: opts.dataType,
           beforeSend: opts.beforeSend,
           complete: opts.complete,

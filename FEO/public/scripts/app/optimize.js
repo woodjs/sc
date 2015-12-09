@@ -26,6 +26,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$container = $('html, body');
       self.$document = $(document);
       self.$curCancelBtn = null;
+      window.$curCancelBtn = null;
     },
     buildlTpl: function () {
       var self = this;
@@ -39,7 +40,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.socket.on('connect', function () {
         self.isSocketConnected = true;
       });
-      self.socket.on('connect_error', function(err) {
+      self.socket.on('connect_error', function (err) {
         if (err) {
           self.socket.close();
           self.isSocketConnected = false;
@@ -48,12 +49,20 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       });
       self.socket.on('optimize message', function (data) {
         self.$infoStage.append(data);
-        self.$container.animate({scrollTop: self.$document.height()}, 0);
+        self.$container.animate({
+          scrollTop: self.$document.height()
+        }, 0);
+      });
+      self.socket.on('optimize stop', function () {
+        self.stampNotOptimizing();
+        self.unlockBtns(self.$curCancelBtn);
       });
 
     },
     bindEvent: function () {
       var self = this;
+
+      $(window).on('beforeunload', self.stampNotOptimizing);
 
       self.$inputSearch.on('keypress', listenKeyPress);
 
@@ -225,6 +234,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       $obj.closest('tr').addClass('warn').siblings('tr').addClass('disable');
       self.unBindEvent();
       self.$curCancelBtn = $obj.siblings('.btn');
+      window.$curCancelBtn = $obj.siblings('.btn');
       self.$curCancelBtn.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
@@ -254,6 +264,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
     unlockBtns: function ($obj) {
       var self = this;
 
+      window.$curCancelBtn = null;
       $obj.hide().siblings('.btn').show();
       $obj.closest('tr').removeClass('warn').siblings('tr').removeClass('disable');
       self.bindEvent();
@@ -262,6 +273,27 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       var self = this;
 
       self.$infoStage.html('');
+    },
+    stampNotOptimizing: function () {
+
+      if (window.$curCancelBtn) {
+        var projectName = window.$curCancelBtn.data('project-name');
+        var data = {
+          type: 'cancel',
+          projectName: projectName
+        };
+        ajax.invoke({
+          url: '/optimize',
+          type: 'post',
+          contentType: 'application/JSON',
+          async: false,
+          data: JSON.stringify(data),
+          dataType: 'json',
+          success: function (res) {
+            console.log(res);
+          }
+        });
+      }
     }
   };
 

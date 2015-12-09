@@ -8,17 +8,16 @@ var socketIO = {
 
     self.sio = io.listen(server);
     self.sio.sockets.on('connection', function (socket) {
-      //socket.userid = UUID();
-      setInterval(function () {
-        var msg = moment().format('YYYY-MM-DD HH:mm:ss') + ' 优化了很多,请等待...' + eol;
-        self.send(socket, msg);
-      }, 1000);
+      //setTimeout(function () {
+      //  var msg = moment().format('YYYY-MM-DD HH:mm:ss') + ' 优化了很多,请等待...' + eol;
+      //  self.send(socket, msg);
+      //}, 5000);
     });
   },
   send: function (socket, msg) {
     var self = this;
 
-    socket.emit('optimize message', msg);
+    socket.emit('optimize stop', msg);
   }
 };
 

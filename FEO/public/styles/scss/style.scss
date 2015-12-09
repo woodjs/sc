@@ -286,7 +286,7 @@ body {
  position: relative;
  .btn-clear{
   display: inline-block;
-  width:44px;
+  padding:0 10px;
   @include setHeightGroup(44px);
   position: fixed;
   right: 0;
