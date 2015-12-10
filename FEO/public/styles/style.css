@@ -320,7 +320,7 @@ body {
     color: #fff;
     min-height: 600px;
     border-radius: 6px;
-    word-wrap: break-word;
+    overflow-x: auto;
     -webkit-box-shadow: 0 0 10px #ddd;
     -ms-box-shadow: 0 0 10px #ddd;
     -moz-box-shadow: 0 0 10px #ddd;
