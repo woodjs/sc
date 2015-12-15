@@ -27,7 +27,8 @@ projectModel.renderAddProject = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       },
-      projectNameList: docs
+      projectNameList: docs,
+      curPage: 'add_project'
     });
   }
 };
@@ -50,7 +51,8 @@ projectModel.renderManageProject = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       },
-      projectList: docs
+      projectList: docs,
+      curPage: 'manage_project'
     });
   }
 };
@@ -75,7 +77,8 @@ projectModel.renderEditProject = function (req, res) {
         role: req.session.user.role
       },
       files: obj,
-      projectName: projectName
+      projectName: projectName,
+      curPage: 'edit_project'
     });
   }
 };

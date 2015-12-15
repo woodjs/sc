@@ -6,12 +6,30 @@
         <span class="welcome">欢迎你，<label><%= curUser.nickname %></label></span>
         <nav>
           <ul>
-            <li><a href="/optimize">项目优化</a></li>
-            <li><a href="/project/manage">项目管理</a></li>
-            <% if (curUser.role) { %>
-            <li><a href="/user/manage">用户管理</a></li>
+            <% if (curPage === 'optimize') { %>
+              <li><a href="/optimize" class="active">项目优化</a></li>
+            <% } else { %>
+              <li><a href="/optimize">项目优化</a></li>
             <% } %>
-            <li><a href="/user/edit">修改密码</a></li>
+            <% if (curPage === 'manage_project') { %>
+              <li><a href="/project/manage"  class="active">项目管理</a></li>
+            <% } else { %>
+              <li><a href="/project/manage">项目管理</a></li>
+            <% } %>
+            <% if (curPage === 'manage_user') { %>
+              <% if (curUser.role) { %>
+                <li><a href="/user/manage"  class="active">用户管理</a></li>
+              <% } %>
+            <% } else { %>
+              <% if (curUser.role) { %>
+                <li><a href="/user/manage">用户管理</a></li>
+              <% } %>
+            <% } %>
+            <% if (curPage === 'edit_user') { %>
+              <li><a href="/user/edit"  class="active">修改密码</a></li>
+            <% } else { %>
+              <li><a href="/user/edit">修改密码</a></li>
+            <% } %>
           </ul>
         </nav>
       </header>

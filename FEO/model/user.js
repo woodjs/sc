@@ -25,7 +25,8 @@ userModel.renderAddUser = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       },
-      userNameList: docs
+      userNameList: docs,
+      curPage: 'add_user'
     });
   }
 };
@@ -51,7 +52,8 @@ userModel.renderManageUser = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       },
-      userList: docs
+      userList: docs,
+      curPage: 'manage_user'
     });
   }
 };
@@ -72,7 +74,8 @@ userModel.renderEditUser = function (req, res) {
         username: req.session.user.username,
         nickname: req.session.user.nickname,
         role: req.session.user.role
-      }
+      },
+      curPage: 'edit_user'
     });
   }
 };

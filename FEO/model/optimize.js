@@ -20,7 +20,8 @@ optimizeModel.renderOptimize = function (req, res) {
         nickname: req.session.user.nickname,
         role: req.session.user.role
       },
-      projectList: docs
+      projectList: docs,
+      curPage: 'optimize'
     });
   }
 };

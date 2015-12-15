@@ -10,6 +10,7 @@ var MongoStore = require('connect-mongo')(expressSession);
 var db = require('./config/db');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
+var check = require('./routes/check');
 var optimize = require('./routes/optimize');
 var user = require('./routes/user');
 var project = require('./routes/project');
@@ -24,28 +25,29 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(expressSession({
-    secret: 'sc_optimizer',
-    name: 'sc_userId',
-    cookie: {
-        maxAge: 1000 * 3000
-    },
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({
-        url: 'mongodb://127.0.0.1:27017/optimizer_sessions'
-        //host: '127.0.0.1',
-        //port: 27017,
-        //db: 'optimizer_sessions'
-    })
+  secret: 'sc_optimizer',
+  name: 'sc_userId',
+  cookie: {
+    maxAge: 1000 * 3600
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: 'mongodb://127.0.0.1:27017/optimizer_sessions'
+    //host: '127.0.0.1',
+    //port: 27017,
+    //db: 'optimizer_sessions'
+  })
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/optimize', optimize);
 app.use('/login', login);
 app.use('/logout', logout);
+app.use('/check', check);
 app.use('/user', user);
 app.use('/project', project);
 app.route('/').get(function (req, res) {
@@ -53,7 +55,7 @@ app.route('/').get(function (req, res) {
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -64,7 +66,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -75,13 +77,12 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
     error: {}
   });
 });
-
 
 module.exports = app;

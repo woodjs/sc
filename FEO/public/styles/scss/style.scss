@@ -210,7 +210,7 @@ body {
     font-size: 14px;
     color: #555;
     @include transition(all 0.3s ease-out);
-    &:hover {
+    &.active,&:hover {
      background: $themeColor;
      color: #fff;
     }

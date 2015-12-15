@@ -68,6 +68,27 @@ define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domRea
           });
         }
       });
+
+      self.interId = setInterval(function () {
+        var data = {
+          type: 'session_expired'
+        };
+
+        ajax.invoke({
+          url: '/check',
+          type: 'post',
+          contentType: 'application/JSON',
+          data: JSON.stringify(data),
+          dataType: 'json',
+          success: function (res) {
+            if (res.result) {
+              self.showError('当前会话已过期，请注意备份相关数据！');
+              clearInterval(self.interId);
+            }
+          }
+        });
+
+      }, 1000 * 3605);
       
       function listenKeyPress(e) {
         if (e.keyCode === 13) {
