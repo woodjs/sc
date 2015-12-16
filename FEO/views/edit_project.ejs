@@ -7,7 +7,7 @@
           <h3>请编辑项目相关配置文件:<span>当前项目名称：<label id="cur-project-name"><%= projectName %></label></span></h3>
 
           <div class="tab-btn-list" id="tab-btn-list">
-            <span class="btn active" data-href="tab-content-1">gulpfile.js</span>
+            <span class="btn active" data-href="tab-content-1">scriptsConfig.json</span>
             <span class="btn" data-href="tab-content-2">cssConfig.json</span>
             <span class="btn" data-href="tab-content-3">requireConfig.json</span>
             <span class="btn" data-href="tab-content-4">srcConfig.json</span>
@@ -15,7 +15,7 @@
           <div class="tab-content-list">
             <div class="tab-content" id="tab-content-1">
               <textarea id="code1" style="display: none;">
-<%- files.gulpfile %>
+<%- files.scriptsConfig %>
               </textarea>
             </div>
             <div class="tab-content" id="tab-content-2">
@@ -38,6 +38,10 @@
         <span class="btn btn-submit-all" id="btn-submit">提交</span>
       </div>
     </section>
+
+    <textarea id="gulpfile" style="display:none;">
+<%- files.gulpfile %>
+    </textarea>
 
     <script type="text/javascript">
       var requiredModuleList = ['editProject'];

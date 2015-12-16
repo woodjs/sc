@@ -4,11 +4,11 @@ $fontSize: 14px;
 $color: #333;
 $bdColor: #ddd;
 $bgColor: #f6f6f6;
-$themeColor: #055a9b;
+$themeColor: #0e6bb2;
 $lighterFontColor: #666;
 $lightestFontColor: #999;
 $errorColor: #fc4343;
-$prevHoverColor: rgba(54, 109, 155, 0.9);
+$prevHoverColor: #055a9b;
 $tagColor: #ff4200;
 
 html, body, header, section, footer, article, nav, aside, div, p, ul, dl, li, dt, dd, span, a, label, input, textarea, pre {
@@ -210,7 +210,11 @@ body {
     font-size: 14px;
     color: #555;
     @include transition(all 0.3s ease-out);
-    &.active,&:hover {
+    &.active{
+     background: $prevHoverColor;
+     color: #fff;
+    }
+    &:hover{
      background: $themeColor;
      color: #fff;
     }
@@ -538,11 +542,11 @@ body {
    @include transition(all 0.3s ease-out);
    &:hover, &.active {
     color: #fff;
-    background: $themeColor;
+    background: $prevHoverColor;
    }
    &:first-child {
     &:hover, &.active {
-     border-left: 1px solid $themeColor;
+     border-left: 1px solid $prevHoverColor;
     }
    }
   }
@@ -637,9 +641,9 @@ body {
    font-size: 14px;
    border-radius: 2px;
    float: right;
-   background: rgba(0, 153, 0, 0.7);
+   background: #009900;
    &:hover {
-    background: #009900;
+    background: rgba(0, 153, 0, 0.7);
    }
   }
  }
@@ -758,4 +762,7 @@ body {
    }
   }
  }
+}
+.cm-s-rubyblue span.cm-comment{
+ font-style: normal;
 }

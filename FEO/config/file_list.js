@@ -4,6 +4,10 @@ var fileList = [
     extension: '.js'
   },
   {
+    name: 'scriptsConfig',
+    extension: '.json'
+  },
+  {
     name: 'cssConfig',
     extension: '.json'
   },
