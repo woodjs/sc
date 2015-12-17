@@ -95,7 +95,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$btnActionList.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
-        var text = '确定优化该项目？';
+        var text = '确定优化'+ projectName +'项目？';
         var data = {
           type: 'action',
           projectName: projectName
@@ -114,7 +114,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
             self.socket.emit('start optimizer', data.projectName);
             $temp.closest('td').prev().html(res.optimizeBy).prev().html(res.optimizeTime);
           } else if (res.status === 201) {
-            self.showError('有其它用户正在操作该项目，请稍后！');
+            self.showError('有其它用户正在操作'+ projectName +'项目，请稍后！');
           }
         }
       });
@@ -238,7 +238,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$curCancelBtn.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
-        var text = '确定取消优化该项目？';
+        var text = '确定取消优化'+ projectName +'项目？';
         var data = {
           type: 'cancel',
           projectName: projectName

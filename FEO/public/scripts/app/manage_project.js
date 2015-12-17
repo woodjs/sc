@@ -60,7 +60,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$btnDeleteList.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
-        var text = '确定删除该项目？';
+        var text = '确定删除'+ projectName +'项目？';
         var data = {
           type: 'delete',
           projectName: projectName
@@ -76,7 +76,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$btnDepDeleteList.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
-        var text = '该操作不可恢复，确定删除该项目？';
+        var text = '该操作不可恢复，确定删除'+ projectName +'项目？';
         var data = {
           type: 'depDelete',
           projectName: projectName
@@ -92,7 +92,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$btnRecoveryList.on('click', function () {
         var $temp = $(this);
         var projectName = $temp.data('project-name');
-        var text = '确定恢复该项目?';
+        var text = '确定恢复'+ projectName +'项目?';
         var data = {
           type: 'recovery',
           projectName: projectName

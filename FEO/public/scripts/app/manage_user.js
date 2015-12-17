@@ -78,7 +78,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$btnDeleteList.on('click', function () {
         var $temp = $(this);
         var username = $temp.data('username');
-        var text = '该操作不可恢复，确定删除该用户？';
+        var text = '该操作不可恢复，确定删除用户'+ username +'？';
         var data = {
           type: 'delete',
           username: username
@@ -94,7 +94,7 @@ define(['jquery', 'ajax', 'easyDialog', 'ejs', '!domReady'], function ($, ajax) 
       self.$btnResetList.on('click', function () {
         var $temp = $(this);
         var username = $temp.data('username');
-        var text = '该用户的密码将被重置为00000000，确定重置？';
+        var text = '用户'+ username +'的密码将被重置为00000000，确定重置？';
         var data = {
           type: 'reset',
           username: username,
