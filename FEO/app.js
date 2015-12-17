@@ -11,6 +11,7 @@ var db = require('./config/db');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var check = require('./routes/check');
+var help = require('./routes/help');
 var optimize = require('./routes/optimize');
 var user = require('./routes/user');
 var project = require('./routes/project');
@@ -48,6 +49,7 @@ app.use('/optimize', optimize);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/check', check);
+app.use('/help', help);
 app.use('/user', user);
 app.use('/project', project);
 app.route('/').get(function (req, res) {

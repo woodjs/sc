@@ -170,11 +170,11 @@ body {
     color: #0e6bb2;
     margin: 0;
     float: left;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     height: 60px;
     line-height: 60px;
-    margin-left: 20px; }
+    margin-left: 12px; }
   .block-top-line .welcome {
     display: inline-block;
     height: 60px;
@@ -197,7 +197,7 @@ body {
       float: left; }
       .block-top-line ul li a {
         display: inline-block;
-        padding: 0 20px;
+        padding: 0 15px;
         height: 60px;
         line-height: 60px;
         font-size: 14px;
@@ -707,6 +707,25 @@ body {
     -webkit-appearance: radio;
     position: relative;
     top: 1px; }
+
+.box-help {
+  padding: 20px 20px 25px;
+  background: #fff;
+  -webkit-box-shadow: 0 0 10px #ddd;
+  -ms-box-shadow: 0 0 10px #ddd;
+  -moz-box-shadow: 0 0 10px #ddd;
+  -o-box-shadow: 0 0 10px #ddd;
+  box-shadow: 0 0 10px #ddd;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 6px; }
+  .box-help h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0e6bb2;
+    margin: 0;
+    height: 30px;
+    line-height: 30px; }
 
 .bg-loading {
   position: fixed;
