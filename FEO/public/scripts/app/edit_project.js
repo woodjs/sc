@@ -71,6 +71,13 @@ define(['jquery', 'ajax', 'codeMirror', 'codeMirrorMode', 'easyDialog', '!domRea
         });
 
       }, 1000 * 3605);
+
+      $(document).on('keydown', function (e) {
+        if (e.ctrlKey && e.keyCode === 83) {
+          e.preventDefault();
+        }
+      });
+
     },
     initCodeMirror: function () {
       var self = this;
