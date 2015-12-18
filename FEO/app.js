@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.use(expressSession({
   secret: 'sc_optimizer',
   name: 'sc_userId',
+  rolling: true,
   cookie: {
     maxAge: 1000 * 3600
   },
