@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var db = require('../config/db');
 var moment = require('moment');
+var co = require('co');
 var projectSchema = require('../schema/project');
 var projectModel = db.model('projects', projectSchema, 'projects');
 var userModel = require('./user');
@@ -125,11 +126,20 @@ projectModel.createProjectFiles = function (obj, callback) {
       if (err) {
         console.log(err);
       }
-      fileList.forEach(function (temp, index, arr) {
-        fs.writeFileSync(path.join(dirPath, temp.name + temp.extension), obj[temp.name]);
+      co(function* () {
+        for (var i = 0; i < fileList.length; i ++) {
+          var temp = fileList[i];
+          yield write(path.join(dirPath, temp.name + temp.extension), obj[temp.name]);
+        }
+        callback && callback();
       });
-      callback && callback();
     });
+  }
+
+  function write(path, data) {
+    return function (callback) {
+      fs.writeFile(path, data, callback);
+    };
   }
 };
 
@@ -143,10 +153,19 @@ projectModel.getProjectFiles = function (projectName, callback) {
   var obj = {};
   var dirPath = baseUrl + projectName;
 
-  fileList.forEach(function (temp, index, arr) {
-    obj[temp.name] = fs.readFileSync(path.join(dirPath, temp.name + temp.extension));
+  co(function* () {
+    for (var i = 0; i < fileList.length; i++) {
+      var temp = fileList[i];
+      obj[temp.name] = yield read(path.join(dirPath, temp.name + temp.extension));
+    }
+    callback && callback(obj);
   });
-  callback && callback(obj);
+
+  function read(path) {
+    return function (callback) {
+      fs.readFile(path, callback);
+    };
+  }
 };
 
 /**
@@ -159,15 +178,24 @@ projectModel.removeProjectFiles = function (projectName, callback) {
   if (projectName) {
     var dirPath = baseUrl + projectName;
 
-    fileList.forEach(function (temp, index, arr) {
-      fs.unlinkSync(path.join(dirPath, temp.name + temp.extension));
-    });
-    fs.rmdir(dirPath, function (err) {
-      if (err) {
-        console.log(err);
+    co(function* () {
+      for (var i = 0; i < fileList.length; i++) {
+        var temp = fileList[i];
+        yield remove(path.join(dirPath, temp.name + temp.extension));
       }
-      callback && callback();
+      fs.rmdir(dirPath, function (err) {
+        if (err) {
+          console.log(err);
+        }
+        callback && callback();
+      });
     });
+  }
+
+  function remove(path) {
+    return function (callback) {
+      fs.unlink(path, callback);
+    }
   }
 };
 
