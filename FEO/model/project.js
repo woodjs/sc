@@ -104,7 +104,7 @@ projectModel.getProjectNameList = function (callback) {
  * @param {Function } callback
  */
 projectModel.getProjectList = function (callback) {
-  projectModel.find({isShow: true}, {}, {},function (err, docs) {
+  projectModel.find({isShow: true}, {}, {}, function (err, docs) {
     if (err) {
       console.log(err);
     }
@@ -127,7 +127,7 @@ projectModel.createProjectFiles = function (obj, callback) {
         console.log(err);
       }
       co(function* () {
-        for (var i = 0; i < fileList.length; i ++) {
+        for (var i = 0; i < fileList.length; i++) {
           var temp = fileList[i];
           yield write(path.join(dirPath, temp.name + temp.extension), obj[temp.name]);
         }
