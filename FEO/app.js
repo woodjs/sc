@@ -33,7 +33,7 @@ app.use(expressSession({
   name: 'sc_userId',
   rolling: true,
   cookie: {
-    maxAge: 1000 * 3600
+    maxAge: 1000 * 3600 * 8
   },
   resave: false,
   saveUninitialized: true,
