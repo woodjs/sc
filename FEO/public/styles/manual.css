@@ -1,0 +1,192 @@
+﻿body * {
+    margin:0;
+    padding:0;
+}
+body {
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+.cf:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.content-wrap {
+    overflow:hidden;
+}
+
+.cf {
+    *zoom: 1;
+    padding:20px 0 0 0;
+}
+
+.clear {
+    clear: both;
+}
+
+html {
+    width: 100%;
+    min-width: 1024px;
+    min-height: 700px;
+    overflow: auto;
+}
+
+.body {
+    height: 700px;
+    font-family:'Microsoft YaHei0' !important;
+    font-size:13px;
+}
+
+.title {
+    width:98%;
+    height:10%;
+    line-height:40px;
+    background-color:#141414;
+    padding-left:20px;
+    font-size:20px;
+    color:#F5F5F5;
+    border:1px solid #141414;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    font-family:'Microsoft YaHei' !important;
+    font-weight:bold !important;
+}
+
+.main-wrap {
+    height:89%;
+}
+
+.treeList {
+    width: 354px;
+    float: left;
+    border: 1px solid #e3e3e3;
+    overflow:hidden;
+    overflow-y: auto;
+    background-color:#f5f5f5;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    margin-right:40px;
+    height:92%;
+    min-height:92%;
+    overflow:auto;
+}
+
+.ztree {
+    overflow:hidden;
+    padding-bottom:20px;
+    font-family:'Microsoft YaHei';
+}
+
+.ztree li,.ztree li a,.ztree li a span {
+    line-height:17px !important;
+    background-color:#f5f5f5;
+    font-family:'Microsoft YaHei';
+    font-size:13px;
+}
+
+
+.ico_close {
+    vertical-align:middle !important;
+    margin-right:5px !important;
+}
+
+.ztree li ul li .button {
+    vertical-align:middle !important;
+}
+
+.ztree li span.button.ico_open {
+    vertical-align:middle!important;
+    margin-right:5px !important;
+}
+/*.ztree li:hover {
+    background-color:#0088cc;
+}
+
+.ztree li:hover span {
+    background-color:#0088cc;
+    color:#fff;
+}*/
+
+.mainBody {
+    margin-left: 394px;
+    height: 85%;
+}
+
+.meanList {
+    overflow: hidden;
+    width:99%;
+    zoom: 1;
+    padding: 5px 0;
+    height:40px;
+    background-color:#eeeeee;
+    border: 1px solid #e3e3e3;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+
+.meanList ul {
+    list-style: none outside none;
+}
+
+.meanList ul li {
+    float: left;
+    height:20px;
+    line-height:15px;
+    padding:5px 5px 0 5px;
+    background: #0088cc;
+    margin: 8px 10px;
+    cursor: pointer;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+
+.meanList ul li label {
+    color: #fff;
+    float: left;
+    cursor: pointer;
+    font-family:'Microsoft YaHei' !important;
+}
+
+.meanList ul li b {
+    float: left;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.ztree li a.curSelectedNode {
+    border:none !important;
+    font-weight:bold !important;
+    color:#0088cc;
+}
+
+.meanList ul li b:hover {
+    background-color:#fff;
+    color:#0088CC;
+}
+
+.iframeMess {
+    height:100%;
+}
+
+.iframeMess iframe {
+    overflow-x:hidden;
+    overflow-y:auto;
+    background: #fff;
+    border:1px solid #E3E3E3;
+    overflow-x: hidden;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    margin-top:20px;
+    width:99%;
+    height:97%;
+}
