@@ -22,7 +22,10 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
       self.$holdLoading = $('#hold-loading');
       self.$btnCancel = $('#btn-cancel');
       self.$btnClear = $('#btn-clear');
+      self.$btnOpen = $('#btn-open');
+      self.$btnClose = $('#btn-close');
       self.$infoStage = $('#info-stage');
+      self.$blockRightStage = $('#block-right-stage');
       self.$container = $('html, body');
       self.$document = $(document);
       self.$curCancelBtn = null;
@@ -125,6 +128,22 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
 
       self.$btnClear.on('click', function () {
         self.clearInfoStage();
+      });
+
+      self.$btnOpen.on('click', function () {
+        self.$blockRightStage.css({
+          width: '1100px'
+        });
+        $(this).hide();
+        self.$btnClose.show();
+      });
+
+      self.$btnClose.on('click', function () {
+        self.$blockRightStage.css({
+          width: '648px'
+        });
+        $(this).hide();
+        self.$btnOpen.show();
       });
 
       function listenKeyPress(e) {

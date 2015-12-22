@@ -229,6 +229,7 @@ body {
 
 .block-main-content {
  margin-top: 20px;
+ position: relative;
 }
 
 .box-left-list {
@@ -287,15 +288,22 @@ body {
  width: 648px;
  float: right;
  margin-bottom: 30px;
- position: relative;
- .btn-clear{
-  display: inline-block;
-  padding:0 10px;
-  @include setHeightGroup(44px);
+ position: absolute;
+ right:0;
+ @include transition(width 0.3s ease-out);
+ .control-btn-group{
+  width:48px;
   position: fixed;
   right: 0;
   top:50%;
-  margin-top:-22px;
+  @include transform(translate(0,-50%));
+ }
+ .btn-control{
+  display: inline-block;
+  width: 48px;
+  float:left;
+  margin:4px 0;
+  @include setHeightGroup(44px);
   text-align: center;
   z-index:10;
   color:$color;

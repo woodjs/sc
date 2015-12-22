@@ -218,7 +218,8 @@ body {
   width: 100%; }
 
 .block-main-content {
-  margin-top: 20px; }
+  margin-top: 20px;
+  position: relative; }
 
 .box-left-list {
   width: 432px;
@@ -279,16 +280,30 @@ body {
   width: 648px;
   float: right;
   margin-bottom: 30px;
-  position: relative; }
-  .block-right-stage .btn-clear {
-    display: inline-block;
-    padding: 0 10px;
-    height: 44px;
-    line-height: 44px;
+  position: absolute;
+  right: 0;
+  -webkit-transition: width 0.3s ease-out;
+  -ms-transition: width 0.3s ease-out;
+  -moz-transition: width 0.3s ease-out;
+  -o-transition: width 0.3s ease-out;
+  transition: width 0.3s ease-out; }
+  .block-right-stage .control-btn-group {
+    width: 48px;
     position: fixed;
     right: 0;
     top: 50%;
-    margin-top: -22px;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%); }
+  .block-right-stage .btn-control {
+    display: inline-block;
+    width: 48px;
+    float: left;
+    margin: 4px 0;
+    height: 44px;
+    line-height: 44px;
     text-align: center;
     z-index: 10;
     color: #333;
@@ -302,7 +317,7 @@ body {
     filter: alpha(opacity=40);
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px; }
-    .block-right-stage .btn-clear:hover {
+    .block-right-stage .btn-control:hover {
       color: #fff;
       background: #0e6bb2;
       opacity: 1;
