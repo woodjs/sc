@@ -38,10 +38,7 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
-    url: 'mongodb://127.0.0.1:27017/optimizer_sessions'
-    //host: '127.0.0.1',
-    //port: 27017,
-    //db: 'optimizer_sessions'
+    url: 'mongodb://dbadmin:dbadmin@127.0.0.1:27017/feo_sessions'
   })
 }));
 app.use(express.static(path.join(__dirname, 'public')));
