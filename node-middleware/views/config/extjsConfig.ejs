@@ -1,0 +1,29 @@
+<!-- extjs page config -->
+
+<script type="text/javascript">
+	Ext.define("SPDM.extjsConfig", {
+		statics : {
+			pageCode : "<%= pageCode %>",
+			appFolder : "/js/app",
+			uxFolder : "/js/extjs/ux",
+			pages : {
+				"login" : {
+					controller : "account.Login",
+					viewport : "account.login.Viewport"
+				},
+				"master" : {
+					controller : "master.Frame",
+					viewport : "master.Viewport"
+				},
+				"usermanagement" : {
+					controller : "account.Users",
+					viewport : "account.users.Viewport"
+				},
+				"treetest" : {
+					controller : "test.Tree",
+					viewport : "test.tree.Viewport"
+				}
+			}
+		}
+	});
+</script>
