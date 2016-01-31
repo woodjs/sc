@@ -3,7 +3,7 @@ var demoModel = {};
 demoModel.test = function (req, res) {
   console.log('demoController action show 1');
 
-  this.viewBag().test = '该属性由res.viewBag()函数添加';
+  this.viewBag().test = '该属性由this.viewBag()函数添加';
 
   res.view({pageCode: 'demoShow', title: 'controller: demo, action: show', baseControllerInfo: this.baseControllerInfo}); //res.view()为guthrie框架扩展的方法
 
