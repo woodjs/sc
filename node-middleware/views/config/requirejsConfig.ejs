@@ -1,0 +1,25 @@
+    <script type="text/javascript" src="/scripts/libs/public/require.js"></script>
+    <script type="text/javascript">
+      requirejs.config({
+        baseUrl: '/scripts/',
+        paths: {
+          //libs
+          jquery: 'libs/public/jquery-2.1.4.min',
+          domReady: 'libs/public/domReady',
+          ejs: 'libs/public/ejs.min',
+          ajax: 'libs/private/ajax',
+          socketIO: '/socket.io/socket.io',
+
+          //component
+          codeMirror: 'component/public/codemirror/codemirror',
+          codeMirrorMode: 'component/public/codemirror/mode/javascript/javascript',
+          easyDialog: 'component/public/easydialog.min',
+
+          //app
+        },
+        shim: {
+          ajax: ['jquery']
+        }
+      });
+      require(requiredModuleList);
+    </script>

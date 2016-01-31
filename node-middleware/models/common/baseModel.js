@@ -1,5 +1,7 @@
-var baseModel = function() {
-	this.init = function() {};
+var baseModel = {};
+
+baseModel.test = function () {
+
 };
 
 module.exports = baseModel;

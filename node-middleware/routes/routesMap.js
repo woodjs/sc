@@ -2,17 +2,10 @@ var initRoutesMap = function (router) {
 
   router.mapRoute('/:controller/:action?');
 
-  //// @url(/demo)
-  //router.mapRoute('/demo/1', {
-  //  controller: 'demo',
-  //  action: 'show'
-  //});
-  //
-  //router.mapRoute('/test', {
-  //  controller: 'demo',
-  //  action: 'test'
-  //});
-
+  router.mapRoute('/', {
+    controller: 'demo',
+    action: 'index'
+  });
 };
 
 module.exports = initRoutesMap;
