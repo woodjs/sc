@@ -10,7 +10,7 @@ var gu = require('guthrie-js');
 var routesMap = require('./routes/routesMap');
 var config = require('./config');
 
-require('./common/extendError')();
+require('./core/extendError')();
 
 var app = express();
 

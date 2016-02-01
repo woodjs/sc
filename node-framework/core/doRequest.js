@@ -13,16 +13,16 @@ function doRequest(opts, callback) {
     }
   };
 
-  var httpReq = http.request(options, function (response) {
+  var httpReq = http.request(options, function (res) {
     var result;
 
-    response.setEncoding('utf8');
+    res.setEncoding('utf8');
 
-    response.on('data', function (chunk) {
+    res.on('data', function (chunk) {
       result += chunk;
     });
 
-    response.on('end', function () {
+    res.on('end', function () {
       callback(result);
     });
   });

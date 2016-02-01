@@ -1,6 +1,6 @@
 var formidable = require('formidable');
 
-function uploadHelper(req, callback, opts) {
+function uploadHelper(req, opts, callback) {
   var form = new formidable.IncomingForm(opts || {
       keepExtensions: true,
       uploadDir: 'upload'
