@@ -14,7 +14,7 @@ function doRequest(opts, callback) {
   };
 
   var httpReq = http.request(options, function (res) {
-    var result;
+    var result = '';
 
     res.setEncoding('utf8');
 
