@@ -1,0 +1,27 @@
+{
+  "name": "feo-servers",
+  "version": "1.0.0",
+  "description": "feo project stocket.io services ",
+  "main": "server.js",
+  "dependencies": {
+    "morgan": "^1.6.1",
+    "node-uuid": "^1.4.7",
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://lihua.qiu@10.0.0.203:29418/tools/feo-services.git"
+  },
+  "keywords": [
+    "feo-services",
+    "socket.io"
+  ],
+  "author": "qiulihua",
+  "license": "ISC"
+}
