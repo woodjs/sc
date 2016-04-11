@@ -5,7 +5,9 @@ var socketIO = {
   listen: function (server) {
     var self = this;
 
-    self.sio = io.listen(server);
+    self.sio = io(server, {
+      path: '/feo'
+    });
 
     self.sio.sockets.on('connection', function (socket) {
       socket.on('start optimize', function (projectName) {
