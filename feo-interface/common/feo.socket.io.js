@@ -1,23 +1,46 @@
-var os = require('os');
 var io = require('socket.io');
-var moment = require('moment');
-var eol = os.EOL;
+var ioClient = require('socket.io-client');
+var service_url = require('../config/service_url');
 var socketIO = {
   listen: function (server) {
     var self = this;
 
     self.sio = io.listen(server);
-    self.sio.sockets.on('connection', function (socket) {
-      //setTimeout(function () {
-      //  var msg = moment().format('YYYY-MM-DD HH:mm:ss') + ' 优化了很多,请等待...' + eol;
-      //  self.send(socket, msg);
-      //}, 5000);
-    });
-  },
-  send: function (socket, msg) {
-    var self = this;
 
-    socket.emit('optimize stop', msg);
+    self.sio.sockets.on('connection', function (socket) {
+      socket.on('start optimize', function (projectName) {
+
+        sioClient.emit('start optimize', projectName);
+
+      });
+
+      socket.on('stop optimize', function (projectName) {
+
+        sioClient.emit('stop optimize', projectName);
+
+      });
+
+      var sioClient = ioClient.connect(service_url);
+
+      sioClient.on('connect', function () {
+
+        console.log('后端压缩服务连接成功！');
+
+      });
+
+      sioClient.on('optimize message', function (data) {
+
+        socket.emit('optimize message', data);
+
+      });
+
+      sioClient.on('optimize stop', function (data) {
+
+        socket.emit('optimize stop');
+
+      });
+
+    });
   }
 };
 

@@ -114,7 +114,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
           if (res.status === 200) {
             self.clearInfoStage();
             self.lockBtns($temp);
-            self.socket.emit('start optimizer', data.projectName);
+            self.socket.emit('start optimize', data.projectName);
             $temp.closest('td').prev().html(res.optimizeBy).prev().html(res.optimizeTime);
           } else if (res.status === 201) {
             self.showError('有其它用户正在操作'+ projectName +'项目，请稍后！');
@@ -271,7 +271,7 @@ define(['jquery', 'ajax', 'socketIO', 'easyDialog', 'ejs', '!domReady'], functio
 
         function handleCancel(res) {
           if (res.status === 200) {
-            self.socket.emit('stop optimizer', data.projectName);
+            self.socket.emit('stop optimize', data.projectName);
             self.unlockBtns($temp);
           } else if (res.status === 201) {
             self.show('该项目尚无人操作！');

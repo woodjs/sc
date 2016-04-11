@@ -30,3 +30,7 @@ node_modules
 node_modules/
 .idea/
 .DS_Store
+/stop-server.bat
+/start-server.bat
+/git-pull.bat
+/ecosystem.json

@@ -20,10 +20,10 @@ sio.sockets.on('connection', function(socket) {
 	socket.userid = UUID();
 
 	// 开启优化
-	socket.on('start optimizer', function(project) {
+	socket.on('start optimize', function(project) {
 		try {
 			var gulpFile = config.path + project + '\\gulpfile.js';
-			var log = '>>> start optimizer...';
+			var log = '>>> start optimize...';
 
 			console.log(log);
 			socket.emit('optimize message', log + '\n');
@@ -49,8 +49,8 @@ sio.sockets.on('connection', function(socket) {
 	});
 
 	// 停止优化
-	socket.on('stop optimizer', function(project) {
-		var log = '>>> stop optimizer';
+	socket.on('stop optimize', function(project) {
+		var log = '>>> stop optimize';
 
 		console.log(log);
 		socket.emit('optimize message', log + '\n');
@@ -61,4 +61,4 @@ sio.sockets.on('connection', function(socket) {
 	});
 });
 
-console.log('feo-services server start success port:' + port)
+console.log('feo-services server start success port:' + port);
