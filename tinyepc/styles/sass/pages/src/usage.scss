@@ -1,0 +1,400 @@
+@import "../../base/mixin";
+@import "../../common/var/frame";
+@import "../../config/size";
+@import "../../config/style";
+@import "../var/usage";
+
+
+.group-block {
+	width: $group-block-width;
+	float: left;
+	.parent {
+		padding: 0 5px 20px 0;
+	}
+	.child{
+		padding-left: 20px;
+	}
+}
+.condition-item-group {
+	.condition-icon, .text  {
+		vertical-align: middle;
+	}
+	.title {
+		display: inline-block;
+		padding-left: 24px;
+		margin-bottom: 5px;
+		word-break: break-all;
+		.condition-icon{
+			margin-left: -24px;
+			margin-right: 8px;
+		}
+	}
+	.tree-icon {
+		display: inline-block;
+		width: 11px;
+		height: 11px;
+		background: url('./images/tree_icon.png') no-repeat;
+		&.btn-collaspe {
+			background-position: -0 -0;
+		}
+		&.btn-expand {
+			background-position: -11px -0;
+		}
+	}
+	&.expand {
+		.btn-collaspe, .btn-leaf {
+			display: none;
+		}
+		> .child {
+			display: block;
+		}
+	}
+	&.collapse {
+		.btn-expand, .btn-leaf {
+			display: none;
+		}
+		> .child {
+			display: none;
+		}
+	}
+	&.leaf {
+		.condition-icon {
+			border: none;
+		}
+		.btn-collaspe, .btn-expand {
+			display: none; 
+		}
+		.btn-leaf {
+			display: inline-block;
+		}
+		.title {
+			padding-left: 20px;
+			.condition-icon{
+				margin-left: -20px;
+				margin-right: 0px;
+			}
+			&:hover {
+				.leaf-icon {
+					background-position: -5px -0;
+				}
+			}
+		}
+	}
+	&.active {
+		> .title {
+			color: $active-color !important;
+			.leaf-icon {
+				background-position: -5px -0;
+			}
+		}
+	}
+	.leaf-icon {
+		display: inline-block;
+		width: 5px;
+		height: 5px;
+		background: url('./images/leaf_icon.png') no-repeat;
+		vertical-align: middle;
+	}
+}
+
+.thumbnail-block {
+	padding-left: 40px;
+}
+.thumbnail-content {
+	width: 100%;
+	margin-right: -20px;
+	padding-left: 40px;
+	.thumbnail-wrapper {
+		width: 200px;
+		display: inline-block;
+		&:hover {
+			.thumbnail-img-wrapper {
+				border-color: $active-color;
+			}
+		}
+	}
+	.thumbnail-item-wrapper {
+		margin-right: -20px;
+	}
+	.thumbnail-item {
+		@include setInlineBlock();
+		margin: 0 20px 20px 0;
+		.thumbnail-img-wrapper {
+			width: 100%;
+			height: 286px;
+			border: $common-solid-border;
+			background: #ffffff;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		.describe-wrapper {
+			margin-top: 10px;
+			line-height: 1.2em;
+			div {
+				width: 100%;
+				@include textOverflow()
+			}
+		}
+	}
+}
+
+.legend-parts-block {
+	.btn-change {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+		z-index: 100003;
+	}
+	.lengend-btn {
+		position: absolute;
+		top: 50%;
+		margin: -16px 0 0 0;
+		background: $bg-color;
+		&.left {
+			left: 5px;
+			&.expand {
+				.icon-right {
+					display: none;
+				}
+				.icon-left {
+					display: block;
+				}
+			}
+			&.collapse {
+				.icon-left {
+					display: none;
+				}
+				.icon-right {
+					display: block;
+				}
+			}
+		}
+		&.right {
+			right: 5px;
+			&.expand {
+				.icon-left {
+					display: none;
+				}
+				.icon-right {
+					display: block;
+				}
+			}
+			&.collapse {
+				.icon-left {
+					display: block;
+				}
+				.icon-right {
+					display: none;
+				}
+			}
+		}
+		.iconfont {
+			font-size: 30px;
+			vertical-align: middle;
+		}
+	}
+}
+
+.lengend-btn {
+	color: $lengend-btn-color;
+}
+
+.legend-block {
+	padding: 0 40px;
+	.condition-entity {
+		bottom: 30px;
+		padding: 0 20px;
+		margin-right: 20px;
+		margin-left: 20px;
+		&:before , &:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 100%;
+			border-left: $common-dotted-border;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+		}
+		&:before {
+			left: 0;
+		}
+		&:after {
+			right: 0;
+		}
+		.svg-wrapper {
+			height: 100%;
+			border: $common-solid-border;
+			background: #ffffff;
+		}
+	}
+}
+
+.parts-block {
+	width: 55%;
+	float: right;
+	.condition-entity {
+		bottom: 30px;
+	}
+	.parts-table-wrapper {
+		min-height: 100%;
+		position: relative;
+		border-style: $coomon-datted-style;
+		border-width: 0 0 $common-border-width 0;
+		border-color: $dotted-line-color;
+		overflow: hidden;
+		&.lock {
+			overflow: hidden;
+			
+			.parts-table-tbody {
+				border-right: $common-dotted-border;
+				overflow: hidden;
+			}
+			.parts-scroll-tbody {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				overflow: auto;
+			}
+			table {
+				width: 100%;
+			}
+		}
+		&.float {
+			width: 35%;
+			height: 100%;
+			float: right;
+			.parts-table-thead {
+				width: 100%;
+				overflow: hidden;
+
+			}
+			.float-table-head {
+				width: 100%;
+			}
+			.parts-table-tbody {
+				overflow: auto;
+				.float-table-body {
+					width: 100%;
+				}
+			}
+			.column {
+				width: 150px;
+				word-break: break-all;
+				vertical-align: top;
+				
+			}
+		}
+		.parts-table-thead {
+			@include setHeightGroup(30px);
+			border-bottom: $common-dotted-border;
+		}
+		.parts-item {
+			font-size: 0;
+
+			.column {
+				display: inline-block;
+				font-size: $main-font-size;
+				vertical-align: top;
+				line-height: 1.2em;
+				text-align: center;
+				.icon-btn-two {
+					margin: 0;
+				}
+				&.text-column {
+					display: inline-block;
+					padding: 0 10px;
+					text-align: left;
+					height: 58px;
+					overflow: hidden;
+				}
+			}
+			.ordernumber {
+				width: 10%;
+			}
+			.operate {
+				width: 10%;
+			}
+			.number {
+				width: 35%;
+				.part-number {
+					line-height: 1em;
+					margin-bottom: 10px;
+				}
+			}
+			.describe {
+				width: 30%;
+			}
+			.quantity {
+				width: 15%;
+			}
+		}
+		.parts-table-tbody {
+			position: absolute;
+			width: 100%;
+			top: 30px;
+			bottom: 0;
+			.parts-item {
+				border-bottom: $common-dotted-border;
+			}
+			.quantity {
+				text-align: left;
+			}
+		}
+	}
+	&.two {
+		.parts-table-wrapper {
+			&.lock {
+				overflow: auto;
+				.parts-table-tbody {
+					overflow: auto;
+					border-right: none;
+				}
+			}
+			&.float {
+				display: none;
+			}
+		}
+	}
+}
+.parts-table-tbody {
+	.parts-item {
+		height: 80px;
+		padding-top: 20px;
+		.quantity {
+			padding-left: 7%;
+			text-align: left;
+		}
+		.icon-btn-wrapper {
+			text-align: left;
+		}
+		.column.number {
+			text-align: left;
+			padding-left: 15px;
+			.text-link {
+				margin-right: 5px;
+				font-size: $main-font-size;
+			}
+		}
+		.ordernumber {
+			padding-top: 10px;
+		}
+		.operate {
+			padding-top: 5px;
+		}
+		&.active {
+			background: $parts-item-activebg;
+		}
+		&.hover {
+			background: $parts-item-hoverbg;
+		}
+	}
+}
+
+.vin-icon {
+	color: #18db57;
+}

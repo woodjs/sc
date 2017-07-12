@@ -1,0 +1,74 @@
+<nav class="navigation">
+	<div class="user-box">
+		<a href="javascript:;" class="username text-link">$username</a>
+		<span>,！${i18n['VUG']}</span>
+	</div>
+	<ul class="nav-box">
+		<li><a href="${homePath}" class="nav-link">$i18n['UVZ']</a></li>
+		#if(not $cart)
+		<li id="shoppingCartNotice" class="toggleBg">
+			<a href="${path}/cart" class=nav-link>
+				<i class="icon-active iconfont icon-cart"></i>
+				<span class="text">$i18n['HOR']</span>
+				<span>(</span>
+				<span class="important-text" id="shoppingcart-kindCount"></span>
+				<span>)</span>
+				<i class="icon-down iconfont icon-arrow-down"></i>
+				<i class="icon-up iconfont icon-arrow-up"></i>
+			</a>
+			<div class="cart-wrapper cart-header-wrap cart-content dropdowncontent condition-block">
+				<div class="loading-wrapper">
+					<div class="loading-middle"></div>
+				</div>
+			</div>
+		</li>
+		#end
+		<li id="languages" class="toggleBg">
+			<a href="javascript:;" class="nav-link">
+				<span class="icon"></span>
+				<span class="text">$i18n['OHS']</span>
+				<i class="icon-down iconfont icon-arrow-down"></i>
+				<i class="icon-up iconfont icon-arrow-up"></i>
+			</a>
+			<ul id="languages" class="dropdownlist dropdowncontent">
+				<li>
+					<a href="javascript:;" class="link-btn" data-action="change-lang" data-lang-code="zh">中文</a>	
+				</li>
+				<li>
+					<a href="javascript:;" class="link-btn" data-action="change-lang" data-lang-code="en">English</a>
+				</li>
+			</ul>
+		</li>
+		<li id="settings" class="toggleBg">
+			<a href="${path}/user" class="nav-link" target="_blank">
+				<span class="icon"></span>
+				<span class="text">$i18n['OQY']</span>
+			</a>
+
+		</li>
+		#*
+		<li id="help" class="toggleBg">
+			<a href="javascript:;" class="nav-link">
+				<span class="icon"></span>
+				<span class="text">$i18n['GGM']</span>
+				<i class="icon-down iconfont icon-arrow-down"></i>
+				<i class="icon-up iconfont icon-arrow-up"></i>
+			</a>
+			 <ul class="dropdownlist dropdowncontent">
+				<li>
+					<a href="" target="_blank" class="text-link" ></a>	
+				</li>
+				<li>
+					<a id="contactService" href="javascript:;" class="text-link"><</a>
+				</li>
+				<li>
+					<a href="" target="_blank" class="text-link">服务站管理</a>
+				</li>
+			</ul> 
+		</li>
+		*#
+		<li><a href="${path}/user/logout" class="nav-link">$i18n['WDY']</a></li>
+		
+	</ul>
+
+</nav>

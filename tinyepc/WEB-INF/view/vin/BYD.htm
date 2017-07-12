@@ -1,0 +1,203 @@
+#set($pageCode = "vin")
+#set($cssFiles = ["detail"])
+#set($releaseCss = "detail.min")
+#if ($vinHolder)
+	#set($title = $vinHolder.Vin + " - " + $i18n['YSX'])
+#else
+	#set($title = "VIN未能成功解析 - " + $i18n['YSX'])
+#end
+
+#parse("header/index.htm")
+
+<div class="navbar">
+	<span class="title">$vin 查询结果</span>
+</div>
+<section class="common-wrapper">
+	#if ($vinHolder)
+	<div class="part-content clearfix">
+		<div class="big-img-wrapper spec-img">
+			#if (${vinHolder.imageUri})
+				<img src="${resHost}${vinHolder.imageUri}"/>
+			#else
+				<img src="${resHost}/epc/no_image.jpg?/d/138" />	
+			#end
+		</div>
+		<div class="part-detail-wrapper">
+			<div class="part-item-wrapper">
+				#foreach ($mapping in $vinHolder.mappings)
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text" title="">$i18n["m_$velocityCount"]：</span>
+					</span>
+					<span class="value" title="">$!mapping.name</span>
+				</div>
+				#end
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text" title="发动机">发动机：</span>
+					</span>
+					<span class="value" title="BYD37QA132132131">$!{vinHolder.engineCode}</span>
+				</div>
+				<div class="data-item long-item">
+					<span class="prop">
+						<span class="text" title="">变速箱：</span>
+					</span>
+					<span class="value">$!{vinHolder.gearboxCode}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text" title="">下线日期：</span>
+					</span>
+					<span class="value">$!{vinHolder.formattedManufactureDate}</span>
+				</div>
+				<div class="data-item long-item">
+					<span class="prop">
+						<span class="text" title="">颜色：</span>
+					</span>
+					<span class="value">$!vinHolder.color</span>
+				</div>
+			</div>
+			<div class="btn-wrapper ">
+				#if ($parsed)
+				<a href="${path}/vin/${vinHolder.vin}/usage" class="btn-two v-middle" target="_blank">
+					<i class="icon iconfont icon-catalog"></i>
+					<span class="text">进入目录</span>
+				</a>
+				#else
+				<span>此VIN（$vin）不能进入目录，请使用首页的层级导航进入。</span>
+				#end
+			</div>
+		</div>
+	</div>
+	#else
+	<div class="result-tip-block error vin-result-tip">
+		<span class="icon">
+			<i class="iconfont icon-error"></i>
+		</span>
+		<span class="text">
+			<div class="title">很抱歉！您输入的VIN（$vin）在系统里不存在！</div>
+			<div>
+				<p>由于各种原因造成部分车型现期无法实现VIN解析功能，对于此部分车型可通过车型的方式进行查询备件，也可通过“在线沟通”模块进行线上沟通。现对可做VIN解析的车型进行说明如下：</p>
+				<table>
+				    <thead>
+				        <tr>
+				            <th>序号</th>  
+				            <th>车系</th>  
+				            <th>可做VIN解析年份</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+				            <td>1</td>
+				            <td>速锐</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>2</td>
+				            <td>思锐</td>
+				            <td>2014年1月以后</td>
+				        </tr>
+				        <tr>
+				            <td>3</td>
+				            <td>S6</td>
+				            <td>2012年以后</td>
+				        </tr>
+				        <tr>
+				            <td>4</td>
+				            <td>G6</td>
+				            <td>2012年以后</td>
+				        </tr>
+				        <tr>
+				            <td>5</td>
+				            <td>全新F3</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>6</td>
+				            <td>秦</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>7</td>
+				            <td>F0</td>
+				            <td>2014年1月以后</td>
+				        </tr>
+				        <tr>
+				            <td>8</td>
+				            <td>e6</td>
+				            <td>2012年以后</td>
+				        </tr>
+				        <tr>
+				            <td>9</td>
+				            <td>L3</td>
+				            <td>2012年2月以后</td>
+				        </tr>
+				        <tr>
+				            <td>10</td>
+				            <td>S7</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>11</td>
+				            <td>G5</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>12</td>
+				            <td>F3</td>
+				            <td>2012年2月以后</td>
+				        </tr>
+				        <tr>
+				            <td>13</td>
+				            <td>M6</td>
+				            <td>2014年1月以后</td>
+				        </tr>
+				        <tr>
+				            <td>14</td>
+				            <td>G3</td>
+				            <td>不支持VIN解析</td>
+				        </tr>
+				        <tr>
+				            <td>15</td>
+				            <td>G3R</td>
+				            <td>不支持VIN解析</td>
+				        </tr>
+				        <tr>
+				            <td>16</td>
+				            <td>F6</td>
+				            <td>不支持VIN解析</td>
+				                </tr>
+				        <tr>
+				            <td>17</td>
+				            <td>唐</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>18</td>
+				            <td>F3R</td>
+				            <td>不支持VIN解析</td>
+				        </tr>
+				        <tr>
+				            <td>19</td>
+				            <td>F3DM</td>
+				            <td>不支持VIN解析</td>
+				        </tr>
+				        <tr>
+				            <td>20</td>
+				            <td>宋</td>
+				            <td>全部</td>
+				        </tr>
+				        <tr>
+				            <td>21</td>
+				            <td>E5</td>
+				            <td>全部</td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+		</span>
+	</div>
+	#end
+</section>
+
+#parse("common/footer.htm")

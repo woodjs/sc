@@ -1,0 +1,20 @@
+#macro(join $list $separator)#foreach($item in $list)#if($velocityCount != 1)$!separator #end$!item#end#end
+
+#macro (struct $nodes $lvl)
+	#foreach ($node in $nodes)
+	<li class="condition-item-group collapse#if($node.leaf) leaf#end">
+		<a  href="javascript:void(0);"  class="title text-link secondary bold-text tree-node" data-id="$node.id" data-code="$node.code" data-text="$node.text" data-lvl="$lvl">
+			<span class="condition-icon">
+				<i class="tree-icon btn-collaspe"></i>
+				<i class="tree-icon btn-expand"></i>
+				<i class="leaf-icon btn-leaf"></i>
+			</span>
+			<span class="text">$node.code - $node.text</span>
+		</a>
+		#if (!$node.leaf)
+			<ul class="child" data-lvl="$lvl">#struct($node.getChildren(), $math.add($lvl, 1))</ul>
+		#end
+		
+	</li>
+	#end
+#end

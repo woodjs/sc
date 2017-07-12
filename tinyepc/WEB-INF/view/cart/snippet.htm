@@ -1,0 +1,56 @@
+#if ($cart.items and $cart.items.size() > 0)
+<div class="headline">
+    <span class="text bold-text">$i18n['HOR']</span>
+</div>
+<div class="item-list">
+    #foreach ($item in $cart.items)
+        <div class="item #if(not $item.part)disabled#end clearfix" data-code="${item.partCode}">
+            <div class="part">
+                <div>
+                	#if($item.part)
+                    <a href="${path}/part/${item.partCode}" class="text-link" target="_blank">${item.partCode}</a>
+                    #else
+                    <a href="javascript:;" class="text-link" target="_blank">${item.partCode}</a>
+                    #end
+                </div>
+                <div>${item.partName}</div>
+            </div>
+            <div class="info">
+                #if ($cfg.hasProp('part.price'))
+                #if ($item.partSaleProps.price)
+                <span class="important-text">$item.partSaleProps.price</span>
+                #else
+                $i18n['QMO']
+                #end
+                <span class="num">x $item.qty</span>
+                #else
+                <span class="num">x $item.qty</span>
+                #end
+                <a href="javascript:;" class="text-link secondary delete-btn" data-action="delete-header-single">
+                    <i class="iconfont icon-delete"></i>
+                </a>
+            </div>
+        </div>
+    #end
+</div>
+<div class="total">
+    <span class="total-item">
+        $i18n['IOF']<span class="important-text product-num">$cart.itemSize</span>$i18n['JHU']
+    </span>
+    #if ($cfg.hasProp('part.price') and $cart.amount)
+    <span class="total-item">
+    $i18n['FZX']：<span class="important-text">$cart.amount $i18n['CLM']</span>
+    </span>
+    #end
+</div>
+<div class="btn-wrapper">
+    <a href="${path}/cart" class="btn">$i18n['PRI']</a>
+</div>
+#else
+    <div class="no-goods-header-wrapper info-text">
+        <span class="icon">
+            <i class="iconfont icon-cart"></i>
+        </span>
+        <span>$i18n['IXN']</span>
+    </div>
+#end

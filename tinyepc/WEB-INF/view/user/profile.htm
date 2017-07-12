@@ -1,0 +1,26 @@
+#set($pageCode = "user")
+#set($cssFiles = ["user"])
+#set($releaseCss = "user.min")
+#set($title = "User Profile - " + $i18n['YSX'])
+
+#parse("header/index.htm")
+
+<div id="crumbs-bar" class="navbar">
+  <div class="search-bar-item-wrapper"></div>
+</div>
+<section class="wrapper">
+  #parse("user/menu.htm")
+  <section class="user-center-detail">
+    <div class="user-center-detail-info">
+    <div class="thead">账号信息</div>
+      <table class="user-center-detail-msg">
+        <tr>
+          <td>维修站编码：</td>
+          <td>asdfs</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+</section>
+
+#parse("common/footer.htm")

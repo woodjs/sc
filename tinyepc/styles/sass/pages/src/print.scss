@@ -1,0 +1,48 @@
+@import "../../common/var/frame";
+@import "../../config/size";
+@import "../../config/style";
+
+body {
+	padding: 0;
+	background: #ffffff;
+}
+.legend-wrapper {
+	height: 1000px;
+	text-align: center;
+	img {
+		height: 100%;
+		width: auto;
+	}
+}
+.parts-block {
+	margin-bottom: 100px;
+	.headline {
+		font-size: 14px;
+	}
+}
+.part-code {
+	padding-left: 20px;
+}
+.vin-icon {
+	display: inline-block;
+	width: 15px;
+}
+.print-table {
+	table {
+		font-size: 14px;
+		tbody {
+			tr {
+				border-bottom: solid 1px #bababa;
+				&:first-child {
+					border-top: solid 1px #bababa;
+				}
+			}
+		}
+		td, th {
+			text-align: left;
+		}
+		.number, .part-code {
+			text-align: center;
+		}
+	}
+}

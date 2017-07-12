@@ -1,0 +1,22 @@
+<aside class="user-center condition-block"> 
+  <div class="headline">
+    <span class="text bold-text">用户信息</span>
+  </div>
+  <ul class="user-center-list">
+    <li class="#if($menu eq 'user-profile')active#end">
+      <a href="${path}/user/profile">
+      <i class="iconfont icon-account"></i><span>账号信息</span>
+      </a>
+    </li>
+    <li class="#if($menu eq 'change-pwd')active#end">
+      <a href="${path}/user/change-pwd">
+        <i class="iconfont icon-pws"></i><span>修改密码</span>
+      </a>
+    </li>
+    <li class="#if($menu eq 'sys-about')active#end">
+      <a href="${path}/sys/about">
+        <i class="iconfont icon-system"></i><span>系统信息</span>
+      </a>
+    </li>
+  </ul>
+</aside>

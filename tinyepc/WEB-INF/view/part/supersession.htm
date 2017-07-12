@@ -1,0 +1,36 @@
+<table>
+	<thead>
+		<tr>
+			<th class="rownumber">序号</th>
+			<th class="old-part">旧件号</th>
+			<th class="new-part">新件号</th>
+			<th class="replacement-type">替换类型</th>
+			<th class="time">断点时间</th>
+			<th class="remark">替换备注</th>
+		</tr>
+	</thead>
+	<tbody>
+		#foreach ($supersession in $supersessions)
+		<tr>
+			<td>$velocityCount</td>
+			<td>
+				#if ($part.id eq $supersession.oldPart.id) 
+				$!{supersession.oldPart.code}
+				#else
+				<a href="${path}/part/${supersession.oldPart.id}" class="text-link" target="_blank">$!{supersession.oldPart.code}</a>
+				#end
+			</td>
+			<td>
+				#if ($part.id eq $supersession.newPart.id) 
+				$!{supersession.newPart.code}
+				#else
+				<a href="${path}/part/${supersession.newPart.id}" class="text-link" target="_blank">$!{supersession.newPart.code}</a>
+				#end
+			</td>
+			<td>$supersession.typeName</td>
+			<td>$!{supersession.formattedDateTime}</td>
+			<td class="remark">$!{supersession.note}</td>
+		</tr>
+		#end
+	</tbody>
+</table>

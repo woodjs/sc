@@ -1,0 +1,23 @@
+@import "../var/input";
+
+@mixin setInputBox(
+	$width, 
+	$height,
+	$font,
+	$padding,
+	$border,
+	$radius,
+	$bg,
+	$box-shadow
+	) {
+	width: $width;
+	font: $font;
+	@include setHeightGroup($height, 2px);
+	background: $bg;
+	padding: $padding;
+	border: $border;
+	@include borderRadius($radius);
+	@include boxShadow($box-shadow);
+	@include placeholderColor($input-tip-color);
+	vertical-align: top;
+} 

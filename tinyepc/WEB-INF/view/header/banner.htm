@@ -1,0 +1,42 @@
+<section class="banner v-middle">
+	<a href="${homePath}" class="logo-wrapper">
+		<img src="${resHost}/tis/logo/${oemCode}.png"/>
+	</a>
+	<div id="header-search-box" class="header-searxh-box">
+		<div class="search-input-wrapper">
+			<input name="q" class="header-input" value="$!q" placeholder="$i18n['KRP']" autocomplete="off" />
+			<div id="search-tips-wrapper" class="search-tips">
+				<script type="text/template" id="search-tip-template">
+				{{#data}}
+					<a href="${path}/search?q={{input}}" class="search-tip-item clearfix">
+						<span class="text">{{output}}</span>
+						<span class="tip-btn delete-btn" data-action="delete">$i18n['UAW']</span>
+					</a>
+					
+				{{/data}}
+				<div class="clear-btn-wrapper clearfix">
+					<a href="javascript:;" class="tip-btn close-btn" data-action="close">$i18n['TNX']</a>
+					<a href="javascript:;" class="tip-btn clear-btn" data-action="reset">$i18n['MJI']</a>
+				</div>
+				</script>
+			</div>
+		</div>
+		
+		<a href="javascript:;" class="header-search-btn btn-two v-middle">
+			<i class="icon iconfont icon-search"></i>
+			<span class="text">$i18n['USI']</span>
+		</a>
+	</div>
+	
+</section>
+<div class="float-tip float-tip-block normal hide">
+	<div class="tip-content">
+		<span class="text"></span>
+	</div>
+</div>
+
+<div class="float-tip float-tip-block price hide">
+	<div class="tip-content">
+		<span class="text"></span>
+	</div>
+</div>

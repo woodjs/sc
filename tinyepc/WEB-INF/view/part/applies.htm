@@ -1,0 +1,23 @@
+<table>
+	<thead>
+		<tr>
+			<th class="rownumber">$i18n['KRM']</th>
+			<th class="brand">$i18n['m_1']</th>
+			<th class="series">$i18n['m_2']</th>
+			<th class="operate">$i18n['EQK']</th>
+		</tr>
+	</thead>
+	<tbody>
+		#foreach ($apply in $applies)
+		<tr>
+			<td>$velocityCount</td>
+			#foreach ($mapping in $apply.mappings)
+			<td>
+				${mapping.name}
+			</td>
+			#end
+			<td><a href="${path}/part/${part.id}/enter-via-apply/${apply.usageId}" class="text-link" target="_blank">$i18n['XRA']</a></td>
+		</tr>
+		#end
+	</tbody>
+</table>

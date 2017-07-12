@@ -1,0 +1,61 @@
+<section class="banner" [style.background-image]="'assets/byd/images/banner.jpg | backgroundSrc'">
+
+    <a href="/" class="logo-wrapper">
+        <img src="http://res2.dev.servision.com.cn/tis/logo/BYD.png"></a>
+</section>
+
+<section class="login-wrapper condition-block">
+    <div class="headline">
+        <span class="text bold-text">比亚迪电子备件目录</span>
+    </div>
+    <div class="languange-btn-wrapper">
+        <a href="javascript:;" class="languange-btn " [ngClass]="{active: lang == 'zh'}" (click)="changeLang('zh')">中文</a>
+        <a href="javascript:;" class="languange-btn"  [ngClass]="{active: lang == 'en'}" (click)="changeLang('en')">English</a>
+    </div>
+    <form id="login-form" class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
+
+        <div class="data-item" [ngClass]="{error: username.invalid && loginCfg.firstInvoke}">
+            <label class="title">用户名/邮件/手机号：</label>
+            <span class="sign-icon"> <i class="iconfont icon-user"></i>
+            </span>
+            <input name="username" #username="ngModel" class="input-box username" [(ngModel)]="loginInfo.name" required />
+        </div>
+        <div class="data-item" [ngClass]="{error:password.invalid && loginCfg.firstInvoke}">
+            <label class="title">密码：</label>
+            <span class="sign-icon"> <i class="iconfont icon-pwd"></i>
+            </span>
+            <input name="password" #password="ngModel" type="password" class="input-box pwd" [(ngModel)]="loginInfo.pwd" required/>
+        </div>
+
+        <div id="verify-code-wrapper" *ngIf="invokeValided" class="data-item" [ngClass]="{error:validcode.invalid}">
+            <label class="title">验证码：</label>
+            <span class="sign-icon">
+                <i class="iconfont icon-verify"></i>
+            </span>
+            <input name="verifyCode" class="input-box verify-code" #validcode="ngModel" [(ngModel)]="loginInfo.validcode" required/>
+            <a href="javascript:;" class="verify-img" (click)="changeVerifyCode(verifyImg)">
+                <img #verifyImg/>
+            </a>
+        </div>
+
+        <div class="info-wrapper" [ngStyle]="{visibility:errorInfo ? 'visible' : 'hidden'}">
+            <span class="icon">
+                <i class="iconfont icon-error"></i>
+            </span>
+            <span class="text">{{errorInfo}}</span>
+        </div>
+
+        <button type="submit" class="login-btn" [disabled]="loginCfg.requestFlag">{{loginCfg.loginText}}</button>
+    </form>
+</section>
+
+<footer class="login-footer">
+    <div>
+        <span class="title">客服热线：</span>
+        <span>021-20252866 / 021-50271393</span>
+    </div>
+    <div>
+        <span class="title">服务时间说明：</span>
+        <span>客服支持时间（周一至周五）09:00 - 17:00</span>
+    </div>
+</footer>

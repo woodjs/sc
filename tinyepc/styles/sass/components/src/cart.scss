@@ -1,0 +1,246 @@
+@import "../../base/mixin";
+@import "../../common/var/frame";
+@import "../var/cart";
+@import "../../config/size";
+@import "../../config/style";
+
+.view-detail {
+	float: right;
+	padding-left: 20px;
+	background: url('./images/search.png') left center no-repeat;
+}
+.cart-table {
+	table {
+		thead {
+			.qty {
+				padding-left: 20px;
+			}
+			.part-number {
+				padding-left: 2px;
+			}
+		}
+		tbody {
+			tr {
+				height: 70px;
+				td {
+					padding: 10px 20px 10px 0;
+					min-height: 70px;
+				}
+				&.checked {
+					background: $parts-item-activebg;
+				}
+				&.disabled {
+					color: $gray-text;
+					background: $cart-item-disabledbg;
+					.text-link {
+						color: $gray-text;
+						text-decoration: none;
+						cursor: default;
+					}
+				}
+			}
+			.price, .total {
+				padding-right: 36px;
+			}
+			.min-qty, .min-pkg-qty {
+				padding-right: 50px;
+			}
+		}
+		.index, .part-number {
+			width: 15%;
+			text-align: left;
+		}
+		.index {
+			padding-left: 8px;
+		}
+		.price, .total {
+			width: 160px;
+			text-align: right;
+			padding-right: 30px;
+		}
+		.min-qty, .min-pkg-qty {
+			width: 150px;
+			text-align: right;
+			padding-right: 30px;
+		}
+		.qty {
+			width: 220px;
+			text-align: left;
+		}
+		.operate {
+			position: relative;
+			.parts-cart-info {
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: auto;
+				margin-right: 20px;
+			}
+		}
+		.icon-btn-two {
+			margin-left: 0;
+		}
+	}
+	.btn-wrapper {
+		font-size: 0;
+		text-align: right;
+		margin-bottom: 50px;
+		.btn {
+			margin-left: 10px;
+		}
+	}
+	.paging {
+		&.top {
+			margin-top: 10px;
+			font-size: $main-font-size;
+		}
+	}
+}
+.qty-wrapper {
+	font-size: 0;
+	.qty-btn {
+		display: inline-block;
+		width: 14px;
+		text-decoration: none;
+		color: $text-color;
+		font-size: $main-font-size;
+		@include setHeightGroup(30px ,2px);
+		border: $common-solid-border;
+		background: $cart-qty-bg;
+		text-align: center;
+		vertical-align: top;
+		&.down {
+			border-right: none;
+			border-top-left-radius: $common-radius;
+			border-bottom-left-radius: $common-radius;
+		}
+		&.up {
+			border-left: none;
+			border-top-right-radius: $common-radius;
+			border-bottom-right-radius: $common-radius;
+		}
+		&.disabled {
+			color: $solid-line-color;
+			cursor: default;
+		}
+	}
+	.input-box {
+		width: 60px;
+		border-radius: 0;
+		vertical-align: top;
+	}
+}
+.qty-tip {
+	font-size: 0;
+	margin-top: 5px;
+	.icon {
+		color: $warn-color;
+		vertical-align: middle;
+		margin-right: 5px;
+	}
+	.text {
+		font-size: $main-font-size;
+		vertical-align: middle;
+	}
+	&.info {
+		.icon {
+			color: $info-color;
+		}
+		
+	}
+}
+.total-wrapper {
+	margin: 20px 0 10px;
+	.total-info {
+		float: right;
+		font-size: 16px;
+		.item {
+			display: inline-block;
+			line-height: 0.8em;
+			border-left: $common-dotted-border;
+			padding-left: 15px;
+			margin-left: 15px;
+			&:first-child {
+				border-left: none;
+				padding-left: 0;
+				margin-left: 0;
+			}
+		}
+		.product-num {
+			margin: 0 5px;
+		}
+		&.fix {
+			float: none;
+			text-align: right;
+		}
+	}
+	.checkbox {
+		margin-right: 20px;
+		vertical-align: middle;
+	}
+
+}
+.cart-list-table {
+	.no-goods-tip {
+		width: 340px;
+		margin: 50px auto 30px;
+	}
+}
+
+.no-goods-tip {
+	width: 420px;
+	margin: 150px auto 0;
+	.icon {
+		@include setInlineBlock();
+		width: 90px;
+		height: 90px;
+		background: url('./images/cart.png');
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+	.text {
+		.info {
+			font-size: 16px;
+		}
+		@include setInlineBlock();
+		vertical-align: middle;
+	}
+}
+.search-conditions {
+	font-size: 0;
+	margin: 15px 0 -5px;
+	.data-item {
+		vertical-align: middle;
+	}
+	.calendar-item {
+		margin-right: 80px;
+	}
+	.keyword-item {
+		margin-right: 10px;
+	}
+	.btn {
+		margin-right: 10px;
+		vertical-align: middle;
+	}
+}
+.cart-detail-table {
+	table {
+		tr {
+	        th, td {
+	            &:first-child {
+	                padding-left: 20px;
+	            }
+	        }
+	    }
+	    tbody {
+	    	.qty{
+	    		padding-right: 112px;
+	    	}
+	    }
+	    .qty {
+	    	padding-right: 100px;
+	    	text-align: right;
+	    }
+	}
+
+}

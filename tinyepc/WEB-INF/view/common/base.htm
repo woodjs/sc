@@ -1,0 +1,33 @@
+<meta charset="UTF-8" />    
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>$title</title>
+<link rel="shortcut icon" href="${path}/favicon/${oemCode}.ico" type="image/x-icon" />
+<!-- 加载公用样式文件 -->
+#if (${isLocal})
+  <link rel="stylesheet" href="${path}/styles/frame.css" type="text/css" />
+  <link rel="stylesheet" href="${path}/styles/common.css" type="text/css" />
+  <link rel="stylesheet" href="${path}/styles/iconfont.css" type="text/css" />
+#else
+  <link rel="stylesheet" href="${path}/release/styles/all.min.css" type="text/css" />
+#end
+
+<!-- 加载子页面样式文件 -->
+#if (${isLocal})
+	#foreach ($css in $cssFiles)
+		<link rel="stylesheet" type="text/css" media="all" href="${path}/styles/${css}.css" />
+	#end
+#else
+	<link rel="stylesheet" type="text/css" media="all" href="${path}/release/styles/${releaseCss}.css" />
+#end
+
+<!--[if lt IE 9]> 
+<script> 
+   (function() {
+     var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video".split(', ');
+     var i= e.length;
+     while (i--){
+         document.createElement(e[i])
+     } 
+})() 
+</script>
+<![endif]-->

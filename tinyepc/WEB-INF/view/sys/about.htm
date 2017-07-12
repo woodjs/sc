@@ -1,0 +1,24 @@
+#set($pageCode = "user")
+#set($cssFiles = ["user"])
+#set($releaseCss = "user.min")
+#set($title = "User Profile - " + $i18n['YSX'])
+
+#parse("header/index.htm")
+
+<div id="crumbs-bar" class="navbar">
+  <div class="search-bar-item-wrapper"></div>
+</div>
+<section class="wrapper">
+	#parse("user/menu.htm")
+ 	<section class="user-center-detail">
+    <div class="sysInfo">
+      <img src="" alt="系统信息图">
+      <div class="system-msg">
+        <p>系统版本：1.0001</p>
+        <p>数据版本：2016-12-27</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+#parse("common/footer.htm")

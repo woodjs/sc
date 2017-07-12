@@ -1,0 +1,64 @@
+<script type="text/javascript" src="${path}/scripts/libs/public/require.min.js"></script>
+
+<script type="text/javascript" >
+
+	require.config({
+		baseUrl : "${path}/scripts/",
+		waitSeconds: 50,
+		urlArgs: '_dc=${stm}',
+		paths : {
+			jquery : 'libs/public/jquery-1.8.3.min',
+			jqueryUI : 'libs/public/jquery-ui-1.9.0.custom.min',
+			domReady: 'libs/public/domReady',
+			jqExtend: 'libs/private/jquery.extend',
+			json2: 'libs/public/json2',
+			ajax: 'libs/private/ajax',
+			util: 'libs/private/util',
+			lazyload: 'libs/public/lazyload.min',
+			pjax: 'libs/public/jquery.pjax',
+			tree : 'app/usage/tree',
+			legend: 'app/usage/legend',
+			parts: 'app/usage/parts',
+			jsDraw2D:'libs/public/jsDraw2D',
+			text:'libs/public/text',
+			scrollIntoView:'libs/public/jquery.scrollIntoView',
+			normalize:'libs/public/normalize',
+			mousewheel:'libs/public/jquery.mousewheel',
+			amplify: 'libs/public/amplify.min',
+			hotpoint: 'component/private/hotpoint/js/hotpoint',
+			loading: 'component/public/showLoading/jquery.showLoading.min',
+			checkbox: 'component/private/jquery_checkbox',
+			picpreview: 'component/private/picpreview',
+			layer: 'component/private/jquery.servision.window',
+			crumbs: 'app/common/crumbs',
+			hashchange: 'libs/public/jquery.ba-hashchange.min',
+			mustache: 'libs/public/mustache',
+			dialog: 'component/private/jquery_dialog',
+			titleTip: 'app/common/titleTip',
+			shoppingCart: 'app/common/shoppingCart',
+			pikaday: 'component/public/pikaday/pikaday',
+		    moment: 'component/public/pikaday/moment',
+		    header: 'app/common/header'
+		},
+		shim : {
+			jquery : {
+				exports : '$'
+			},
+			jqExtend: ['jquery'],
+			pjax :['jquery'],
+			amplify: ['jquery'],
+			hotpoint: ['jquery'],
+			loading: ['jquery'],
+			picpreview: ['jquery'],
+			scrollIntoView: ['jquery'],
+			layer: ['jquery'],
+			hashchange: ['jquery'],
+			pikaday: ['moment'],
+			checkbox: ['jquery']
+		}
+	});
+
+	if (console && console.log) {
+		console.log(' _____   _____   _____    _     _   _   _____   _   _____   __   _ \n/  ___/ | ____| |  _  \\  | |   / / | | /  ___/ | | /  _  \\ |  \\ | |\n| |___  | |__   | |_| |  | |  / /  | | | |___  | | | | | | |   \\| |\n\\___  \\ |  __|  |  _  /  | | / /   | | \\___  \\ | | | | | | | |\\   |\n ___| | | |___  | | \\ \\  | |/ /    | |  ___| | | | | |_| | | | \\  |\n/_____/ |_____| |_|  \\_\\ |___/     |_| /_____/ |_| \\_____/ |_|  \\_|\n');
+	}
+</script>

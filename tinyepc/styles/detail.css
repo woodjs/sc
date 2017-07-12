@@ -1,0 +1,134 @@
+.part-content {
+  margin: 20px 0;
+}
+.part-content .big-img-wrapper {
+  float: left;
+  width: 400px;
+  height: 400px;
+  line-height: 398px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  font-size: 0;
+  text-align: center;
+  margin-right: 45px;
+}
+.part-content .big-img-wrapper img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  outline: none;
+}
+.part-content .part-detail-wrapper, .part-content .part-vin-wrapper {
+  max-width: 820px;
+  min-width: 700px;
+  min-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+.part-content .part-detail-wrapper .part-item-wrapper, .part-content .part-vin-wrapper .part-item-wrapper {
+  padding-top: 10px;
+}
+.part-content .part-detail-wrapper .btn-wrapper, .part-content .part-vin-wrapper .btn-wrapper {
+  margin-top: 20px;
+}
+.part-content .part-detail-wrapper .btn-wrapper .icon, .part-content .part-vin-wrapper .btn-wrapper .icon {
+  margin-right: 5px;
+}
+.part-content .part-vin-wrapper .part-item-wrapper {
+  margin-right: -200px;
+}
+.part-content .spec-list {
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  font-size: 0;
+}
+.part-content .spec-list .spec-items-list {
+  width: 500%;
+  position: absolute;
+}
+.part-content .spec-list .spec-items-list .spec-item {
+  display: inline-block;
+}
+.part-content .spec-list .spec-items-list .spec-item.active .img-wrapper {
+  border-color: #f72f3e;
+}
+.part-content .spec-list .img-wrapper {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 68px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  font-size: 0;
+  text-align: center;
+  margin: 0 5px;
+}
+.part-content .spec-list .img-wrapper img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  outline: none;
+}
+
+.part-relative-content {
+  margin-bottom: 20px;
+}
+
+.tab-head {
+  border-bottom: solid 1px #e60e1e;
+  font-size: 0;
+}
+.tab-head .tab-btn {
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  min-width: 80px;
+  padding: 0 10px;
+  background: #ffffff;
+  text-decoration: none;
+  color: #333333;
+  border: 1px solid #e0e0e0;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.tab-head .tab-btn:hover {
+  background: #ff5865;
+  color: #ffffff;
+  border-color: #ff5865;
+}
+.tab-head .tab-btn.active {
+  background: #f72f3e;
+  color: #ffffff;
+  border-color: #e50011;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+.vin-result-tip {
+  width: 750px;
+  margin: 40px auto 30px;
+}
+.vin-result-tip table {
+  width: 100%;
+  text-align: center;
+}
+
+.prat-error-block {
+  width: 190px;
+  margin-top: 120px;
+}
+
+/*# sourceMappingURL=detail.css.map */

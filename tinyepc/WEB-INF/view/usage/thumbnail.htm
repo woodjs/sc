@@ -1,0 +1,24 @@
+<div class="headline">
+	<span class="text bold-text">图例</span>
+</div>
+<div class="condition-entity thumbnail-content">
+	<ul class="thumbnail-item-wrapper">
+		#foreach ($node in $nodes)
+		<li class="thumbnail-item">
+			<a href="javascript:;" class="thumbnail-wrapper text-link secondary" data-id="$node.id" data-code="$node.code" data-lvl="$node.lvl" data-parent-ids="${node.formattedParentIds}">
+				<div class="thumbnail-img-wrapper">
+					#if ($node.fileUri)
+					<img class="lazy" src="${path}/images/${oemCode}_loading.jpg" data-original="${resHost}${node.fileUri}?/d/300" />
+					#else
+					<img src="${path}/images/no_image.jpg" />
+					#end
+				</div>
+				<div class="describe-wrapper">
+					<div>$node.code</div>
+					<div>$node.text</div>
+				</div>
+			</a>
+		</li>
+		#end
+	</ul>
+</div>

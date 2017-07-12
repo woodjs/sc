@@ -1,0 +1,69 @@
+#if ($sr.totalPage > 1)
+<div class="paging bottom">
+	#if ($sr.hasPrevPage())
+	<a href="$srp.prevPage($sr.page)" class="paging-icon left change-page">
+		<i class="iconfont icon-arrow-left"></i>
+	</a>
+	#else
+	<a href="javascript:;" class="paging-icon left disabled">
+		<i class="iconfont icon-arrow-left"></i>
+	</a>
+	#end
+	#if ($sr.page ge 4)
+		<a class="text-link secondary page-num-btn change-page" href="${srp.addParam('p', 1)}">1</a>
+	#end
+	#if ($sr.page ge 5)
+		<a class="text-link secondary page-num-btn change-page" href="${srp.addParam('p', 2)}">2</a>
+	#end
+	#if ($sr.page gt 5)
+		<span class="ellipsis">...</span>
+	#end
+	#if ($sr.page - 2 gt 1)
+		#set($startPage = $sr.page - 2)
+	#else
+		#set($startPage = 1)
+	#end
+	#if ($sr.page + 2 lt $sr.totalPage)
+		#set($endPage = $sr.page + 2)
+	#else
+		#set($endPage = $sr.totalPage)
+	#end
+	#if ($startPage gt $endPage)
+		#set ($startPage = $endPage)
+	#end
+	#foreach ($pageNumber in [$startPage .. $endPage])
+		#if ($pageNumber == $sr.page)
+			<span class="current">${pageNumber}</span>			
+		#else
+			<a class="text-link secondary page-num-btn change-page" href="$srp.addParam('p', $pageNumber)">${pageNumber}</a>
+		#end
+	#end
+	#if ($sr.totalPage - $sr.page >= 3)
+		<span class="ellipsis">...</span>
+	#end
+	#if ($sr.hasNextPage())
+	<a href="$srp.nextPage($sr.page)" class="paging-icon right change-page">
+		<i class="iconfont icon-arrow-right"></i>
+	</a>
+	#else
+	<a href="javascript:;" class="paging-icon right disabled">
+		<i class="iconfont icon-arrow-right"></i>
+	</a>
+	#end
+	#if ($enableGoto)
+	<span class="text-link secondary paging-goto-btn">
+		跳转
+		<div class="page-goto-block bottom float-tip-block">
+			<div class="tip-content" data-url="$srp.removeParam('p')">
+				<span>跳转到第</span>
+				<input type="text" name="p" class="input-box small" value="$sr.page"/>
+				<span>页</span>
+				<a href="javascript:;" id="search-page-btn" class="btn small" >
+					确定
+				</a>
+			</div>
+		</div>
+	</span>
+	#end
+</div>
+#end

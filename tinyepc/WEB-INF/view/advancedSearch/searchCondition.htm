@@ -1,0 +1,91 @@
+<aside class="search-condition condition-block">
+	<div class="headline">
+		<span class="text bold-text">$i18n['WLA']</span>
+	</div>
+	
+	<div class="condition-item-wrapper">
+		#foreach ($mapping in $sr.preMappings)
+		<div class="condition-item disapper">
+			<div class="condition-title">
+				<span class="bold-text title-text">${i18n["m_$mapping.lvl"]}</span>
+				<span class="current">[</span>
+				<span class="current current-choice">$mapping.name</span>
+				<span class="current">]</span>
+				#if ($srp.hasParam("m_$mapping.lvl"))
+				<a href="$srp.removeParamsByLE('m_', $mapping.lvl)" class="paging-icon">
+					<i class="iconfont icon-close"></i>
+				</a>
+				#end
+			</div>
+		</div>
+		#end
+		#if ($sr.suggestMappings.size() > 0)
+		<div class="condition-item #if($sr.suggestMappings.size() > 3) collapse#else disapper#end">
+			<div class="condition-title">
+				<span class="bold-text title-text">${i18n["m_$sr.suggestMappings.first().obj.lvl"]}</span>
+				
+			</div>
+			<div class="condition-content">
+				#foreach ($suggest in $sr.suggestMappings)
+				<div>
+					<a href="$srp.addParam("m_${suggest.obj.lvl}", ${suggest.obj.id})" class="text-link secondary">${suggest.obj.name}</a>
+				</div>
+				#end
+			</div>
+			<div class="condition-btn-wrapper">
+				<a href="javascript:;" class="condition-btn">
+					<span class="btn-collaspe">
+						<i class="iconfont icon-collapse"></i>
+						<span class="text">$i18n['VVU']</span>
+					</span>
+					<span class="btn-expand">
+						<i class="iconfont icon-expand"></i>
+						<span class="text">$i18n['WMJ']</span>
+					</span>
+				</a>
+			</div>
+		</div>
+		#end
+		#foreach ($struct in $sr.preStructs)
+		<div class="condition-item disapper">
+			<div class="condition-title">
+				<span class="bold-text title-text">${i18n["s_$struct.lvl"]}</span>
+				<span class="current">[</span>
+				<span class="current current-choice">$struct.code - $struct.name</span>
+				<span class="current">]</span>
+				#if ($srp.hasParam("s_$struct.lvl"))
+				<a href="$srp.removeParamsByLE('s_', $struct.lvl)" class="paging-icon">
+					<i class="iconfont icon-close"></i>
+				</a>
+				#end
+			</div>
+		</div>
+		#end
+		#if ($sr.suggestStructs.size() > 0)
+		<div class="condition-item #if($sr.suggestStructs.size() > 3) collapse#else disapper#end">
+			<div class="condition-title">
+				<span class="bold-text title-text">${i18n["s_$sr.suggestStructs.first().obj.lvl"]}</span>
+			</div>
+			<div class="condition-content">
+				#foreach ($suggest in $sr.suggestStructs)
+				<div>
+					<a href="$srp.addParam("s_${suggest.obj.lvl}", ${suggest.obj.id})" class="text-link secondary">${suggest.obj.code} - ${suggest.obj.name}</a>
+				</div>
+				#end
+			</div>
+			<div class="condition-btn-wrapper">
+				<a href="javascript:;" class="condition-btn">
+					<span class="btn-collaspe">
+						<i class="iconfont icon-collapse"></i>
+						<span class="text">$i18n['VVU']</span>
+					</span>
+					<span class="btn-expand">
+						<i class="iconfont icon-expand"></i>
+						<span class="text">$i18n['WMJ']</span>
+					</span>
+				</a>
+			</div>
+		</div>
+		#end
+	</div>
+</aside>

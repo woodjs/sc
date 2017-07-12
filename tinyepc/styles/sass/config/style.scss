@@ -1,0 +1,9 @@
+$common-font-style: 'Microsoft Yahei', 'Arial', 'Simhei', 'SimSun', 'sans-serif';
+$common-solid-style: solid;
+$common-dash-style: dashed;
+$coomon-datted-style: dotted;
+
+$footer-border-style: $footer-border-height $common-solid-style $footer-border-color;
+$common-solid-border: $common-border-width $common-solid-style $solid-line-color;
+$common-dashed-border: $common-border-width $common-dash-style $dash-line-color;
+$common-dotted-border: $common-border-width $coomon-datted-style $dotted-line-color;

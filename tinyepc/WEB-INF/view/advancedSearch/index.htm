@@ -1,0 +1,15 @@
+#set($pageCode = "search")
+#set($cssFiles = ["search"])
+#set($releaseCss = "search.min")
+#set($title = $i18n['JEO'] + " - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+	
+	<section class="common-wrapper flow-left clearfix">
+		#parse("advancedSearch/searchCondition.htm")
+		<section id="search-block" class="search-result">
+		#parse("advancedSearch/searchResult.htm")
+		</section>
+	</section>
+
+#parse("common/footer.htm")

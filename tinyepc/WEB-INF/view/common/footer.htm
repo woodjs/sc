@@ -1,0 +1,11 @@
+		<footer class="footer">
+			沪ICP备12038558号|©2014 版权所有，上海事成软件股份有限公司
+		</footer>
+		<!-- load bootstrap script -->
+		#if (${isLocal})
+		    <script type="text/javascript" src="${path}/scripts/bootstrap.js"></script>
+	    #else
+	    	<script type="text/javascript" src="${path}/release/scripts/bootstrap.min.js?v=${stm}"></script>
+	    #end
+	</body>
+</html>

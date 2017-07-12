@@ -1,0 +1,42 @@
+//icon btn
+
+$icon-btn-width: 24px;
+$icon-btn-height: 24px;
+$icon-btn-radius: $common-radius;
+$icon-btn-margin: 0 0 0 10px;
+$icon-btn-color: $theme-color;
+$icon-btn-bg-color: #ffffff;
+$icon-btn-hove-bg-color: #ff5865;
+$icon-btn-active-bg-color: #f72f3e;
+$icon-hover-color: #ffffff;
+$icon-disabled-color: #c7c7c7;
+$icon-disabled-bg-color: #c7c7c7;
+
+//small icon btn
+
+$icon-sbtn-width: 12px;
+$icon-sbtn-height: 12px;
+$icon-sbtn-margin: 0 0 0 10px;
+$icon-sbtn-color: #797979;
+$icon-sbtn-bg-color: transparent;
+$icon-sbtn-hover-bg-color: transparent;
+$icon-sbtn-active-bg-color: transparent;
+$icon-sbtn-hover-color: $hover-color;
+$icon-sbtn-disabled-color: #c7c7c7;
+$icon-sbtn-disabled-bg-color: transparent;
+
+//btn
+$btn-common-height: 30px;
+$btn-common-padding: 0 10px;
+$btn-common-min-width: 60px;
+$btn-common-radius: $common-radius;
+$btn-common-color: #ffffff;
+$btn-common-bg-color: $theme-color;
+$btn-common-fsize: $main-font-size;
+$btn-common-hover-color: #ffffff;
+$btn-common-hover-bgcolor: #494c6c;
+$btn-common-active-color: #494c6c;
+$btn-common-active-bgcolor: #303249;
+//small-btn
+$btn-small-height: 24px;
+$btn-small-min-width: 54px;

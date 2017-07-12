@@ -1,0 +1,128 @@
+@import "../../base/mixin";
+@import "../../common/var/frame";
+@import "../../config/size";
+@import "../../config/style";
+@import "../var/search";
+
+
+.banner {
+	border-bottom: solid 2px $theme-color;
+	@include boxShadow(0px 2px 2px #cdcccc);
+
+}
+.search-result {
+	overflow: hidden;
+	padding: 0 0 15px 430px;
+	position: relative;
+	.search-box-wrapper {
+		height: $search-condition-box;
+		border-bottom: $common-dotted-border;
+	}
+
+	.search-result-item {
+		padding: $search-result-item-padding;
+		height: $search-result-item-img-height + $search-result-item-pt + $search-result-item-pb;
+		position: relative;
+		border-bottom: $common-dotted-border;
+	}
+	.loading-box {
+		position: fixed;
+		z-index: 9990;
+		width: 400px;
+		top: 50%;
+		left: 50%;
+		margin-top: -15px;
+	}
+}
+
+.search-box-wrapper {
+	.data-item {
+		.input-box {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+	}
+	
+	.btn {
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+}
+.search-result-item {
+	.part-img {
+		@include setInlineBlock();
+		width: $search-result-item-img-width;
+		@include setHeightGroup($search-result-item-img-height, 2px);
+		border: $common-solid-border;
+		background-color: $img-wrapper-bg-color;
+		position: absolute;
+		left: 0;
+		font-size: 0;
+		text-decoration: none;
+		text-align: center;
+		img {
+			@include setAutoImg();
+		}
+	}
+	.part-describe {
+		@include setInlineBlock();
+		line-height: 1.8em;
+		padding-left: $search-result-item-part-pl;
+		.title {
+			font-size: 0;
+			* {
+				vertical-align: middle;
+			}
+			.number {
+				font-size: $main-font-size;
+				margin-right: $common-text-margin;
+			}
+			.name {
+				font-size: $main-font-size;
+			}
+		}
+		.part-detail-wrapper {
+			font-size: 0;
+			.part-detail-item {
+				@include setInlineBlock();
+				padding: 0 $search-result-item-legend-padding;
+				border-left: $common-dotted-border;
+				position: relative;
+				font-size: $main-font-size;
+				line-height: 1.2em;
+				vertical-align: middle;
+				&:first-child {
+					padding-left: 0;
+				}
+			}
+		}
+		
+	}
+	.part-operate-wrapper {
+		position: absolute;
+		right: 0;
+		top: $search-result-item-pt;
+		font-size: 0;
+		.icon-btn {
+			font-size: 0;
+		}
+	}
+}
+
+.search-condition {
+	width: $search-condition-width;
+	height: 100%;
+	background-color: $bg-color;
+	float: right;
+	margin-left: 50px;
+	position: fixed;
+	z-index: 9999;
+	.condition-item-wrapper {
+		overflow: auto;
+	}
+}
+
+.search-result-tip {
+	width: 225px;
+	margin-top: 40px;
+}

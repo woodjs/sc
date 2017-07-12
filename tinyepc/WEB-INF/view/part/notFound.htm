@@ -1,0 +1,24 @@
+#set($pageCode = "detail_notFount")
+#set($cssFiles = ["detail"])
+#set($releaseCss = "detail.min")
+#set($title = $code + " - $i18n['UOR'] - " + $i18n['YSX'])
+
+#parse("header/index.htm")
+<script type="text/javascript">
+	var pageContext = {
+		
+	};
+</script>
+<div class="navbar">
+	<span class="title">${i18n['UOR']}：$code</span>
+</div>
+<section class="common-wrapper">
+	<div class="result-tip-block warn prat-error-block">
+		<span class="icon">
+			<i class="iconfont icon-warn"></i>
+		</span>
+		<span class="title">此配件($code)不存在</span>
+	</div>
+</section>
+
+#parse("common/footer.htm")

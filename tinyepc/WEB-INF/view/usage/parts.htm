@@ -1,0 +1,102 @@
+<div class="headline">
+	<span class="text bold-text">${i18n.args('IFO', $usages.size())}</span>
+</div>
+<div class="condition-entity">
+	<div id="parts-float-table" class="parts-table-wrapper float">
+		<div id="parts-float-thead" class="parts-table-thead">
+			<div class="float-table-head">
+				<div class="parts-item bold-text">
+					#if ($cfg.hasProp('part.extra1'))
+					<span class="column">$i18n['part.extra1']</span>
+					#end
+					#if ($cfg.hasProp('usage.partMappings'))
+					<span class="column">$i18n['LCV']</span>
+					#end
+					<span class="column">$i18n['XWQ']</span>
+				</div>
+			</div>
+		</div>
+		<div id="parts-float-tbody"  class="parts-table-tbody">
+			<div class="float-table-body">
+				#foreach ($usage in $usages)
+				<div class="parts-item" data-id="$usage.origin.id" data-part-id="$!{usage.origin.part.id}" data-callout="$!{usage.origin.callout}">
+					#if ($cfg.hasProp('part.extra1'))
+					<span class="column text-column">$!{usage.origin.part.extra1}</span>
+					#end
+					#if ($cfg.hasProp('usage.partMappings'))
+					<span class="column text-column" title="$!{usage.formattedPartMappings}">$!{usage.formattedPartMappings}</span>
+					#end
+					<span class="column text-column">$!{usage.origin.note}</span>
+				</div>
+				#end
+			</div>
+		</div>
+	</div>
+	<div class="parts-table-wrapper lock">
+		<div class="parts-table-thead">
+			<div class="parts-item bold-text">
+				<span class="column ordernumber">${i18n['APK']}</span>
+				<span class="column operate">${i18n['EQK']}</span>
+				<span class="column number">${i18n['GAI']}</span>
+				<span class="column describe">${i18n['YOQ']}</span>
+				<span class="column quantity">${i18n['AVE']}</span>
+			</div>
+		</div>
+		<div id="parts-lock-tbody" class="parts-table-tbody">
+			<div id="parts-lock-stbody" class="parts-scroll-tbody">
+				<div class="parts-scroll-wrapper">
+					#foreach ($usage in $usages)
+					<div class="parts-item" data-id="$usage.origin.id" data-part-id="$!{usage.origin.part.id}" data-callout="$!{usage.origin.callout}" data-code="$!{usage.origin.part.code}">
+						<span class="column ordernumber">$!{usage.origin.callout}</span>
+						<span class="column operate">
+							#if ($usage.origin.saleProps.canSale)
+							<a href="javascript:;" class="icon-btn-two" data-action="buy">
+								<i class="iconfont icon-cart"></i>
+							</a>
+							#end
+							<div class="parts-cart-info">
+								<div class="cart-add-info ok">
+									<span class="info-icon"></span>
+								</div>
+							</div>
+						</span>
+						<span class="column number">
+							<div class="part-number">
+								<a href="${path}/part/${usage.origin.part.id}" class="text-link" target="_blank">$!{usage.origin.part.code}</a>
+							</div>
+							<div class="icon-btn-wrapper">
+								#if ($usage.origin.part)
+								#if ($usage.origin.existsInVin)
+								<span title="适用当前VIN" class="vin-icon" data-title="适用当前VIN">
+									<i class="iconfont icon-correct"></i>
+								</span>
+								#end
+								#if ($usage.origin.part.hasSupersession)
+								<a href="${path}/part/${usage.origin.part.id}#supersession" title="$i18n['GCF']" class="text-link secondary" target="_blank">
+									<i class="iconfont icon-replacement"></i>
+								</a>
+								#end
+								<a href="${path}/usage/${usage.origin.id}/part-usage" title="$i18n['MAB']" class="text-link secondary" target="_blank">
+									<i class="iconfont icon-car"></i>
+								</a>
+								#if ($cfg.hasProp('part.price') and $usage.origin.saleProps.canSale and $authz.hasPermission('2000'))
+								<a href="javascript:;" class="text-link secondary" data-price data-direction="left">
+									<i class="iconfont icon-price"></i>
+								</a>
+								#end
+								#end
+							</div>
+						</span>
+						#if ($usage.origin.part)
+						<span class="column describe text-column">$!{usage.origin.part.name}</span>
+						#else
+						<span class="column describe text-column">$!{usage.origin.partName}</span>
+						#end
+						<span class="column quantity">$!{usage.origin.qty}</span>
+					</div>
+					#end
+				</div>
+			</div>
+		</div>
+	</div>		
+</div>

@@ -1,0 +1,98 @@
+.user-center {
+  float: left;
+  width: 270px;
+}
+.user-center .user-center-list li {
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.user-center .user-center-list li a {
+  color: #333333;
+  text-decoration: none;
+  display: block;
+}
+.user-center .user-center-list li:hover, .user-center .user-center-list li.active {
+  background: #f72f3e;
+}
+.user-center .user-center-list li:hover a, .user-center .user-center-list li.active a {
+  color: #fff;
+}
+.user-center .user-center-list li span {
+  display: inline-block;
+  margin-left: 5px;
+}
+.user-center .user-center-list li i {
+  font-weight: normal;
+}
+
+.user-center-detail {
+  padding-left: 380px;
+  padding-top: 20px;
+  color: #333333;
+  font-weight: bold;
+}
+.user-center-detail .user-center-detail-info .thead {
+  height: 12px;
+  line-height: 12px;
+  padding-left: 5px;
+  border-left: 2px solid #f72f3e;
+  margin-bottom: 20px;
+}
+.user-center-detail .user-center-detail-info:nth-of-type(1) {
+  display: block;
+}
+.user-center-detail .user-center-detail-msg tbody tr {
+  height: 40px;
+}
+.user-center-detail .user-center-detail-msg tbody tr td {
+  text-align: left;
+}
+.user-center-detail .user-center-detail-msg tbody tr td:last-child {
+  padding-left: 15px;
+  font-weight: normal;
+  width: 360px;
+}
+.user-center-detail .user-center-detail-msg tbody tr td:last-child .input-box {
+  width: 100%;
+  line-height: 40px;
+}
+.user-center-detail .user-center-detail-msg tbody tr td:last-child .change-pws-btn {
+  width: 100%;
+  padding: 0;
+  text-align: center;
+}
+.user-center-detail .user-center-detail-msg tbody tr:nth-of-type(3) {
+  height: 20px;
+  color: #bbb;
+}
+.user-center-detail .sysInfo {
+  padding-top: 33px;
+  padding-left: 10px;
+}
+.user-center-detail .sysInfo img {
+  float: left;
+  width: 140px;
+}
+.user-center-detail .sysInfo .system-msg {
+  padding-left: 170px;
+  margin-top: 28px;
+}
+
+.icon-account:before {
+  content: "\e66f";
+}
+
+.icon-pws:before {
+  content: "\e65a";
+}
+
+.icon-system:before {
+  content: "\e666";
+}
+
+/*# sourceMappingURL=user.css.map */

@@ -1,0 +1,47 @@
+body {
+  padding: 0;
+  background: #ffffff;
+}
+
+.legend-wrapper {
+  height: 1000px;
+  text-align: center;
+}
+.legend-wrapper img {
+  height: 100%;
+  width: auto;
+}
+
+.parts-block {
+  margin-bottom: 100px;
+}
+.parts-block .headline {
+  font-size: 14px;
+}
+
+.part-code {
+  padding-left: 20px;
+}
+
+.vin-icon {
+  display: inline-block;
+  width: 15px;
+}
+
+.print-table table {
+  font-size: 14px;
+}
+.print-table table tbody tr {
+  border-bottom: solid 1px #bababa;
+}
+.print-table table tbody tr:first-child {
+  border-top: solid 1px #bababa;
+}
+.print-table table td, .print-table table th {
+  text-align: left;
+}
+.print-table table .number, .print-table table .part-code {
+  text-align: center;
+}
+
+/*# sourceMappingURL=print.css.map */

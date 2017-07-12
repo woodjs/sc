@@ -1,0 +1,41 @@
+#set($pageCode = "usage")
+#set($cssFiles = ["usage"])
+#set($releaseCss = "usage.min")
+#set($title = " 用法 - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+<script type="text/javascript">
+	var params = $params;
+	var mappings = $mappings;
+</script>
+
+<div id="crumbs-bar" class="navbar">
+	<div class="search-bar-item-wrapper"></div>
+</div>
+<section class="wrapper">
+	<aside id="tree-block" class="condition-block group-block">
+		<div class="headline">
+			<span class="text bold-text">组别</span>
+		</div>
+		<div class="condition-entity">
+			<ul id="navigation-tree" class="navigation-tree parent">
+				#struct($structNodes, 1)
+			</ul>
+		</div>
+	</aside>
+
+	<section id="lead-block" class="condition-block lead-block" style="display:none;">
+		<div class="condition-entity lead-content">
+			<div class="lead-info">
+				<div class="lead-info-icon"></div>
+				<span class="text">请先选择组别内容</span>
+			</div>
+		</div>
+	</section>
+	<section id="thumbnail-block" class="condition-block thumbnail-block hide">
+		#parse("usage/thumbnail.htm")
+	</section>
+	#parse("usage/legendParts.htm")
+</section>
+
+#parse("common/footer.htm")

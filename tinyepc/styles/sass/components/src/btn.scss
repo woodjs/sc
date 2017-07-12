@@ -1,0 +1,91 @@
+@import "../var/btn";
+
+@mixin icon-btn($width, 
+	$height, 
+	$font-size,
+	$color,
+	$bg-color, 
+	$border, $margin, 
+	$hover-color, 
+	$bg-hover-color, 
+	$bg-active-color,
+	$disabled-color,
+	$disabled-bg-color,$radius: $icon-btn-radius) {
+	@include setInlineBlock();
+	width: $width;
+	@include setHeightGroup($height, 2px);
+	font-size: $font-size;
+	text-decoration: none;
+	text-align: center;
+	border: $border;
+	@include borderRadius($radius);
+	color: $color;
+	background-color: $bg-color;
+	margin: $margin;
+	&:hover {
+		color: $hover-color;
+		background-color: $bg-hover-color;
+		border-color: $bg-hover-color;
+	}
+	&.active {
+		color: $hover-color;
+		background-color: $bg-active-color;
+		border-color: $bg-active-color;
+		&:hover {
+			color: $hover-color;
+			background-color: $bg-active-color;
+			border-color: $bg-active-color;
+		}
+	}
+	&.disabled {
+		color: $disabled-color;
+		background-color: $disabled-bg-color;
+		border-color: $disabled-bg-color;
+		&:hover {
+			color: $disabled-color;
+			background-color: $disabled-bg-color;
+			border-color: $disabled-bg-color;
+			cursor: default;
+		}
+	}
+}
+
+@mixin common-btn (
+	$height,
+	$padding,
+	$color,
+	$bg-color,
+	$border,
+	$font-size,
+	$radius,
+	$min-width,
+	$hover-color,
+	$hover-bgcolor,
+	$active-color,
+	$active-bgcolor
+) {
+	display: inline-block;
+	@include setHeightGroup($height, 2px);
+	padding: $padding;
+	color: $color;
+	background-color: $bg-color;
+	border: $border;
+	font-size: $font-size;
+	@include borderRadius($radius);
+	min-width: $min-width;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	&:hover {
+		color: $hover-color;
+		background-color: $hover-bgcolor;
+		border-color: $hover-bgcolor;
+	}
+	&.active, &.active {
+		color: $active-color;
+		background-color: $active-bgcolor;
+		border-color: $active-bgcolor;
+	}
+}
+
+

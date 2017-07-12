@@ -1,0 +1,126 @@
+#set($pageCode = "vin")
+#set($cssFiles = ["detail"])
+#set($releaseCss = "detail.min")
+#if ($vinHolder)
+	#set($title = $vinHolder.Vin + " - " + $i18n['YSX'])
+#else
+	#set($title = "VIN未能成功解析 - " + $i18n['YSX'])
+#end
+
+#parse("header/index.htm")
+
+<div class="navbar">
+	<span class="title">$vin 查询结果</span>
+</div>
+<section class="common-wrapper">
+	#if ($vinHolder)
+	<div class="part-content clearfix">
+		<div class="big-img-wrapper spec-img">
+			#if (${vinHolder.imageUri})
+				<img src="${resHost}${vinHolder.imageUri}"/>
+			#else
+				<img src="${resHost}/epc/no_image.jpg?/d/138" />	
+			#end
+		</div>
+		<div class="part-detail-wrapper">
+			<div class="part-item-wrapper">
+				#foreach ($mapping in $vinHolder.mappings)
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text">$i18n["m_$velocityCount"]：</span>
+					</span>
+					<span class="value">$!mapping.name</span>
+				</div>
+				#end
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text">下线日期：</span>
+					</span>
+					<span class="value">$!{vinHolder.formattedManufactureDate}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text">VSN：</span>
+					</span>
+					<span class="value">$!{vinHolder.vsn}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text">公告车型：</span>
+					</span>
+					<span class="value">$!{vinHolder.publicModel}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text">车型描述：</span>
+					</span>
+					<span class="value">$!{vinHolder.modelName}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text" title="发动机">发动机：</span>
+					</span>
+					<span class="value">$!{vinHolder.engineCode}</span>
+				</div>
+				<div class="data-item inline-item long-item">
+					<span class="prop">
+						<span class="text" title="发动机名称">发动机名称：</span>
+					</span>
+					<span class="value">$!{vinHolder.engineName}</span>
+				</div>
+				<div class="data-item long-item">
+					<span class="prop">
+						<span class="text">座位类别名称：</span>
+					</span>
+					<span class="value">$!{vinHolder.seatTypeName}</span>
+				</div>
+				<div class="data-item long-item">
+					<span class="prop">
+						<span class="text">车身类型：</span>
+					</span>
+					<span class="value">$!{vinHolder.bodyTypeName}</span>
+				</div>
+				<div class="data-item long-item line-item">
+					<span class="prop">
+						<span class="text">车型颜色：</span>
+					</span>
+					<span class="value">$!vinHolder.color</span>
+				</div>
+				<div class="data-item long-item line-item">
+					<span class="prop">
+						<span class="text">座位：</span>
+					</span>
+					<span class="value">$!vinHolder.seat</span>
+				</div>
+				<div class="data-item long-item line-item">
+					<span class="prop">
+						<span class="text">配置形态：</span>
+					</span>
+					<span class="value">$!vinHolder.options</span>
+				</div>
+			</div>
+			<div class="btn-wrapper ">
+				#if ($parsed)
+				<a href="${path}/vin/${vinHolder.vin}/usage" class="btn-two v-middle" target="_blank">
+					<i class="icon iconfont icon-catalog"></i>
+					<span class="text">进入目录</span>
+				</a>
+				#else
+				<span>此VIN（$vin）不能进入目录，请使用首页的层级导航进入。</span>
+				#end
+			</div>
+		</div>
+	</div>
+	#else
+	<div class="result-tip-block error vin-result-tip">
+		<span class="icon">
+			<i class="iconfont icon-error"></i>
+		</span>
+		<span class="text">
+			<div class="title">很抱歉！您输入的VIN（$vin）在系统里不存在！</div>
+		</span>
+	</div>
+	#end
+</section>
+
+#parse("common/footer.htm")

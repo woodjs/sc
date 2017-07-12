@@ -1,0 +1,72 @@
+#set($pageCode = "print")
+#set($cssFiles = ["print"])
+#set($releaseCss = "print.min")
+#set($title = $title)
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- base -->
+		#parse("common/base.htm")
+		<!-- global config -->
+		#parse("config/globalConfig.htm")
+	</head>
+	<body>
+	<section class="common-wrapper">
+		<div class="condition-block legend-block">
+			<div class="legend-wrapper">
+				<img src="${resHost}${struct.fileUri}">
+			</div>
+		</div>
+		<div class="condition-block parts-block">
+			<div class="headline">
+				<span class="text bold-text">${i18n.args('IFO', $usages.size())}</span>
+			</div>
+			<div class="common-table print-table">
+				<table>
+					<thead>
+						<tr>
+							<th class="number" style="width:5%;">${i18n['APK']}</th>
+							<th class="part-code" style="width:16%;">${i18n['GAI']}</th>
+							<th style="width:13%;">${i18n['YOQ']}</th>
+							<th style="width:8%;">${i18n['AVE']}</th>
+							#if ($cfg.hasProp('part.extra1'))
+							<th style="width:15%;">$i18n['part.extra1']</th>
+							#end
+							#if ($cfg.hasProp('usage.partMappings'))
+							<th style="width:15%;">$i18n['LCV']</th>
+							#end
+							<th>$i18n['XWQ']</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach ($usage in $usages)
+						<tr>
+							<td class="number">$!usage.origin.callout</td>
+							<td class="part-code"><span class="vin-icon">#if($usage.origin.existsInVin)✓#end</span> $usage.origin.part.code</td>
+							<td>$!usage.origin.part.name</td>
+							<td>$!usage.origin.qty</td>
+							#if ($cfg.hasProp('part.extra1'))
+							<td>$!usage.origin.part.extra1</td>
+							#end
+							#if ($cfg.hasProp('usage.partMappings'))
+							<td>$!{usage.formattedPartMappings}</td>
+							#end
+							<td>$!usage.origin.note</td>
+						</tr>
+						#end
+					</tbody>
+				</table>	
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript">
+		var params = ${params};
+		window.onload = function() {
+			if(params.print == 1) {
+				window.print();
+			} 
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+#set($pageCode = "login")
+#set($cssFiles = ["login"])
+#set($releaseCss = "login.min")
+#set($title = $i18n['FOW'] + " - " + $i18n['YSX'])
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- base -->
+		#parse("common/base.htm")
+		<!-- global config -->
+		#parse("config/globalConfig.htm")
+		#parse("config/requirejsConfig.htm")
+	</head>
+	<body>
+		<section class="banner" style="background-image: url(${path}/images/${oemCode}_banner.jpg)">
+			<a href="${homePath}" class="logo-wrapper">
+				<img src="${resHost}/tis/logo/${oemCode}.png"/>
+			</a>
+		</section>
+		<section class="login-wrapper condition-block">
+			<div class="headline">
+				<span class="text bold-text">$i18n['YSX']</span>
+			</div>
+			<div class="languange-btn-wrapper">
+				<a href="javascript:;" class="languange-btn #if($i18n.lang eq 'zh')active#end" data-lang-code="zh">中文</a>
+				<a href="javascript:;" class="languange-btn #if($i18n.lang eq 'en')active#end" data-lang-code="en">English</a>
+			</div>
+			<form id="login-form" class="login-form">
+				<div class="data-item">
+					<label class="title">$i18n['YAU']：</label>
+					<span class="sign-icon">
+						<i class="iconfont icon-user"></i>
+					</span>
+					<input name="username" class="input-box username" type="text" data-null="false" data-msg="$i18n['YAU']" autocomplete="false" />
+				</div>
+				<div class="data-item">
+					<label class="title">$i18n['GHY']：</label>
+					<span class="sign-icon">
+						<i class="iconfont icon-pwd"></i>
+					</span>
+					<input name="password" class="input-box pwd" type="password" data-null="false" data-msg="$i18n['GHY']" autocomplete="false" />
+				</div>
+				
+				<div id="verify-code-wrapper" class="data-item #if (not $needVerifyCode)hide#end">
+					<label class="title">$i18n['RZC']：</label>
+					<span class="sign-icon">
+						<i class="iconfont icon-verify"></i>
+					</span>
+					<input name="verifyCode" class="input-box verify-code" type="text" data-null="false" data-msg="$i18n['RZC']" autocomplete="false" />
+					<a href="javascript:;" class="verify-img">
+						<img #if ($needVerifyCode)src="${path}/user/login/captcha?${timestamp}"#end/>
+					</a>
+				</div>
+				
+				
+				<div class="info-wrapper">
+					<span class="icon">
+						<i class="iconfont icon-error"></i>
+					</span>
+					<span class="text"></span>
+				</div>
+				<a href="javascript:;" id="login-btn" class="login-btn btn-two v-middle">
+					<span class="text">$i18n['AOW']</span>
+				</a>
+				
+			</form>
+		</section>
+		<footer class="login-footer">
+			<div>
+				<span class="title">客服热线：</span>
+				<span>021-20252866 / 021-50271393</span>
+			</div>
+			<div>
+				<span class="title">服务时间说明：</span>
+				<span>客服支持时间（周一至周五）09:00 - 17:00</span>
+			</div>
+		</footer>
+		#if (true)
+		    <script type="text/javascript" src="${path}/scripts/bootstrap.js"></script>
+	    #else
+	    	<script type="text/javascript" src="${path}/release/scripts/bootstrap.min.js?v=${stm}"></script>
+	    #end
+	</body>
+</html>

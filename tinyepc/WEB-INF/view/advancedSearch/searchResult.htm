@@ -1,0 +1,109 @@
+<div class="search-box-wrapper v-middle">
+	<div class="data-item inline-block-item" data-url="$srp.removeParam('exp_q')">
+		<input name="exp_q" type="text" class="input-box" placeholder="$i18n['OVF']" value="$!{srp.expQ}"/>
+		<a href="javascript:;" id="search-btn" class="btn">
+			$i18n['MMM']
+		</a>
+	</div>
+	<div class="paging top inline-block-item">
+		#if ($sr.list.size() gt 0)
+		<span>$i18n['IOF']</span>
+		<span class="important-text">${sr.total}</span>
+		<span>$i18n['IWM']</span>
+		<span class="current">${sr.page}</span>
+		<span>/</span>
+		<span>${sr.totalPage}</span>
+		#end
+		#if ($sr.hasPrevPage())
+		<a href="$srp.prevPage($sr.page)" class="paging-icon left change-page">
+			<i class="iconfont icon-arrow-left"></i>
+		</a>
+		#else
+		<a href="javascript:;" class="paging-icon left disabled">
+			<i class="iconfont icon-arrow-left"></i>
+		</a>
+		#end
+		#if ($sr.hasNextPage())
+		<a href="$srp.nextPage($sr.page)" class="paging-icon right change-page">
+			<i class="iconfont icon-arrow-right"></i>
+		</a>
+		#else
+		<a href="javascript:;" class="paging-icon right disabled">
+			<i class="iconfont icon-arrow-right"></i>
+		</a>
+		#end
+	</div>
+</div>
+#if ($sr.list.size() gt 0)
+<div>
+#foreach ($item in $sr.list)
+	<div class="search-result-item v-middle parts-item" data-id="${item.origin.id}" data-code="${item.origin.code}">
+		<a href="${path}/part/${item.origin.id}" target="_blank" class="part-img">
+			#if (${item.origin.coverImageUri})
+				<img class="lazy" src="${resHost}/epc/${oemCode}_loading.jpg?/d/138" data-original="${resHost}${item.origin.coverImageUri}?/d/138" />
+			#else
+				<img src="${resHost}/epc/no_image.jpg?/d/138" />
+			#end
+		</a>
+		<div class="part-describe">
+			<div class="title bold-text">
+				<a class="text-link number" href="${path}/part/${item.origin.id}" target="_blank">${item.dCode}</a>
+				<span class="name">${item.dName}</span>
+			</div>
+			#if (${cfg.hasProp('part.extra1')})
+			<div>
+				<span>$i18n['part.extra1']：</span>
+				<span>$!{item.origin.extra1}</span>
+			</div>
+			#end
+			#if (${cfg.hasProp('part.minOrderQty')})
+			<div>
+				<span>${i18n['EDT']}：</span>
+				<span>$!{item.origin.minOrderQty}</span>
+			</div>
+			#end
+			#if (${cfg.hasProp('part.unitPkgQty')})
+			<div>
+				<span>${i18n['OLE']}：</span>
+				<span>$!{item.origin.unitPkgQty}</span>
+			</div>
+			#end
+		</div>
+		<div class="part-operate-wrapper">
+			<div class="cart-add-info ok">
+				<span class="info-icon"></span>
+				<span class="text">$i18n['ZMQ']</span>
+			</div>
+			#if ($cfg.hasProp('part.price') and $item.saleProps.canSale)
+			<a href="javascript:;" class="icon-btn price" data-price>
+				<i class="iconfont icon-price"></i>
+			</a>
+			#end
+			#if ($item.saleProps.canSale)
+			<a href="javascript:;" class="icon-btn cart" data-title="$i18n['UOJ']" data-action="buy">
+				<i class="iconfont icon-cart"></i>
+			</a>
+			#end
+			#if ($item.origin.hasSupersession)
+			<a href="${path}/part/${item.origin.id}#target=supersession" data-title="$i18n['GCF']" class="icon-btn repalcement" target="_blank">
+				<i class="iconfont icon-replacement"></i>
+			</a>
+			#end
+			<a href="${path}/part/${item.origin.id}" data-title="$i18n['UOR']" class="icon-btn detail" target="_blank">
+				<i class="iconfont icon-detail"></i>
+			</a>
+		</div>
+	</div>
+#end
+</div>
+#set($enableGoto = true)
+#parse("common/pagination.htm")
+#else
+<div class="result-tip-block warn search-result-tip">
+	<span class="icon">
+		<i class="iconfont icon-warn"></i>
+	</span>
+	<span class="title">$i18n['EUM']</span>
+</div>
+
+#end

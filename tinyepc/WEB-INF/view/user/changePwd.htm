@@ -1,0 +1,44 @@
+#set($pageCode = "user")
+#set($cssFiles = ["user"])
+#set($releaseCss = "user.min")
+#set($title = "User Profile - " + $i18n['YSX'])
+
+#parse("header/index.htm")
+
+<div id="crumbs-bar" class="navbar">
+  <div class="search-bar-item-wrapper"></div>
+</div>
+<section class="wrapper">
+	#parse("user/menu.htm")
+ 	<section class="user-center-detail">
+    <div class="user-center-detail-info">
+      <div class="thead">修改密码</div>
+        <table class="user-center-detail-msg">
+        <tbody>
+          <tr>
+            <td>原密码：</td>
+            <td><input type="password" class="input-box"></td>
+          </tr>
+          <tr>
+            <td>新密码：</td>
+            <td><input type="password" class="input-box"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>8-20位，必须包含数字和字母，如 xie96070</td>
+          </tr>
+          <tr>
+            <td>重复密码：</td>
+            <td><input type="password" class="input-box"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><a href="javascript:;" class="btn change-pws-btn">递交</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+#parse("common/footer.htm")

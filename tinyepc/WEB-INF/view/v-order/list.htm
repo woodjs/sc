@@ -1,0 +1,97 @@
+#set($pageCode = "order_list")
+#set($cssFiles = ["cart", "pikaday"])
+#set($releaseCss = "order_list.min")
+#set($title = $i18n['LPX'] + " - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+<script type="text/javascript">
+var pageContext = {
+	keepParamsUrl: '$srp.keepParamsUrl'
+};
+</script>
+<div class="navbar">
+	<span class="title">$i18n['LPX']</span>
+</div>
+<section class="common-wrapper">
+	<div id="order-list-wrapper" class="common-table cart-table cart-list-table">
+		<form id="search-form" class="search-conditions">
+			<div class="data-item inline-block-item calendar-item">
+				<span class="text">$i18n['UUJ']：</span>
+				<input class="input-box calendar-box" id="search-date-start-input" type="text" name="sdd" value="$!srp.getParamVal('sdd')">
+				<span class="text-block date-input-splite">-</span>
+				<input class="input-box calendar-box" id="search-date-end-input" type="text" name="sdu" value="$!srp.getParamVal('sdu')">
+			</div>
+			<div class="data-item keyword-item inline-block-item">
+				<span class="text">$i18n['BNT']：</span>
+				<input type="text" class="input-box" name="q" placeholder="$i18n['DAO']" value="$!srp.getParamVal('q')">
+			</div>
+			<a href="javascript:;" id="search-btn" class="btn">查询</a>
+			<a href="javascript:;" id="reset-btn" class="btn secondary">清空</a>
+			#if ($sr.list and $sr.list.size() > 0)
+			<div class="paging top inline-block-item">
+				<span class="current">${sr.page}</span>
+				<span>/</span>
+				<span>${sr.totalPage}</span>
+				#if ($sr.hasPrevPage())
+				<a href="$srp.prevPage($sr.page)" class="paging-icon left change-page">
+					<i class="iconfont icon-arrow-left"></i>
+				</a>
+				#else
+				<a href="javascript:;" class="paging-icon left disabled">
+					<i class="iconfont icon-arrow-left"></i>
+				</a>
+				#end
+				#if ($sr.hasNextPage())
+				<a href="$srp.nextPage($sr.page)" class="paging-icon right change-page">
+					<i class="iconfont icon-arrow-right"></i>
+				</a>
+				#else
+				<a href="javascript:;" class="paging-icon right disabled">
+					<i class="iconfont icon-arrow-right"></i>
+				</a>
+				#end
+			</div>
+			#end
+		</form>
+		#if ($sr.list and $sr.list.size() > 0)
+		<table>
+			<thead>
+				<tr>
+					<th>$i18n['APK']</th>
+					<th>购物车清单单号</th>
+					<th>订单日期</th>
+					<th class="operate">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach ($item in $sr.list)
+				<tr class="item" data-code="${item.id}">
+					#set ($rowNumber = ($sr.page - 1) * $sr.pageSize + $velocityCount)
+					<td>$rowNumber</td>
+					<td>
+						<a href="${path}/v-order/${item.id}" class="text-link" target="_blank">$item.id</a>
+					</td>
+					<td>$item.formattedSubmitDate</td>
+					<td class="operate">
+						<a href="javascript:;" class="icon-btn-two" data-action="delete">
+							<i class="iconfont icon-delete"></i>
+						</a>
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/pagination.htm")
+		#else
+			<div class="no-goods-tip">
+				<div class="icon"></div>
+				<div class="text">
+					<div class="info">没有匹配的历史购物车清单~~~</div>
+					<div><span class="info-text">$i18n['YIR']：</span><a href="${path}/v-order" class="text-link">查询所有</a></div>
+				</div>
+			</div>
+		#end
+	</div>
+</section>
+
+#parse("common/footer.htm")

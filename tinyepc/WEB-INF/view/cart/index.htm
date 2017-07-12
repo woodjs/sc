@@ -1,0 +1,149 @@
+#set($pageCode = "cart")
+#set($cssFiles = ["cart"])
+#set($releaseCss = "cart.min")
+#set($title = $i18n['CMC'] + " - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+
+<div class="navbar">
+	<span class="title">$i18n['CMC']</span>
+	<a href="${path}/v-order" class="text-link2 view-detail" target="_blank">
+		<i class=""></i>
+		<span>$i18n['LGN']</span>
+	</a>
+</div>
+<section class="common-wrapper">
+	#if ($cart.items and $cart.items.size() > 0)
+	<div class="cart-wrapper common-table cart-table">
+		<table>
+			<thead>
+				<tr>
+					<th class="index">
+						<a href="javascript:;" class="form-checkbox checkbox" data-action="select-all">
+							<span class="icon"><i class="iconfont icon-checked"></i></span>
+							<span class="text">$i18n['EJM']</span>
+						</a>
+					</th>
+					<th class="part-number">$i18n['GAI']</th>
+					<th>$i18n['YOQ']</th>
+					<th class="qty">$i18n['JFK']</th>
+					#if ($cfg.hasProp('part.minOrderQty'))
+					<th class="min-qty">$i18n['EDT']</th>
+					#end
+					#if ($cfg.hasProp('part.unitPkgQty'))
+					<th class="min-pkg-qty">$i18n['OLE']</th>
+					#end
+					#if ($cfg.hasProp('part.price'))
+					<th class="price">$i18n['KLU']</th>
+					<th class="total">$i18n['TGH']</th>
+					#end
+					<th class="operate">$i18n['EQK']</th>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach ($item in $cart.items)
+				<tr class="item #if($item.selected)checked#end #if(not $item.canSale)disabled#end" data-code="${item.partCode}">
+					<td class="index">
+						<a href="javascript:;" class="form-checkbox checkbox #if($item.selected)checked#end #if(not $item.canSale)disabled#end">
+							<span class="icon"><i class="iconfont icon-checked"></i></span>
+						</a>
+					</td>
+					<td class="part-number">
+						#if ($item.canSale)
+						<a href="${path}/part/${item.partCode}" class="text-link" target="_blank">$item.partCode</a>
+						#else
+						<a href="javascript:;" class="text-link" target="_blank">$item.partCode</a>
+						#end
+					</td>
+					<td>$item.partName</td>
+					<td class="qty">
+						#if ($item.canSale)
+						<div class="qty-wrapper">
+							<a href="javascript:;" class="qty-btn down" data-action="down">-</a>
+							<input type="text" name="qty" class="input-box" value="$item.qty">
+							<a href="javascript:;" class="qty-btn up" data-action="up">+</a>
+						</div>
+						<div class="qty-tip hide">
+							<span class="icon">
+								<i class="iconfont icon-warn"></i>
+							</span>
+							<span class="text">
+							</span>
+						</div>
+						#else
+						<div class="qty-wrapper">
+							<a href="javascript:;" class="qty-btn down disabled" data-action="down">-</a>
+							<input type="text" name="qty" class="input-box" disabled="disabled" value="$item.qty">
+							<a href="javascript:;" class="qty-btn up disabled" data-action="up">+</a>
+						</div>
+						<div class="qty-tip info">
+							<span class="icon">
+								<i class="iconfont icon-info"></i>
+							</span>
+							<span class="text">
+								#if ($item.reasonCode eq 'PART_NOT_EXISTS')
+								$i18n['DYS']
+								#elseif ($item.reasonCode eq 'PART_CAN_NOT_SALE')
+								$i18n['XCQ']
+								#else
+								$item.reasonCode
+								#end
+							</span>
+						</div>
+						#end
+					</td>
+					#if ($cfg.hasProp('part.minOrderQty'))
+					<td class="min-qty">$!item.part.minOrderQty</td>
+					#end
+					#if ($cfg.hasProp('part.unitPkgQty'))
+					<td class="min-pkg-qty">$!item.part.unitPkgQty</td>
+					#end
+					#if ($cfg.hasProp('part.price'))
+					<td class="price">
+						#if ($item.partSaleProps.price)
+						<span class="important-text">$item.partSaleProps.price</span>
+						#else
+						$i18n['QMO']
+						#end
+					</td>
+					<td class="total">
+						<span class="important-text">$!item.amount</span>
+					</td>
+					#end
+					<td class="operate">
+						<a href="javascript:;" class="icon-btn-two" data-action="delete-single">
+							<i class="iconfont icon-delete"></i>
+						</a>
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<div class="total-wrapper">
+			<div class="total-info">
+				<span class="item total-selection">$i18n['INT']<span class="important-text product-num">-</span>$i18n['JHU']</span>
+				<span class="item total-price">$i18n['QEO'] ：<span class="important-text price">-</span></span>
+			</div>
+			<a href="javascript:;" class="form-checkbox checkbox" data-action="select-all">
+				<span class="icon"><i class="iconfont icon-checked"></i></span>
+				<span class="text">$i18n['EJM']</span>
+			</a>
+			<a href="javascript:;" class="btn secondary middle" data-action="delete-all">$i18n['UAW']</a>
+		</div>
+		<div class="btn-wrapper">
+			<a href="javascript:;" class="btn middle" data-action="export">$i18n['XEH']</a>
+			<a href="javascript:;" class="btn middle" data-action="export-order">$i18n['XVW']</a>
+		</div>
+	</div>
+	#else
+	<div class="no-goods-tip">
+		<div class="icon"></div>
+		<div class="text">
+			<div class="info">$i18n['IXN']</div>
+			<div><span class="info-text">$i18n['YIR']：</span><a href="${homePath}" class="text-link">$i18n['OEC']</a></div>
+		</div>
+	</div>
+	#end
+</section>
+
+#parse("common/footer.htm")

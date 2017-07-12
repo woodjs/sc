@@ -1,0 +1,85 @@
+#set($pageCode = "order_detail")
+#set($cssFiles = ["cart"])
+#set($releaseCss = "cart.min")
+#set($title = $order.id + " - 购物车清单 - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+
+<div class="navbar">
+	<span class="title">购物车清单：${order.id}</span>
+</div>
+<section class="common-wrapper">
+	<div id="order-wrapper" class="common-table cart-table cart-detail-table" data-order-id="${order.id}">
+		<table>
+			<thead>
+				<tr>
+					<th class="part-number">零件编号</th>
+					<th>零件名称</th>
+					<th class="qty">订货量</th>
+					#if ($cfg.hasProp('part.minOrderQty'))
+					<th class="min-qty">最小订购数</th>
+					#end
+					#if ($cfg.hasProp('part.unitPkgQty'))
+					<th class="min-pkg-qty">单位包装数</th>
+					#end
+					#if ($cfg.hasProp('part.price'))
+					<th class="price">单价（元）</th>
+					<th class="total">小计（元）</th>
+					#end
+					<th class="operate">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach ($item in $order.items)
+				<tr class="item" data-code="${item.partCode}">
+					<td class="part-number">
+						<a href="${path}/part/${item.partCode}" class="text-link" target="_blank">$item.partCode</a>
+					</td>
+					<td>$item.partName</td>
+					<td class="qty">
+						$item.qty
+					</td>
+					#if ($cfg.hasProp('part.minOrderQty'))
+					<td class="min-qty">$!item.part.minOrderQty</td>
+					#end
+					#if ($cfg.hasProp('part.unitPkgQty'))
+					<td class="min-pkg-qty">$!item.part.unitPkgQty</td>
+					#end
+					#if ($cfg.hasProp('part.price'))
+					<td class="price">
+						<span class="important-text">$!item.price</span>
+					</td>
+					<td class="total">
+						<span class="important-text">$!item.amount</span>
+					</td>
+					#end
+					<td class="operate">
+						<a href="javascript:;" class="icon-btn-two" data-action="add">
+							<i class="iconfont icon-cart"></i>
+						</a>
+						<div class="parts-cart-info">
+							<div class="cart-add-info ok">
+								<span class="info-icon"></span>
+							</div>
+						</div>
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<div class="total-wrapper">
+			<div class="total-info fix">
+				<span class="item total-selection">共<span class="important-text product-num">${order.items.size()}</span>件商品</span>
+				#if ($cfg.hasProp('part.price') and $order.amount)
+				<span class="item total-price">总价（元）：<span class="important-text price">${order.amount}</span></span>
+				#end
+			</div>
+		</div>
+		<div class="btn-wrapper">
+			<a href="${path}/v-order/${order.id}/re-buy" class="btn middle" data-action="order-buy">再次订购</a>
+			<a href="${path}/v-order/${order.id}/export" class="btn middle" data-action="export-order">导出清单</a>
+		</div>
+	</div>
+</section>
+
+#parse("common/footer.htm")

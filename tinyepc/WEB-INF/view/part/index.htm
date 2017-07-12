@@ -1,0 +1,175 @@
+#set($pageCode = "detail")
+#set($cssFiles = ["detail"])
+#set($releaseCss = "detail.min")
+#set($title = $part.code + " - " + $part.name + " - $i18n['UOR'] - " + $i18n['YSX'])
+	
+#parse("header/index.htm")
+<script type="text/javascript">
+	var pageContext = {
+		partId: '${part.id}',
+		hasSupersession: $part.hasSupersession
+	};
+</script>
+<div class="navbar">
+	<span class="title">${i18n['UOR']}：$part.code - $part.name</span>
+</div>
+<section class="common-wrapper">
+	<div class="part-content clearfix" data-code="${part.code}">
+		<div class="big-img-wrapper spec-img">
+			#if (${part.coverImageUri})
+				<img class="lazy" src="${resHost}/epc/${oemCode}_loading.jpg?/d/398" data-original="${resHost}${part.coverImageUri}?/d/398"/>
+			#else
+				<img src="${resHost}/epc/no_image.jpg?/d/138" />	
+			#end
+		</div>
+		<div class="part-detail-wrapper">
+			<div class="part-item-wrapper">
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['GAI']}">${i18n['GAI']}：</span>
+					</span>
+					<span class="value" title="${part.code}">${part.code}</span>
+				</div>
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['YOQ']}">${i18n['YOQ']}：</span>
+					</span>
+					<span class="value" title="${part.name}">${part.name}</span>
+				</div>
+				#if (${cfg.hasProp('part.extra1')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['part.extra1']}">${i18n['part.extra1']}：</span>
+					</span>
+					<span class="value" title="$!{part.extra1}">$!{part.extra1}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.minOrderQty')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['EDT']}">${i18n['EDT']}：</span>
+					</span>
+					<span class="value" title="$!{part.minOrderQty}">$!{part.minOrderQty}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.unitPkgQty')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['OLE']}">${i18n['OLE']}：</span>
+					</span>
+					<span class="value" title="$!{part.unitPkgQty}">$!{part.unitPkgQty}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.length')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['DED']">$i18n['DED']：</span>
+					</span>
+					<span class="value" title="$!{part.length}">$!{part.length}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.width')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['OVB']">$i18n['OVB']：</span>
+					</span>
+					<span class="value" title="$!{part.width}">$!{part.width}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.height')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['VHJ']">$i18n['VHJ']：</span>
+					</span>
+					<span class="value" title="$!{part.height}">$!{part.height}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.weight')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="${i18n['OQD']}">${i18n['OQD']}</span>
+					</span>
+					<span class="value" title="${part.weight}">${part.weight}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.price')} and $saleProps.canSale)
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['BVA']">$i18n['BVA']：</span>
+					</span>
+					#if ($saleProps.price)
+					<span class="value" title="$!{saleProps.price}">$!{saleProps.price}</span>
+					#else
+					<span class="value">${i18n['QMO']}</span>
+					#end
+				</div>
+				#end
+				#if (${cfg.hasProp('part.unit')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['GMS']">$i18n['GMS']：</span>
+					</span>
+					<span class="value" title="$!{part.unitName}">$!{part.unitName}</span>
+				</div>
+				#end
+				#if (${cfg.hasProp('part.note')})
+				<div class="data-item inline-item">
+					<span class="prop bold-text">
+						<span class="text" title="$i18n['RQM']">$i18n['RQM']：</span>
+					</span>
+					<span class="value" title="$!{part.note}">$!{part.note}</span>
+				</div>
+				#end
+			</div>
+			<div class="btn-wrapper ">
+				#if ($saleProps.canSale)
+				<a href="javascript:;" id="buy-goods" class="btn-two v-middle">
+					<i class="icon iconfont icon-cart"></i>
+					<span class="text">$i18n['FTU']</span>
+				</a>
+				#else
+				${i18n["saleProps.${saleProps.reasonCode}"]}
+				#end
+				<div class="cart-info-wrapper">
+					<div class="cart-add-info ok">
+						<span class="info-icon"></span>
+						<span class="text">$i18n['ZMQ']</span>
+					</div>
+				</div>
+			</div>
+			#if ($images.size() gt 1)
+			<div class="spec-list">
+				<ul class="spec-items-list">
+					#foreach ($image in $images)
+					<li class="spec-item">
+						<a href="javascript:;" class="img-wrapper" data-url="${resHost}${image.fileUri}">
+							<img class="lazy" src="${resHost}/epc/${oemCode}_loading.jpg?/d/108" data-original="${resHost}${image.fileUri}?/d/108"/>
+						</a>
+					</li>
+					#end
+				</ul>
+			</div>
+			#end
+		</div>
+	</div>
+	<div class="part-relative-content">
+		<div class="tab-head">
+			#if ($part.hasSupersession)
+			<a href="javascript:;" id="supersession-tab-btn" class="tab-btn" data-hashname="supersession">$i18n['GCF']</a>
+			#end
+			<a href="javascript:;" id="applicability-tab-btn" class="tab-btn" data-hashname="applies">$i18n['WHH']</a>
+		</div>
+		<div class="tab-body common-table">
+			#if ($part.hasSupersession)
+			<div id="supersession-tab-content" class="tab-content">
+				
+			</div>
+			#end
+			<div id="applicability-tab-content" class="tab-content">
+			
+			</div>
+		</div>
+	</div>
+</section>
+
+#parse("common/footer.htm")

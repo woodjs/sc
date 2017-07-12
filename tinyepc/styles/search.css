@@ -1,0 +1,126 @@
+.banner {
+  border-bottom: solid 2px #353751;
+  -webkit-box-shadow: 0px 2px 2px #cdcccc;
+  -moz-box-shadow: 0px 2px 2px #cdcccc;
+  box-shadow: 0px 2px 2px #cdcccc;
+}
+
+.search-result {
+  overflow: hidden;
+  padding: 0 0 15px 430px;
+  position: relative;
+}
+.search-result .search-box-wrapper {
+  height: 70px;
+  border-bottom: 1px dotted #bababa;
+}
+.search-result .search-result-item {
+  padding: 20px 0;
+  height: 180px;
+  position: relative;
+  border-bottom: 1px dotted #bababa;
+}
+.search-result .loading-box {
+  position: fixed;
+  z-index: 9990;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+}
+
+.search-box-wrapper .data-item .input-box {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.search-box-wrapper .btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.search-result-item .part-img {
+  display: inline-block;
+  *zoom: 1;
+  width: 140px;
+  height: 140px;
+  line-height: 138px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  position: absolute;
+  left: 0;
+  font-size: 0;
+  text-decoration: none;
+  text-align: center;
+}
+.search-result-item .part-img img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  outline: none;
+}
+.search-result-item .part-describe {
+  display: inline-block;
+  *zoom: 1;
+  line-height: 1.8em;
+  padding-left: 160px;
+}
+.search-result-item .part-describe .title {
+  font-size: 0;
+}
+.search-result-item .part-describe .title * {
+  vertical-align: middle;
+}
+.search-result-item .part-describe .title .number {
+  font-size: 12px;
+  margin-right: 10px;
+}
+.search-result-item .part-describe .title .name {
+  font-size: 12px;
+}
+.search-result-item .part-describe .part-detail-wrapper {
+  font-size: 0;
+}
+.search-result-item .part-describe .part-detail-wrapper .part-detail-item {
+  display: inline-block;
+  *zoom: 1;
+  padding: 0 25px;
+  border-left: 1px dotted #bababa;
+  position: relative;
+  font-size: 12px;
+  line-height: 1.2em;
+  vertical-align: middle;
+}
+.search-result-item .part-describe .part-detail-wrapper .part-detail-item:first-child {
+  padding-left: 0;
+}
+.search-result-item .part-operate-wrapper {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  font-size: 0;
+}
+.search-result-item .part-operate-wrapper .icon-btn {
+  font-size: 0;
+}
+
+.search-condition {
+  width: 380px;
+  height: 100%;
+  background-color: #fafafa;
+  float: right;
+  margin-left: 50px;
+  position: fixed;
+  z-index: 9999;
+}
+.search-condition .condition-item-wrapper {
+  overflow: auto;
+}
+
+.search-result-tip {
+  width: 225px;
+  margin-top: 40px;
+}
+
+/*# sourceMappingURL=search.css.map */

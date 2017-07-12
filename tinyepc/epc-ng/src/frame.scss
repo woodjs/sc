@@ -1,0 +1,35 @@
+@import "./app/sass/etc/mixin";
+@import './app/sass/etc/reset';
+$main-font-size: 12px;
+$font: 12px/2em "Microsoft Yahei", "Arial", "Simhei", "SimSun", "sans-serif";
+$text-color: #333;
+
+html {
+    min-height: 600px;
+    height: 100%;
+}
+body {
+    font: $font;
+    color: $text-color;
+    min-height: 100%;
+    position: relative;
+}
+.clearfix:after {
+    content: '.';
+    display: block;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+
+    &:after, &:before {
+        content: '';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
