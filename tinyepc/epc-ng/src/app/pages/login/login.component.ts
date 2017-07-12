@@ -1,6 +1,7 @@
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewContainerRef, OnInit } from '@angular/core';
 
 import { LoginService } from './login.service';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -16,7 +17,11 @@ export class LoginComponent implements OnInit {
     lang = 'zh';
     invokeValided: Boolean = false;
 
-    constructor(private loginService: LoginService) { }
+    constructor(
+        private loginService: LoginService,
+        private viewContainer: ViewContainerRef,
+        private loadingService: LoadingService
+    ) { }
 
     login(): void {
         let loginInfo = this.loginInfo;
