@@ -4,7 +4,7 @@ import { Headers, Http } from "@angular/http";
 
 import { Observable } from 'rxjs/Observable';
 
-import {BaseHttpService} from '../../services/base-http.service';
+import {BaseHttpService, BaseHttpConfig, BaseHttpOptions} from '../../services/base-http.service';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 import {LoadingService} from '../../services/loading.service';
 
 @Injectable()
+@BaseHttpConfig()
 export class LoginService extends BaseHttpService {
     private loginUrl = "http://10.0.0.250/Servision.Ebom.Sgmw.Www/Login/YaoWeiTest";
     private langUrl = "http://10.0.0.250/Servision.Ebom.Sgmw.Www/Login/YaoWeiTest";

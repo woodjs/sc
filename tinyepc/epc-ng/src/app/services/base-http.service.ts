@@ -17,9 +17,9 @@ const dataTypeMap = {
 @Injectable()
 export class BaseHttpService {
 
-    protected dataType: string = dataTypeMap.JSON;
-    protected isShowLoading: boolean = true;
-    private viewContainer: ViewContainerRef = null;
+    protected dataType: string;
+    protected isShowLoading: boolean;
+    private viewContainer: ViewContainerRef;
 
     constructor(
         protected http?: Http,
@@ -110,10 +110,16 @@ export class BaseHttpService {
     }
 }
 
-export function BaseHttpConfig(opts) {
+export class BaseHttpOptions {
+    dataType?: string;
+    isShowLoading?: boolean;
+    viewContainer?: ViewContainerRef;
+}
 
-    return function (target: BaseHttpService) {
+export function BaseHttpConfig(opts: BaseHttpOptions = {dataType: dataTypeMap.JSON, isShowLoading: false, viewContainer: null}) {
+    return function () {
 
+        debugger;
     }
 }
 
