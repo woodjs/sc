@@ -6,7 +6,7 @@ import {LoadingService} from '../../services/loading.service';
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'app-login',
-    templateUrl: './login.html',
+    template: '',
     styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
@@ -31,19 +31,19 @@ export class LoginComponent implements OnInit {
             this.loginCfg.loginText = "登录中";
             loginCfg.requestFlag = true;
 
-            this.loginService.login(loginInfo).subscribe(res => {
-                window.location.href = "http://localhost:4200/catalog";
-
-                // if (res.success) {
-                //     // navigator
-                //     window.location.href = "http://localhost:4200/catalog";
-                // } else {
-                //     this.errorInfo = res.message || "Error Info";
-                //     this.invokeValided = true;// !!res.needVerifyCode;
-                //     loginCfg.loginText = "登录";
-                //     loginCfg.requestFlag = false;
-                // }
-            });
+            // this.loginService.login(loginInfo).subscribe(res => {
+            //     window.location.href = "http://localhost:4200/catalog";
+            //
+            //     if (res.success) {
+            //         // navigator
+            //         window.location.href = "http://localhost:4200/catalog";
+            //     } else {
+            //         this.errorInfo = res.message || "Error Info";
+            //         this.invokeValided = true;// !!res.needVerifyCode;
+            //         loginCfg.loginText = "登录";
+            //         loginCfg.requestFlag = false;
+            //     }
+            // });
         }
 
         loginCfg.firstInvoke = true;
@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
 
+        this.loginService.login({});
         //TODO
         this.lang = 'zh';
 

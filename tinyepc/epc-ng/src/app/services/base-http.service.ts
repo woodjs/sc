@@ -1,6 +1,7 @@
 import {Injectable, ViewContainerRef} from '@angular/core';
 import {Http, Request, Response, RequestMethod, RequestOptionsArgs, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 import {LoadingService} from './loading.service';
 
@@ -21,8 +22,8 @@ export class BaseHttpService {
     private viewContainer: ViewContainerRef = null;
 
     constructor(
-        protected http: Http,
-        protected loadingService: LoadingService
+        protected http?: Http,
+        protected loadingService?: LoadingService
     ) {
     }
 
@@ -33,6 +34,7 @@ export class BaseHttpService {
         requestOptions.url = url;
 
         requestOptions = this.beforeRequest(requestOptions) || requestOptions;
+
         let observable: Observable<Response> = this.http.request(new Request(requestOptions));
 
         if (this.dataType === dataTypeMap.JSON) {
@@ -40,12 +42,13 @@ export class BaseHttpService {
             return observable
                 .map(res => {
                     this.afterResponse(res, requestOptions);
+
                     return res.json();
                 })
-                .catch(this.errorHandler);
+                .catch(this.errorHandler.bind(this));
         } else {
 
-            return observable.catch(this.errorHandler);
+            return observable.catch(this.errorHandler.bind(this));
         }
     }
 
@@ -91,23 +94,26 @@ export class BaseHttpService {
         return requestOptions;
     }
 
-    protected afterResponse(res: Response, requestOptions?: RequestOptions): void {
+    protected afterResponse(res: any, requestOptions?: RequestOptions): void {
 
-        if (this.viewContainer) {
+        if (this.isShowLoading && this.viewContainer) {
             this.loadingService.hide();
             this.viewContainer = null;
         }
     }
 
-    protected setViewContainer(viewContainer: ViewContainerRef) {
+    protected errorHandler(res: any): Observable<any> {
 
-        this.viewContainer = viewContainer;
-    }
+        this.afterResponse(res);
 
-    protected errorHandler(res: Observable<any>): Observable<any> {
-
-        console.log(res);
-
-        return res;
+        return Observable.throw(res);
     }
 }
+
+export function BaseHttpConfig(opts) {
+
+    return function (target: BaseHttpService) {
+
+    }
+}
+
