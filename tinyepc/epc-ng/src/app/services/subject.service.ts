@@ -10,10 +10,10 @@ export class SubjectService {
     private cacheMap: Map<string, any> = new Map<string, any>();
 
     constructor() {
-        this.subject$.subscribe(action => this.dispose(action));
+        this.subject$.subscribe(action => this.handle(action));
     }
 
-    private dispose(action: Object): void {  // dispose，处理
+    private handle(action: Object): void {
 
         let listeners = this.listenerMap.get(action['event']) || [];
 
