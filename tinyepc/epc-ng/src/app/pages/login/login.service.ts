@@ -21,19 +21,15 @@ export class LoginService extends BaseHttpService {
         'Content-Type': 'application/json'
     });
 
-    constructor(public http: Http, public loadingService: LoadingService) {
-        super(http, loadingService);
-    }
-
     login(params: Object) {
-
-        this.get('http://localhost:3000').subscribe((res) => {
-            console.log('success');
-            console.log(res);
-        }, (res) => {
-            console.log('error');
-            console.log(res);
-        });
+        console.log(this.viewContainer);
+        // this.get('http://localhost:3000').subscribe((res) => {
+        //     console.log('success');
+        //     console.log(res);
+        // }, (res) => {
+        //     console.log('error');
+        //     console.log(res);
+        // });
         // return this.http
         //     .post(this.loginUrl,{},{headers:this.headers})
         //     .toPromise()

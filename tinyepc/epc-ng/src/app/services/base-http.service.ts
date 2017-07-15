@@ -19,12 +19,13 @@ export class BaseHttpService {
 
     protected dataType: string;
     protected isShowLoading: boolean;
-    private viewContainer: ViewContainerRef;
+    protected viewContainer: ViewContainerRef;
 
     constructor(
-        protected http?: Http,
-        protected loadingService?: LoadingService
+        protected http: Http,
+        protected loadingService: LoadingService
     ) {
+        debugger;
     }
 
     protected request(url: string, options: RequestOptionsArgs): Observable<any> {
@@ -116,10 +117,29 @@ export class BaseHttpOptions {
     viewContainer?: ViewContainerRef;
 }
 
-export function BaseHttpConfig(opts: BaseHttpOptions = {dataType: dataTypeMap.JSON, isShowLoading: false, viewContainer: null}) {
-    return function () {
+export function BaseHttpConfig(opts: BaseHttpOptions = {dataType: dataTypeMap.JSON, isShowLoading: false, viewContainer: null}): Function {
 
-        debugger;
+    return function (target: any) {
+
+        let original = target;
+        let newConstructor = function (...args) {
+
+            return construct(original, args);
+        };
+
+        function construct(constructor, args) {
+
+            let Builder: any = function () {
+                return constructor.apply(this, args);
+            };
+
+            Builder.prototype = constructor.prototype;
+
+            return new Builder;
+        }
+
+        newConstructor.prototype = original.prototype;
+        return newConstructor;
     }
 }
 
