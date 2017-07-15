@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
 
+        this.loginService.setViewContainer(this.viewContainer);
         this.loginService.login({});
         //TODO
         this.lang = 'zh';

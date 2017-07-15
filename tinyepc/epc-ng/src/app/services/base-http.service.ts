@@ -17,16 +17,14 @@ const dataTypeMap = {
 @Injectable()
 export class BaseHttpService {
 
-    protected dataType: string;
-    protected isShowLoading: boolean;
-    protected viewContainer: ViewContainerRef;
+    private viewContainer: ViewContainerRef;
+
+    protected configMap: BaseHttpConfigMap;
 
     constructor(
         protected http: Http,
         protected loadingService: LoadingService
-    ) {
-        debugger;
-    }
+    ) {}
 
     protected request(url: string, options: RequestOptionsArgs): Observable<any> {
 
@@ -38,7 +36,7 @@ export class BaseHttpService {
 
         let observable: Observable<Response> = this.http.request(new Request(requestOptions));
 
-        if (this.dataType === dataTypeMap.JSON) {
+        if (this.configMap[requestOptions.method].dataType === dataTypeMap.JSON) {
 
             return observable
                 .map(res => {
@@ -87,7 +85,7 @@ export class BaseHttpService {
 
     protected beforeRequest(requestOptions: RequestOptions): RequestOptions {
 
-        if (this.isShowLoading && this.viewContainer) {
+        if (this.configMap[requestOptions.method].isShowLoading && this.viewContainer) {
 
             this.loadingService.show(this.viewContainer);
         }
@@ -97,7 +95,7 @@ export class BaseHttpService {
 
     protected afterResponse(res: any, requestOptions?: RequestOptions): void {
 
-        if (this.isShowLoading && this.viewContainer) {
+        if (this.configMap[requestOptions.method].isShowLoading && this.viewContainer) {
             this.loadingService.hide();
             this.viewContainer = null;
         }
@@ -109,37 +107,56 @@ export class BaseHttpService {
 
         return Observable.throw(res);
     }
+
+    public setViewContainer(viewContainer: ViewContainerRef): void {
+
+        this.viewContainer = viewContainer;
+    }
+
+    public getViewContainer(): ViewContainerRef {
+
+        return this.viewContainer;
+    }
 }
 
-export class BaseHttpOptions {
+export interface BaseHttpOptions {
     dataType?: string;
-    isShowLoading?: boolean;
-    viewContainer?: ViewContainerRef;
+    isShowLoading?: boolean
 }
 
-export function BaseHttpConfig(opts: BaseHttpOptions = {dataType: dataTypeMap.JSON, isShowLoading: false, viewContainer: null}): Function {
+export interface BaseHttpConfigMap {
+    GET?: BaseHttpOptions;
+    POST?: BaseHttpOptions;
+    PUT?: BaseHttpOptions;
+    DELETE?: BaseHttpOptions
+}
+
+function buildBaseHttpOptions(opts: BaseHttpOptions): BaseHttpOptions {
+
+    let defaultOpts = {
+        dataType: dataTypeMap.JSON,
+        isShowLoading: false
+    };
+
+    if (!opts) return defaultOpts;
+
+    return Object.assign(defaultOpts, opts);
+}
+
+export function BaseHttpConfig(configMap?: BaseHttpConfigMap): Function {
 
     return function (target: any) {
 
-        let original = target;
-        let newConstructor = function (...args) {
-
-            return construct(original, args);
+        let defaultConfigMap = {
+            GET: buildBaseHttpOptions(configMap.GET),
+            POST: buildBaseHttpOptions(configMap.POST),
+            PUT: buildBaseHttpOptions(configMap.PUT),
+            DELETE: buildBaseHttpOptions(configMap.DELETE)
         };
 
-        function construct(constructor, args) {
-
-            let Builder: any = function () {
-                return constructor.apply(this, args);
-            };
-
-            Builder.prototype = constructor.prototype;
-
-            return new Builder;
-        }
-
-        newConstructor.prototype = original.prototype;
-        return newConstructor;
+        Object.assign(target.prototype, {
+            configMap: defaultConfigMap
+        });
     }
 }
 

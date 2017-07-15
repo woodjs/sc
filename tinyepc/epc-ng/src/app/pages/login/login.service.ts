@@ -13,7 +13,11 @@ import 'rxjs/add/operator/map';
 import {LoadingService} from '../../services/loading.service';
 
 @Injectable()
-@BaseHttpConfig()
+@BaseHttpConfig({
+    PUT: {isShowLoading: true, dataType: 'json'},
+    POST: {isShowLoading: true, dataType: 'json'},
+    DELETE: {isShowLoading: true, dataType: null}
+})
 export class LoginService extends BaseHttpService {
     private loginUrl = "http://10.0.0.250/Servision.Ebom.Sgmw.Www/Login/YaoWeiTest";
     private langUrl = "http://10.0.0.250/Servision.Ebom.Sgmw.Www/Login/YaoWeiTest";
@@ -22,7 +26,7 @@ export class LoginService extends BaseHttpService {
     });
 
     login(params: Object) {
-        console.log(this.viewContainer);
+        console.log(this.getViewContainer());
         // this.get('http://localhost:3000').subscribe((res) => {
         //     console.log('success');
         //     console.log(res);
