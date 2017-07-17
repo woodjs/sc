@@ -4,20 +4,21 @@ import {FormsModule} from '@angular/forms';
 
 import {LoginComponent} from './login.component';
 import {LoginService} from './login.service';
-import { ImgSrcPipe } from '../../pipes/img-src.pipe';
+import {ImgSrcPipe} from '../../pipes/img-src.pipe';
 
 @NgModule({
-	imports: [
-		CommonModule,
+    imports: [
+        CommonModule,
         FormsModule
-	],
-	declarations: [
-		LoginComponent,
-     ImgSrcPipe
-	],
-  exports: [
-    ImgSrcPipe
-  ],
-	providers: [LoginService]
+    ],
+    declarations: [
+        LoginComponent,
+        ImgSrcPipe
+    ],
+    exports: [
+        ImgSrcPipe
+    ],
+    providers: [LoginService]
 })
-export class LoginModule {}
+export class LoginModule {
+}
